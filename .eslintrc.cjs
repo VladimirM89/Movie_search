@@ -1,5 +1,3 @@
-import { jsx } from "react/jsx-runtime";
-
 module.exports = {
   root: true,
   extends: [
