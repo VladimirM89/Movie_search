@@ -1,0 +1,20 @@
+.nav_link {
+  width: 16rem;
+  background-color: transparent;
+  color: var(--mantine-color-text);
+  padding: 0.75rem;
+  line-height: 140%;
+}
+
+.nav_link:hover {
+  color: var(--mantine-color-purple-5);
+  background-color: transparent;
+  font-weight: 700;
+}
+
+.nav_link[data-active] {
+  color: var(--mantine-color-purple-5);
+  background-color: var(--mantine-color-purple-2);
+  border-radius: 0.5rem;
+  font-weight: 700;
+}

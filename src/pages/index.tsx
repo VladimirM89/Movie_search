@@ -1,5 +1,6 @@
 import Head from "next/head";
-import style from "../styles/index.module.css";
+import SearchPanel from "@/components/SearchPanel/SearchPanel";
+import MovieList from "@/components/MovieList/MovieList";
 
 export default function Home() {
   return (
@@ -10,13 +11,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1 className={style.title}>Movie Search App </h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam,
-          commodi.
-        </p>
-      </main>
+      <div>
+        <SearchPanel />
+        <MovieList />
+      </div>
     </>
   );
 }
