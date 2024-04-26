@@ -2,6 +2,7 @@ import { NavLink } from "@mantine/core";
 import { useRouter } from "next/router";
 import navigationItems from "./navigationPanelInfo";
 import styles from "./NavigationPanel.module.css";
+import FlickIcon from "../UI/FlickIcon/FlickIcon";
 
 const NavigationPanel = () => {
   const router = useRouter();
@@ -14,19 +15,23 @@ const NavigationPanel = () => {
   };
 
   return (
-    <nav>
-      {navigationItems.map((item) => (
-        <NavLink
-          className={styles.nav_link}
-          key={item.id}
-          active={item.path === router.pathname}
-          label={item.label}
-          onClick={() => handleClick(item.path)}
-          // color="pink"
-          // variant="filled"
-        />
-      ))}
-    </nav>
+    <div className={styles.navigation}>
+      <div className={styles.navigation_header}>
+        <FlickIcon />
+        <span>ArrowFlicks</span>
+      </div>
+      <nav className={styles.navigation_list}>
+        {navigationItems.map((item) => (
+          <NavLink
+            className={styles.nav_link}
+            key={item.id}
+            active={item.path === router.pathname}
+            label={item.label}
+            onClick={() => handleClick(item.path)}
+          />
+        ))}
+      </nav>
+    </div>
   );
 };
 

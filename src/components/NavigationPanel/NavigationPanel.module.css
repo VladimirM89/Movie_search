@@ -1,20 +1,44 @@
+.navigation {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  background-color: var(--mantine-color-purple-0);
+}
+
+.navigation_header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 150%;
+  font-weight: 600;
+  color: var(--mantine-color-purple-4);
+}
+
+.navigation_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .nav_link {
-  width: 16rem;
+  width: 14.5rem;
+  padding: 0.6rem;
+  line-height: var(--mantine-line-height-xs);
   background-color: transparent;
   color: var(--mantine-color-text);
-  padding: 0.75rem;
-  line-height: 140%;
 }
 
 .nav_link:hover {
-  color: var(--mantine-color-purple-5);
+  color: var(--mantine-color-purple-4);
   background-color: transparent;
   font-weight: 700;
 }
 
 .nav_link[data-active] {
-  color: var(--mantine-color-purple-5);
-  background-color: var(--mantine-color-purple-2);
+  color: var(--mantine-color-purple-4);
+  background-color: var(--mantine-color-purple-1);
   border-radius: 0.5rem;
   font-weight: 700;
 }
