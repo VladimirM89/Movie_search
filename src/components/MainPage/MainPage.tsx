@@ -1,44 +1,31 @@
 import { useState, useEffect, memo } from "react";
 import MovieList from "../MovieList/MovieList";
 import SearchPanel from "../SearchPanel/SearchPanel";
-import { getGenres, getMovies } from "../utils/api";
-import { Genre, MovieGenres, MoviesResponse } from "../../models/Response";
-import sortingValues from "./mainPageInfo";
+import { getMovies } from "../utils/api";
+import { MoviesResponse } from "../../models/Response";
 import { QueryParams } from "@/models/queryParams";
+import sortingValues, { releaseYears } from "./mainPageInfo";
 
 const MainPage = memo(() => {
   console.log("Render main page");
 
-  const [genres, setGenres] = useState<Array<Genre>>([]);
-  const [queryParams, setQueryParams] = useState<QueryParams>({});
+  const initialQueryParams: QueryParams = {
+    sort_by: sortingValues[0].value,
+  };
 
-  useEffect(() => {
-    getGenres().then((res: MovieGenres) => {
-      setGenres(res.genres);
-    });
-  }, []);
+  const [queryParams, setQueryParams] =
+    useState<QueryParams>(initialQueryParams);
 
   useEffect(() => {
     getMovies(queryParams).then((res: MoviesResponse) => {
       console.log(res);
+      console.log(queryParams);
     });
   }, [JSON.stringify(queryParams)]);
-
-  const releaseYears = [
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024",
-  ];
 
   return (
     <div>
       <SearchPanel
-        genres={genres.map((item) => item.name)}
         releaseYears={releaseYears}
         sortingValues={sortingValues}
         setQuery={setQueryParams}

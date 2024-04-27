@@ -13,4 +13,15 @@ const sortingValues: Array<{ value: string; label: string }> = [
   { value: "primary_release_date.asc", label: "Release Date ACS" },
 ];
 
+export const releaseYears = [
+  "2017",
+  "2018",
+  "2019",
+  "2020",
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+];
+
 export default sortingValues;

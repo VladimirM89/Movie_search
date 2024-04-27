@@ -10,7 +10,6 @@ const NavigationPanel = () => {
   // console.log("Render nav panel");
 
   const handleClick = (path: string) => {
-    // console.log("URL: ", router.pathname, "NAV: ", path);
     router.pathname !== path && router.push(path);
   };
 
