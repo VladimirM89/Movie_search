@@ -1,6 +1,5 @@
 import Head from "next/head";
-import SearchPanel from "@/components/SearchPanel/SearchPanel";
-import MovieList from "@/components/MovieList/MovieList";
+import MainPage from "@/components/MainPage/MainPage";
 
 export default function Home() {
   return (
@@ -12,8 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <SearchPanel />
-        <MovieList />
+        <MainPage />
       </div>
     </>
   );

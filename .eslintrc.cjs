@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   extends: [
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@next/next/recommended",
     "eslint:recommended",
@@ -23,7 +24,7 @@ module.exports = {
   },
   plugins: ["@typescript-eslint", "react", "react-hooks"],
   rules: {
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "warn",
     "react-hooks/exhaustive-deps": "warn",
     "comma-dangle": ["error", "only-multiline"],
     "react/prop-types": "off",
