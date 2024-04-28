@@ -1,10 +1,4 @@
-import {
-  Button,
-  TextInput,
-  Select,
-  NumberInput,
-  MultiSelect,
-} from "@mantine/core";
+import { TextInput, Select, NumberInput, MultiSelect } from "@mantine/core";
 import React, {
   Dispatch,
   FC,
@@ -23,6 +17,8 @@ import {
   getSortParam,
   normalizeQueryParams,
 } from "../utils/queryParams";
+import styles from "./SearchPanel.module.css";
+import StandardButton from "../UI/Button/StandardButton";
 
 type SearchPanelProps = {
   releaseYears: Array<string>;
@@ -103,12 +99,15 @@ const SearchPanel: FC<SearchPanelProps> = memo(
             key={form.key("query")}
             {...form.getInputProps("query")}
             placeholder="Search movie title"
-            rightSection={<Button type="submit">Search</Button>}
+            rightSection={
+              <StandardButton text="Search" type="submit" size="sm" />
+            }
           />
         </div>
 
         <div>
           <MultiSelect
+            classNames={{ pill: styles.pill }}
             key={form.key("with_genres")}
             {...form.getInputProps("with_genres")}
             label="Genres"
@@ -121,6 +120,7 @@ const SearchPanel: FC<SearchPanelProps> = memo(
           />
 
           <Select
+            classNames={{ option: styles.option }}
             key={form.key("primary_release_year")}
             {...form.getInputProps("primary_release_year")}
             label="Release year"

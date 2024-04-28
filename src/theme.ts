@@ -9,7 +9,7 @@ export const theme = createTheme({
       "#BD93F7",
       "#9854F6",
       "#541F9D",
-      "",
+      "#9854F6",
       "",
       "",
       "",
@@ -28,4 +28,6 @@ export const theme = createTheme({
     ],
   },
   fontFamily: "Inter, sans-serif",
+  black: "#000000",
+  primaryColor: "purple",
 });
