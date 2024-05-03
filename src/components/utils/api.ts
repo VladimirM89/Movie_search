@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/constants/enums";
-import { QueryParams } from "@/models/queryParams";
+import { QueryParams } from "@/models/QueryParams";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY!;

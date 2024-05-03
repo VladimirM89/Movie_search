@@ -1,0 +1,9 @@
+.inputWrapper {
+  width: 490px;
+  --input-height: 48px;
+  /* --input-radius: 8px; */
+}
+
+.input {
+  padding-inline-end: 140px;
+}

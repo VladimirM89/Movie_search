@@ -1,5 +1,6 @@
 import { Genre } from "@/models/Response";
-import sortingValues from "../MainPage/mainPageInfo";
+import sortingValues from "../SearchPage/searchPageInfo";
+import { FilterParams } from "@/models/QueryParams";
 
 export const getGenreParam = (
   genres: Array<Genre>,
@@ -17,13 +18,13 @@ export const getSortParam = (label: string): string => {
   return result ? result.value : "";
 };
 
-export const normalizeQueryParams = (obj: {
-  [key: string]: string | number;
-}) => {
+export const normalizeQueryParams = (
+  obj: FilterParams,
+): Record<string, string> => {
   return Object.entries(obj)
     .filter(([, value]) => !!value !== false)
     .reduce((acc, [key, value]) => {
       key.includes("-") ? (key = key.replace("-", ".")) : key;
-      return { ...acc, [key]: value };
+      return { ...acc, [key]: value.toString() };
     }, {});
 };
