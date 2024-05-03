@@ -3,7 +3,7 @@ import sortingValues, { releaseYears } from "../SearchPage/searchPageInfo";
 import { useForm } from "@mantine/form";
 import { FilterParams } from "@/models/QueryParams";
 import { Genre, MovieGenres } from "@/models/Response";
-import { useState, useEffect, FC, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, FC, Dispatch } from "react";
 import { getGenres } from "../utils/api";
 import classes from "./SearchFilters.module.css";
 import { useDebouncedCallback } from "@mantine/hooks";
@@ -11,7 +11,7 @@ import { getGenreParam } from "../utils/queryParams";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
 
 type SearchFiltersProps = {
-  handleFilters: Dispatch<SetStateAction<FilterParams>>;
+  handleFilters: Dispatch<FilterParams>;
 };
 
 const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
@@ -70,7 +70,10 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
 
         //TODO: separate interfaces for form and for query
         // console.log("!!!!!!!!!!!", { ...rawParams, with_genres: [genreArray] });
-        handleFilters({ ...rawParams, with_genres: [genreArray] });
+        handleFilters({
+          ...rawParams,
+          with_genres: [genreArray],
+        });
       }
     }, 1000),
   });

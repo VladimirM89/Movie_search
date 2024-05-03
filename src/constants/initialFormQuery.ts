@@ -11,5 +11,5 @@ export const INITIAL_FILTER_PARAMS: FilterParams = {
   "vote_average-lte": "",
   "vote_average-gte": "",
   sort_by: sortingValues[0].label,
-  page: "1",
+  // page: "1",
 };

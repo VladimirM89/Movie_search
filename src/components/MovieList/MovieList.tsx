@@ -1,20 +1,19 @@
+import { Movie } from "@/models/Response";
 import MovieItem from "../MovieItem/MovieItem";
+import { FC } from "react";
 
-const MovieList = () => {
+type MovieListProps = {
+  movies: Array<Movie>;
+};
+
+const MovieList: FC<MovieListProps> = ({ movies }) => {
   return (
     <div>
-      MovieList
-      <ul>
-        <li>
-          <MovieItem />
-        </li>
-        <li>
-          <MovieItem />
-        </li>
-        <li>
-          <MovieItem />
-        </li>
-      </ul>
+      {movies.length === 0 ? (
+        <p>NOthing found</p>
+      ) : (
+        movies.map((movie) => <MovieItem key={movie.id} />)
+      )}
     </div>
   );
 };
