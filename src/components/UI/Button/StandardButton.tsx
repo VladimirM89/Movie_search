@@ -12,7 +12,7 @@ type StandardButtonProps = {
     | "compact-md"
     | "compact-lg"
     | "compact-xl";
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const StandardButton: FC<StandardButtonProps> = ({
