@@ -1,6 +1,6 @@
 import { Genre } from "@/models/Response";
 import sortingValues from "../SearchPage/searchPageInfo";
-import { FilterParams } from "@/models/QueryParams";
+import { FilterParams } from "@/models/queryParams";
 
 export const getGenreParam = (
   genres: Array<Genre>,

@@ -4,7 +4,7 @@ import { getMovies } from "../utils/api";
 import { Movie, SearchResponse } from "../../models/Response";
 import SearchFilters from "../SearchFilters/SearchFilters";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
-import { FilterParams } from "@/models/QueryParams";
+import { FilterParams } from "@/models/queryParams";
 import { normalizeQueryParams } from "../utils/queryParams";
 import { Loader, Pagination } from "@mantine/core";
 import { API_MAX_REQUEST_PAGE, INITIAL_PAGE } from "@/constants/constants";

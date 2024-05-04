@@ -4,7 +4,7 @@ import { useForm } from "@mantine/form";
 import SearchIcon from "../UI/SearchIcon/SearchIcon";
 import classes from "./SearchBar.module.css";
 import { Dispatch, FC, SetStateAction } from "react";
-import { SearchParam } from "../../models/QueryParams";
+import { SearchParam } from "../../models/queryParams";
 
 type SearchBarProps = {
   handleSearch: Dispatch<SetStateAction<SearchParam>>;

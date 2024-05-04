@@ -1,0 +1,10 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.description_container {
+  display: flex;
+  gap: 1rem;
+}

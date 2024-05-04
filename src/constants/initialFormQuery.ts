@@ -1,5 +1,5 @@
 import sortingValues from "@/components/SearchPage/searchPageInfo";
-import { FilterParams, SearchParam } from "@/models/QueryParams";
+import { FilterParams, SearchParam } from "@/models/queryParams";
 
 export const INITIAL_SEARCH_VALUE: SearchParam = {
   query: "",

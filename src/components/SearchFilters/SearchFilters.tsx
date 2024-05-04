@@ -1,7 +1,7 @@
 import { MultiSelect, Select, NumberInput } from "@mantine/core";
 import sortingValues, { releaseYears } from "../SearchPage/searchPageInfo";
 import { useForm } from "@mantine/form";
-import { FilterParams } from "@/models/QueryParams";
+import { FilterParams } from "@/models/queryParams";
 import { Genre, MovieGenres } from "@/models/Response";
 import { useState, useEffect, FC, Dispatch } from "react";
 import { getGenres } from "../utils/api";
@@ -9,6 +9,7 @@ import classes from "./SearchFilters.module.css";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { getGenreParam } from "../utils/queryParams";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
+import { LOCAL_STORAGE_GENRES_KEY } from "@/constants/constants";
 
 type SearchFiltersProps = {
   handleFilters: Dispatch<FilterParams>;
@@ -24,6 +25,10 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
   useEffect(() => {
     getGenres().then((res: MovieGenres) => {
       setGenres(res.genres);
+      localStorage.setItem(
+        LOCAL_STORAGE_GENRES_KEY,
+        JSON.stringify(res.genres),
+      );
     });
   }, []);
 
