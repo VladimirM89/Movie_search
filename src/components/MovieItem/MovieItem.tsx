@@ -20,6 +20,7 @@ import {
   MANTINE_COLOR_YELLOW_6,
 } from "@/constants/colorConstants";
 import convertToShortFormat from "../utils/convertToShortFormat";
+import validateDate from "../utils/validateDate";
 
 type MovieItemProps = {
   movieInfo: Movie;
@@ -29,8 +30,6 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
   const posterPath = movieInfo.poster_path
     ? `${process.env.NEXT_PUBLIC_IMG_BASE_URL}${movieInfo.poster_path}`
     : PATH_TO_NO_MOVIE_POSTER;
-
-  const releaseDate = new Date(movieInfo.release_date);
 
   const theme = useMantineTheme();
   const colorYellow = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
@@ -90,7 +89,7 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
         <Image src={posterPath} width={119} height={170} alt={ALT_POSTER_IMG} />
         <div>
           <p>{movieInfo.original_title}</p>
-          <p>{releaseDate.getFullYear()}</p>
+          <p>{validateDate(movieInfo.release_date)}</p>
           <div>
             <RatingIcon color={colorYellow} />
             <span>{movieInfo.vote_average}</span>

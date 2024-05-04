@@ -7,7 +7,7 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { SearchParam } from "../../models/queryParams";
 
 type SearchBarProps = {
-  handleSearch: Dispatch<SetStateAction<SearchParam>>;
+  handleSearch: Dispatch<SetStateAction<string>>;
 };
 
 const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
@@ -19,8 +19,7 @@ const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
   });
 
   const handleSubmit = () => {
-    handleSearch(form.getValues());
-    console.log(form.getValues());
+    handleSearch(form.getValues().query);
   };
 
   return (

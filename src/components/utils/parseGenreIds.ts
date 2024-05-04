@@ -3,7 +3,7 @@ import { Genre } from "@/models/Response";
 
 const parseGenreIds = (value: Array<string>): string => {
   const genres = JSON.parse(
-    localStorage.getItem(LOCAL_STORAGE_GENRES_KEY) || "",
+    localStorage.getItem(LOCAL_STORAGE_GENRES_KEY) || "[]",
   ) as Array<Genre>;
 
   const obj: Record<string, string> = genres.reduce(
