@@ -1,7 +1,6 @@
 import { useState, useEffect, memo } from "react";
 import MovieList from "../MovieList/MovieList";
 import { getMovies } from "../utils/api";
-import { SearchResponse } from "../../types/Response";
 import SearchFilters from "../SearchFilters/SearchFilters";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
 import { FilterParams } from "@/types/QueryParams";
@@ -23,21 +22,24 @@ const SearchPage = memo(() => {
   const [page, setPage] = useState<number>(INITIAL_PAGE);
 
   useEffect(() => {
-    setIsLoading(true);
     const normalizedQueryParams = normalizeQueryParams({
       ...filterParams,
     });
-    getMovies(normalizedQueryParams)
-      .then((res: SearchResponse) => {
-        console.log(res);
-        setMovies(res.results);
-        setTotalPages(
-          res.total_pages > API_MAX_REQUEST_PAGE
-            ? API_MAX_REQUEST_PAGE
-            : res.total_pages,
-        );
-      })
-      .finally(() => setIsLoading(false));
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      const data = await getMovies(normalizedQueryParams);
+      console.log(data);
+      setMovies(data.results);
+      setTotalPages(
+        data.total_pages > API_MAX_REQUEST_PAGE
+          ? API_MAX_REQUEST_PAGE
+          : data.total_pages,
+      );
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, [filterParams]);
 
   const handleChangePage = (value: number): void => {
@@ -56,7 +58,7 @@ const SearchPage = memo(() => {
       <SearchFilters handleFilters={handleChangeFilter} />
       {isLoading ? (
         <Loader />
-      ) : movies.length > 0 ? (
+      ) : movies.length ? (
         <>
           <MovieList movies={movies} />
           {totalPages > 1 && (

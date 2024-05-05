@@ -6,7 +6,7 @@ import {
   LOCAL_STORAGE_MOVIES_KEY,
 } from "@/constants/constants";
 import { RatedMovie } from "@/types/Movies";
-import { Pagination } from "@mantine/core";
+import { Loader, Pagination } from "@mantine/core";
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import StandardButton from "@/components/UI/Button/StandardButton";
@@ -18,13 +18,16 @@ export default function RatingPage() {
   const [ratedMovies, setRatedMovies] = useState<Array<RatedMovie>>([]);
   const [page, setPage] = useState<number>(INITIAL_PAGE);
   const [filteredMovies, setFilteredMovies] = useState<Array<RatedMovie>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const initialValues: Array<RatedMovie> = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_MOVIES_KEY) || "[]",
     );
     setRatedMovies(initialValues);
     setFilteredMovies(initialValues);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -55,7 +58,9 @@ export default function RatingPage() {
       ITEMS_PER_PAGE,
   );
 
-  return filteredMovies.length > 0 ? (
+  return isLoading ? (
+    <Loader />
+  ) : filteredMovies.length ? (
     <div>
       <div>
         <h2>Rated Movies</h2>

@@ -1,8 +1,8 @@
-import { MultiSelect, Select, NumberInput } from "@mantine/core";
+import { MultiSelect, Select, NumberInput, Loader } from "@mantine/core";
 import sortingValues, { releaseYears } from "../SearchPage/searchPageInfo";
 import { useForm } from "@mantine/form";
 import { FilterParams } from "@/types/QueryParams";
-import { Genre, MovieGenres } from "@/types/Response";
+import { Genre } from "@/types/Response";
 import { useState, useEffect, FC, Dispatch } from "react";
 import { getGenres } from "../utils/api";
 import classes from "./SearchFilters.module.css";
@@ -17,19 +17,26 @@ type SearchFiltersProps = {
 
 const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
   const [genres, setGenres] = useState<Array<Genre>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   // const [sortParam, setSortParam] = useState<{
   //   value: string;
   //   label: string;
   // }>(sortingValues[0]);
 
   useEffect(() => {
-    getGenres().then((res: MovieGenres) => {
-      setGenres(res.genres);
+    const fetchGenres = async () => {
+      setIsLoading(true);
+      const data = await getGenres();
+      console.log(data);
+      setGenres(data.genres);
       localStorage.setItem(
         LOCAL_STORAGE_GENRES_KEY,
-        JSON.stringify(res.genres),
+        JSON.stringify(data.genres),
       );
-    });
+      setIsLoading(false);
+    };
+
+    fetchGenres();
   }, []);
 
   //TODO: find bug
@@ -98,7 +105,7 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
         placeholder="Select genre"
         data={genres.map((item) => item.name)}
         maxDropdownHeight={200}
-        rightSection={"v"}
+        rightSection={!isLoading && genres.length ? "v" : <Loader size="xs" />}
         searchable
         withCheckIcon={false}
       />

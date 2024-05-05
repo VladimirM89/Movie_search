@@ -1,11 +1,14 @@
 import { API_ENDPOINTS } from "@/constants/enums";
+import { MovieGenres, SearchResponse } from "@/types/Response";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY!;
 
 //TODO: api will be added in proxy server
 
-export const getMovies = async (params: Record<string, string>) => {
+export const getMovies = async (
+  params: Record<string, string>,
+): Promise<SearchResponse> => {
   const searchParams = new URLSearchParams(params);
   const url = new URL(API_ENDPOINTS.ALL_MOVIES, apiUrl);
   console.log(`${url}?${searchParams.toString()}`);
@@ -24,7 +27,7 @@ export const getMovies = async (params: Record<string, string>) => {
   return response.json();
 };
 
-export const getGenres = async () => {
+export const getGenres = async (): Promise<MovieGenres> => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const url = new URL(API_ENDPOINTS.GENRE, apiUrl);
