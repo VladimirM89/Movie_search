@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_GENRES_KEY } from "@/constants/constants";
-import { Genre } from "@/models/Response";
+import { Genre } from "@/types/Response";
 
 const parseGenreIds = (value: Array<string>): string => {
   const genres = JSON.parse(

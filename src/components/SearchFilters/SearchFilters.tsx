@@ -1,8 +1,8 @@
 import { MultiSelect, Select, NumberInput } from "@mantine/core";
 import sortingValues, { releaseYears } from "../SearchPage/searchPageInfo";
 import { useForm } from "@mantine/form";
-import { FilterParams } from "@/models/queryParams";
-import { Genre, MovieGenres } from "@/models/Response";
+import { FilterParams } from "@/types/QueryParams";
+import { Genre, MovieGenres } from "@/types/Response";
 import { useState, useEffect, FC, Dispatch } from "react";
 import { getGenres } from "../utils/api";
 import classes from "./SearchFilters.module.css";

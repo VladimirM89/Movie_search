@@ -1,13 +1,15 @@
 import { useState, useEffect, memo } from "react";
 import MovieList from "../MovieList/MovieList";
 import { getMovies } from "../utils/api";
-import { Movie, SearchResponse } from "../../models/Response";
+import { SearchResponse } from "../../types/Response";
 import SearchFilters from "../SearchFilters/SearchFilters";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
-import { FilterParams } from "@/models/queryParams";
+import { FilterParams } from "@/types/QueryParams";
 import { normalizeQueryParams } from "../utils/queryParams";
 import { Loader, Pagination } from "@mantine/core";
 import { API_MAX_REQUEST_PAGE, INITIAL_PAGE } from "@/constants/constants";
+import { Movie } from "@/types/Movies";
+import Image from "next/image";
 
 const SearchPage = memo(() => {
   console.log("Render main page");
@@ -54,20 +56,27 @@ const SearchPage = memo(() => {
       <SearchFilters handleFilters={handleChangeFilter} />
       {isLoading ? (
         <Loader />
-      ) : (
+      ) : movies.length > 0 ? (
         <>
           <MovieList movies={movies} />
           {totalPages > 1 && (
-            <>
-              <p>{page}</p>
-              <Pagination
-                total={totalPages}
-                onChange={handleChangePage}
-                value={page}
-              />
-            </>
+            <Pagination
+              total={totalPages}
+              onChange={handleChangePage}
+              value={page}
+            />
           )}
         </>
+      ) : (
+        <div>
+          <Image
+            src="/notFoundMovies.png"
+            alt="Not found results image"
+            width={311}
+            height={252}
+          />
+          <p>We don&apos;t have such movies, look for another one</p>
+        </div>
       )}
     </div>
   );

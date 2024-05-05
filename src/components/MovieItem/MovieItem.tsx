@@ -1,4 +1,3 @@
-import { Movie } from "@/models/Response";
 import { FC, memo, useEffect, useState } from "react";
 import Image from "next/image";
 import RatingIcon from "../UI/RatingIcon/RatingIcon";
@@ -12,7 +11,7 @@ import {
   PATH_TO_NO_MOVIE_POSTER,
 } from "@/constants/constants";
 import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";
-import { RatedMovie } from "@/models/RatedMovie";
+import { Movie, RatedMovie } from "@/types/Movies";
 import { useRouter } from "next/router";
 import parseGenreIds from "../utils/parseGenreIds";
 import {
@@ -36,9 +35,8 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
   const colorPurple = getThemeColor(MANTINE_COLOR_PURPLE_4, theme);
 
   const [opened, { open, close }] = useDisclosure(false);
-  const { setItem, removeItemById, getItemById } = useRatedMoviesLocalStorage(
-    LOCAL_STORAGE_MOVIES_KEY,
-  );
+  const { handleChangeItem, removeItemById, getItemById } =
+    useRatedMoviesLocalStorage(LOCAL_STORAGE_MOVIES_KEY);
 
   const initialRating = getItemById(movieInfo.id)?.userRating;
   const [rating, setRating] = useState<number>(initialRating || 0);
@@ -55,26 +53,27 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
           release_date,
           vote_average,
           vote_count,
+          poster_path,
         } = movieInfo;
 
         const newItem: RatedMovie = {
           id,
           original_title,
           genre_ids,
-          poster_path: posterPath,
+          poster_path,
           release_date,
           vote_count,
           vote_average,
           userRating: rating,
         };
-        setItem(newItem);
+        handleChangeItem(newItem);
       } else {
         removeItemById(movieInfo.id);
       }
     };
 
     handleChangeRating();
-  }, [movieInfo, posterPath, rating, removeItemById, setItem]);
+  }, [handleChangeItem, movieInfo, rating, removeItemById]);
 
   const navigateToDetailPage = () => {
     router.push(`${movieInfo.id}`);

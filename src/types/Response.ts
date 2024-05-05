@@ -1,55 +1,50 @@
+import { Movie, MovieDetails } from "./Movies";
+
 export interface SearchResponse {
   page: number;
-  results: Array<Movie>;
+  results: Array<MovieResponse>;
   total_pages: number;
   total_results: number;
 }
 
-export interface Movie {
+export interface MovieResponse extends Movie {
   adult: boolean;
   backdrop_path: string | null;
-  genre_ids: Array<string>;
-  id: number;
   original_language: string;
-  original_title: string;
   overview: string;
   popularity: number;
-  poster_path: string | null;
-  release_date: string;
   title: string;
   video: boolean;
-  vote_average: number;
-  vote_count: number;
 }
 
-export interface MovieDetailsResponse {
-  adult: boolean;
-  backdrop_path: string;
+export interface MovieDetailsResponse extends MovieResponse, MovieDetails {
+  // adult: boolean;
+  // backdrop_path: string | null;
   belongs_to_collection: Collection;
-  budget: number;
-  genres: Array<Genre>;
+  // budget: number;
+  // genres: Array<Genre>;
   homepage: string;
-  id: number;
+  // id: number;
   imdb_id: string;
   original_country: Array<string>;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  production_companies: Array<ProductionCompanies>;
+  // original_language: string;
+  // original_title: string;
+  // overview: string;
+  // popularity: number;
+  // poster_path: string;
+  // production_companies: Array<ProductionCompanies>;
   production_countries: Array<ProductionCountries>;
-  release_date: string;
-  revenue: number;
-  runtime: number;
+  // release_date: string;
+  // revenue: number;
+  // runtime: number;
   spoken_languages: Array<SpokenLanguages>;
   status: string;
   tagline: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-  videos?: MovieTrailer;
+  // title: string;
+  // video: boolean;
+  // vote_average: number;
+  // vote_count: number;
+  // videos?: MovieTrailer;
 }
 
 interface Collection {
@@ -64,7 +59,7 @@ export interface Genre {
   name: string;
 }
 
-interface ProductionCompanies {
+export interface ProductionCompanies {
   id: number;
   logo_path: string;
   name: string;
@@ -82,7 +77,7 @@ interface SpokenLanguages {
   name: string;
 }
 
-interface MovieTrailer {
+export interface MovieTrailer {
   results: Array<Trailer>;
 }
 
