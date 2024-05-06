@@ -9,3 +9,8 @@ export enum API_ENDPOINTS {
   MOVIE = "movie",
   GENRE = "genre/movie/list",
 }
+
+export enum STATUS_CODE {
+  OK = 200,
+  NOT_FOUND = 404,
+}

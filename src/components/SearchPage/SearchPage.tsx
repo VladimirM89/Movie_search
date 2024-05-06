@@ -72,7 +72,7 @@ const SearchPage = memo(() => {
       ) : (
         <div>
           <Image
-            src="/notFoundMovies.png"
+            src="/images/notFoundMovies.png"
             alt="Not found results image"
             width={311}
             height={252}

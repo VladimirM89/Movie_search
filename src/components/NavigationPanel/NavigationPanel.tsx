@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import navigationItems from "./navigationPanelInfo";
 import styles from "./NavigationPanel.module.css";
 import FlickIcon from "../UI/FlickIcon/FlickIcon";
+import { PATH } from "@/constants/enums";
 
 const NavigationPanel = () => {
   const router = useRouter();
@@ -24,7 +25,9 @@ const NavigationPanel = () => {
           <NavLink
             className={styles.nav_link}
             key={item.id}
-            active={item.path === router.pathname}
+            active={
+              item.path === (router.query.id ? PATH.HOME : router.pathname)
+            }
             label={item.label}
             onClick={() => handleClick(item.path)}
           />
