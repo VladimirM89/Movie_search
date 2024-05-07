@@ -4,7 +4,7 @@ import { API_ENDPOINTS, STATUS_CODE } from "@/constants/enums";
 import checkIsNumber from "@/components/utils/checkIsNumber";
 import dynamic from "next/dynamic";
 
-const Details = dynamic(() => import("../components/MovieDetails/index"));
+const Details = dynamic(() => import("../components/MovieDetailsPage/index"));
 
 type DetailsPageProps = {
   data: MovieDetails;

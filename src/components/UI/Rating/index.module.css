@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.rating_text {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 125%;
+}
