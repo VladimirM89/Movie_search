@@ -4,15 +4,15 @@ import { MovieDetails } from "@/types/Movies";
 import { FC, memo } from "react";
 import { ALT_POSTER_IMG, PATH_TO_NO_MOVIE_POSTER } from "@/constants/constants";
 import Image from "next/image";
+import MovieProfilePanel from "../MovieProfilePanel";
+import MovieStatsPanel from "../MovieStatsPanel";
+import classes from "./index.module.css";
 
-type MovieDetailsCardType = {
+type MovieDetailsCardProps = {
   movieInfo: MovieDetails;
 };
 
-const MovieDetailsCard: FC<MovieDetailsCardType> = memo(({ movieInfo }) => {
-  const posterPath = movieInfo.poster_path
-    ? `${process.env.NEXT_PUBLIC_IMG_BASE_URL}${movieInfo.poster_path}`
-    : PATH_TO_NO_MOVIE_POSTER;
+const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
   const {
     original_title,
     poster_path,
@@ -22,11 +22,16 @@ const MovieDetailsCard: FC<MovieDetailsCardType> = memo(({ movieInfo }) => {
     runtime,
     budget,
     revenue,
-    genre_ids,
+    genres,
   } = movieInfo;
+
+  const posterPath = poster_path
+    ? `${process.env.NEXT_PUBLIC_IMG_BASE_URL}${poster_path}`
+    : PATH_TO_NO_MOVIE_POSTER;
+
   return (
-    <Card radius={"md"}>
-      <div>
+    <Card radius={"md"} className={classes.details_container}>
+      <div className={classes.details_content}>
         <Image
           src={posterPath}
           width={250}
@@ -35,8 +40,19 @@ const MovieDetailsCard: FC<MovieDetailsCardType> = memo(({ movieInfo }) => {
           alt={ALT_POSTER_IMG}
         />
         <div>
-          <div></div>
-          <div></div>
+          <MovieProfilePanel
+            title={original_title}
+            release_date={release_date}
+            vote_average={vote_average}
+            vote_count={vote_count}
+          />
+          <MovieStatsPanel
+            runtime={runtime}
+            release_date={release_date}
+            budget={budget}
+            revenue={revenue}
+            genres={genres}
+          />
         </div>
       </div>
       <Rating movieInfo={movieInfo} />

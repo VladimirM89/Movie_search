@@ -1,4 +1,4 @@
-import { MovieTrailer, ProductionCompanies } from "./Response";
+import { Genre, MovieTrailer, ProductionCompanies } from "./Response";
 
 export interface Movie {
   id: number;
@@ -24,7 +24,7 @@ export interface MovieDetails extends Movie {
   runtime: number;
   budget: number;
   revenue: number;
-  // genres: Array<Genre>;
+  genres: Array<Genre>;
   overview: string;
   production_companies: Array<ProductionCompanies>;
   videos?: MovieTrailer;

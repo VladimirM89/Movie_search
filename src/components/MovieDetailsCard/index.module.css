@@ -1,0 +1,12 @@
+.details_container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.details_content {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
