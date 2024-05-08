@@ -3,13 +3,12 @@
 import { FC, memo, useEffect, useState } from "react";
 import { RatingImage } from "../../../../public/images";
 import {
-  // MANTINE_COLOR_YELLOW_6,
   MANTINE_COLOR_PURPLE_4,
   MANTINE_COLOR_GRAY_SCALE_3,
 } from "@/constants/colorConstants";
 import { useMantineTheme, getThemeColor } from "@mantine/core";
 import {
-  ALT_RATING_ICON_IMG,
+  ALT_RATING_ICON,
   LOCAL_STORAGE_MOVIES_KEY,
 } from "@/constants/constants";
 import classes from "./index.module.css";
@@ -64,7 +63,6 @@ const Rating: FC<RatingProps> = memo(({ movieInfo }) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const theme = useMantineTheme();
-  // const colorRatedFromApi = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
   const colorUserRated = getThemeColor(MANTINE_COLOR_PURPLE_4, theme);
   const colorNotRated = getThemeColor(MANTINE_COLOR_GRAY_SCALE_3, theme);
 
@@ -78,7 +76,7 @@ const Rating: FC<RatingProps> = memo(({ movieInfo }) => {
           stroke={color}
           width={28}
           height={28}
-          alt={ALT_RATING_ICON_IMG}
+          alt={ALT_RATING_ICON}
         />
         {rating > 0 && <span className={classes.rating_text}>{rating}</span>}
       </div>
