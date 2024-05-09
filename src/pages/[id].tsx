@@ -5,6 +5,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Loader } from "@mantine/core";
+import { NO_INFO_MOVIE_DETAILS } from "@/constants/constants";
 
 const MovieDetailsPage = dynamic(
   () => import("../components/MovieDetailsPage/index"),
@@ -15,29 +16,38 @@ export default function DetailsPage() {
 
   const [, setId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isMovieError, setIsMovieError] = useState<boolean>(false);
   const [movie, setMovie] = useState<MovieDetails | null>(null);
 
   useEffect(() => {
     const id = Number(router.query.id) || Number(location.pathname.slice(1));
 
-    // console.log(id);
+    // console.log(id, isNaN(id));
 
-    if (isNaN(id)) router.push("404");
+    if (isNaN(id) && id !== undefined) {
+      setIsLoading(false);
+      router.push("404");
+    }
 
     setId(id);
 
     const fetchData = async () => {
       setIsLoading(true);
-      if (id && router.isReady) {
-        const data = await getMovie(id);
-        // console.log(data, "id" in data);
 
-        if ("id" in data) {
-          setMovie(data as MovieDetails);
-          setIsLoading(false);
-        } else {
-          router.push("404");
+      try {
+        if (id && router.isReady) {
+          const data = await getMovie(id);
+          // console.log(data, "id" in data);
+          if ("id" in data) {
+            setMovie(data as MovieDetails);
+          } else {
+            router.push("404");
+          }
         }
+      } catch {
+        setIsMovieError(true);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -56,7 +66,13 @@ export default function DetailsPage() {
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
       <div>
-        {isLoading ? <Loader /> : movie && <MovieDetailsPage data={movie} />}
+        {isLoading ? (
+          <Loader />
+        ) : isMovieError ? (
+          <p>{NO_INFO_MOVIE_DETAILS}</p>
+        ) : (
+          movie && <MovieDetailsPage data={movie} />
+        )}
       </div>
     </>
   );

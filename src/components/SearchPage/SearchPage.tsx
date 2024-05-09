@@ -6,7 +6,11 @@ import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
 import { FilterParams } from "@/types/QueryParams";
 import { normalizeQueryParams } from "../utils/queryParams";
 import { Loader, Pagination } from "@mantine/core";
-import { API_MAX_REQUEST_PAGE, INITIAL_PAGE } from "@/constants/constants";
+import {
+  API_MAX_REQUEST_PAGE,
+  INITIAL_PAGE,
+  NO_INFO_MOVIE_LIST,
+} from "@/constants/constants";
 import { Movie } from "@/types/Movies";
 import Image from "next/image";
 
@@ -18,25 +22,31 @@ const SearchPage = memo(() => {
   );
   const [movies, setMovies] = useState<Array<Movie>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isMovieError, setIsMovieError] = useState<boolean>(false);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [page, setPage] = useState<number>(INITIAL_PAGE);
 
   useEffect(() => {
-    const normalizedQueryParams = normalizeQueryParams({
-      ...filterParams,
-    });
+    const normalizedQueryParams = normalizeQueryParams(filterParams);
 
     const fetchData = async () => {
       setIsLoading(true);
-      const data = await getMovies(normalizedQueryParams);
-      // console.log(data);
-      setMovies(data.results);
-      setTotalPages(
-        data.total_pages > API_MAX_REQUEST_PAGE
-          ? API_MAX_REQUEST_PAGE
-          : data.total_pages,
-      );
-      setIsLoading(false);
+      try {
+        const data = await getMovies(normalizedQueryParams);
+        // console.log(data);
+        if (data && data.results) {
+          setMovies(data.results);
+          setTotalPages(
+            data.total_pages > API_MAX_REQUEST_PAGE
+              ? API_MAX_REQUEST_PAGE
+              : data.total_pages,
+          );
+        }
+      } catch {
+        setIsMovieError(true);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
@@ -52,10 +62,19 @@ const SearchPage = memo(() => {
     setPage(INITIAL_PAGE);
   };
 
+  // const deleteReleaseYearFromParams = () => {
+  //   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  //   const { primary_release_year, ...rest } = filterParams;
+  //   return rest;
+  // };
+
   return (
     <div>
       <h2>Movie</h2>
-      <SearchFilters handleFilters={handleChangeFilter} />
+      <SearchFilters
+        handleFilters={handleChangeFilter}
+        // filters={deleteReleaseYearFromParams()}
+      />
       {isLoading ? (
         <Loader />
       ) : movies.length ? (
@@ -69,7 +88,7 @@ const SearchPage = memo(() => {
             />
           )}
         </>
-      ) : (
+      ) : !isMovieError ? (
         <div>
           <Image
             src="/images/notFoundMovies.png"
@@ -79,6 +98,8 @@ const SearchPage = memo(() => {
           />
           <p>We don&apos;t have such movies, look for another one</p>
         </div>
+      ) : (
+        <p>{NO_INFO_MOVIE_LIST}</p>
       )}
     </div>
   );

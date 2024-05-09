@@ -27,6 +27,8 @@ export const PREMIERE_SUBTITLE = "Premiere";
 export const BUDGET_SUBTITLE = "Budget";
 export const REVENUE_SUBTITLE = "Gross worldwide";
 export const GENRES_SUBTITLE = "Genres";
+export const NO_INFO_MOVIE_DETAILS = "No details movie info. Please try again";
+export const NO_INFO_MOVIE_LIST = "No movie list info";
 
 export const URL_SEPARATOR = "/";
 export const DYNAMIC_IMPORT_PATH = "/[id]";
@@ -35,3 +37,13 @@ export const ATTRIBUTE_HREF = "href";
 export const LOCALE = "en-us";
 export const MONTH_FORMAT = "long";
 export const CURRENCY_FORMAT = "USD";
+
+//forms
+export const LABEL_GENRES = "Genres";
+export const LABEL_YEAR = "Release year";
+export const LABEL_RATINGS = "Ratings";
+export const LABEL_SORT_BY = "Sort by";
+export const PLACEHOLDER_GENRE_OK = "Select genre";
+export const PLACEHOLDER_GENRE_ERROR = "No genres info";
+export const PLACEHOLDER_YEARS_OK = "Select release year";
+export const PLACEHOLDER_YEARS_ERROR = "No release year info";

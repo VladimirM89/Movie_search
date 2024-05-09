@@ -2,6 +2,7 @@
 export enum PATH {
   HOME = "/",
   RATING = "/rating",
+  NOT_FOUND = "/404",
 }
 
 export enum API_ENDPOINTS {
@@ -13,4 +14,11 @@ export enum API_ENDPOINTS {
 export enum STATUS_CODE {
   OK = 200,
   NOT_FOUND = 404,
+  SERVER_ERROR = 500,
+}
+
+export enum PROXY_ENDPOINTS {
+  ALL_MOVIES = "api/movies",
+  MOVIE = "api/movie",
+  GENRE = "api/genres",
 }

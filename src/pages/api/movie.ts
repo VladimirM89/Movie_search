@@ -1,13 +1,11 @@
-import checkIsNumber from "@/components/utils/checkIsNumber";
-import { API_ENDPOINTS } from "@/constants/enums";
-import { MovieDetails } from "@/types/Movies";
+import { API_ENDPOINTS, STATUS_CODE } from "@/constants/enums";
+import { ERROR_MESSAGE_PROXY_MOVIE } from "@/constants/errorText";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<MovieDetails>,
+  res: NextApiResponse,
 ) {
-  // console.log("CALL PROXY FN getMovie");
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const apiKey = process.env.NEXT_PUBLIC_API_KEY!;
 
@@ -16,14 +14,6 @@ export default async function handler(
     query: { id },
   } = req;
 
-  // console.log("PROXY. ID", id);
-
-  if (id && !Array.isArray(id)) {
-    if (!checkIsNumber(id)) {
-      return res.status(404);
-    }
-  }
-
   const searchParams = new URLSearchParams({
     api_key: apiKey,
     append_to_response: "videos",
@@ -31,22 +21,24 @@ export default async function handler(
 
   // console.log(`PROXY !!!!!!!!!!!${url}/${id}?${searchParams.toString()}`);
 
-  const response = await fetch(`${url}/${id}?${searchParams.toString()}`, {
-    method: "GET",
-    cache: "no-cache",
-  });
+  try {
+    const response = await fetch(`${url}/${id}?${searchParams.toString()}`, {
+      method: "GET",
+      cache: "no-cache",
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  // console.log("PROXY. RESULT FROM API: ", response.status, data);
+    if (response.status === 404) {
+      return res.status(response.status).json(data);
+    }
 
-  // if (!response.ok) {
-  //   throw new Error("Unable to fetch data (movie's details)");
-  // }
-  return res.status(response.status).json(data);
-
-  // if (response.ok) {
-  //   // const data = (await response.json()) as MovieDetails;
-  //   res.status(200).json(data);
-  // }
+    if (response.ok) {
+      return res.status(STATUS_CODE.OK).json(data);
+    }
+  } catch (error) {
+    return res.status(STATUS_CODE.SERVER_ERROR).json({
+      message: `${ERROR_MESSAGE_PROXY_MOVIE} ${(error as Error).message}`,
+    });
+  }
 }

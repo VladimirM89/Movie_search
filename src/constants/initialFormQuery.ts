@@ -12,3 +12,6 @@ export const INITIAL_FILTER_PARAMS: FilterParams = {
   "vote_average-gte": "",
   sort_by: sortingValues[0].value,
 };
+export const FILTER_PARAMS_MIN_YEARS: FilterParams = {
+  sort_by: sortingValues[sortingValues.length - 1].value,
+};
