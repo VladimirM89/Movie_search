@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { PATH } from "@/constants/enums";
 import { useCallback } from "react";
 
-export default function NotFoundPage() {
+export default function NotFound() {
   const router = useRouter();
 
   const navigateToMain = useCallback(() => {
@@ -15,7 +15,7 @@ export default function NotFoundPage() {
 
   return (
     <div>
-      <Image src={NotFoundPageImage} alt={ALT_404_PAGE_IMG} />
+      <Image src={NotFoundPageImage} alt={ALT_404_PAGE_IMG} priority={true} />
       <p>We can’t find the page you are looking for</p>
       <StandardButton text="Go Home" size="md" onClick={navigateToMain} />
     </div>

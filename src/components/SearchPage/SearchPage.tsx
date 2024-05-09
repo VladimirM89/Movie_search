@@ -29,7 +29,7 @@ const SearchPage = memo(() => {
     const fetchData = async () => {
       setIsLoading(true);
       const data = await getMovies(normalizedQueryParams);
-      console.log(data);
+      // console.log(data);
       setMovies(data.results);
       setTotalPages(
         data.total_pages > API_MAX_REQUEST_PAGE

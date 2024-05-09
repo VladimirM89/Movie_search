@@ -27,7 +27,7 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
     const fetchGenres = async () => {
       setIsLoading(true);
       const data = await getGenres();
-      console.log(data);
+      // console.log(data);
       setGenres(data.genres);
       localStorage.setItem(
         LOCAL_STORAGE_GENRES_KEY,
@@ -73,7 +73,7 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
     },
 
     onValuesChange: useDebouncedCallback((values, previous) => {
-      console.log("previous: ", previous, "values: ", values);
+      // console.log("previous: ", previous, "values: ", values);
       // console.log("errors: ", !!Object.keys(form.errors).length);
       if (!Object.keys(form.errors).length && !Object.is(previous, values)) {
         const rawParams = form.values;
@@ -143,7 +143,6 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
         allowNegative={false}
       />
       <p onClick={handleClearFilters}>Reset filters</p>
-      {/* // TODO: find bug with default value */}
       <Select
         key={form.key("sort_by")}
         {...form.getInputProps("sort_by")}

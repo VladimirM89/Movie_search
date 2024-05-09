@@ -1,5 +1,3 @@
-"use client";
-
 import { FC, memo, useEffect, useState } from "react";
 import { RatingImage } from "../../../../public/images";
 import {
@@ -63,6 +61,7 @@ const Rating: FC<RatingProps> = memo(({ movieInfo }) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const theme = useMantineTheme();
+  // const colorRatedFromApi = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
   const colorUserRated = getThemeColor(MANTINE_COLOR_PURPLE_4, theme);
   const colorNotRated = getThemeColor(MANTINE_COLOR_GRAY_SCALE_3, theme);
 

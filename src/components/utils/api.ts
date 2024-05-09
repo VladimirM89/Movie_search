@@ -1,44 +1,17 @@
-import { API_ENDPOINTS } from "@/constants/enums";
 import { MovieGenres, SearchResponse } from "@/types/Response";
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-const apiKey = process.env.NEXT_PUBLIC_API_KEY!;
-
-//TODO: api will be added in proxy server
 
 export const getMovies = async (
   params: Record<string, string>,
 ): Promise<SearchResponse> => {
   const searchParams = new URLSearchParams(params);
-  const url = new URL(API_ENDPOINTS.ALL_MOVIES, apiUrl);
-  console.log(`${url}?${searchParams.toString()}`);
 
-  const response = await fetch(
-    `${url}?${searchParams.toString()}&api_key=${apiKey}`,
-    {
-      cache: "no-cache",
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error("Unable to fetch data (movie list)");
-  }
+  const response = await fetch(`api/movies?${searchParams.toString()}`);
 
   return response.json();
 };
 
 export const getGenres = async (): Promise<MovieGenres> => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-  const url = new URL(API_ENDPOINTS.GENRE, apiUrl);
-
-  const searchParams = new URLSearchParams({
-    api_key: apiKey,
-  });
-
-  const response = await fetch(`${url}?${searchParams.toString()}`, {
-    cache: "no-cache",
-  });
+  const response = await fetch("api/genres");
 
   if (!response.ok) {
     throw new Error("Unable to fetch data (movie's genre)");
@@ -47,22 +20,18 @@ export const getGenres = async (): Promise<MovieGenres> => {
   return response.json();
 };
 
-export const getMovie = async (id: string) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-  const url = new URL(API_ENDPOINTS.GENRE, apiUrl);
+export const getMovie = async (id: number) => {
+  // console.log("CALL API FN getMovie");
 
   const searchParams = new URLSearchParams({
-    api_key: apiKey,
+    id: id.toString(),
   });
 
-  const response = await fetch(`${url}/${id}?${searchParams.toString()}`, {
-    cache: "no-cache",
-  });
-
-  if (!response.ok) {
-    throw new Error("Unable to fetch data (movie's details)");
+  try {
+    const response = await fetch(`api/movie?${searchParams.toString()}`);
+    // console.log("!!!!!!!!!!!", response, response.status);
+    return response.json();
+  } catch {
+    console.error("NOT FOUND SUCH ITEM");
   }
-
-  return response.json();
 };
