@@ -8,7 +8,7 @@ const useRatedMoviesLocalStorage = (key: string) => {
       const item = localStorage.getItem(key);
       return item ? (JSON.parse(item) as Array<RatedMovie>) : undefined;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [key]);
 
@@ -32,7 +32,7 @@ const useRatedMoviesLocalStorage = (key: string) => {
           localStorage.setItem(key, JSON.stringify([value]));
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
     [getAllItems, key],
@@ -47,7 +47,7 @@ const useRatedMoviesLocalStorage = (key: string) => {
         }
         return undefined;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
     [getAllItems],
@@ -60,15 +60,17 @@ const useRatedMoviesLocalStorage = (key: string) => {
         if (movies) {
           const filteredArr = movies.filter((item) => item.id !== id);
           localStorage.setItem(key, JSON.stringify(filteredArr));
+          window.dispatchEvent(new StorageEvent("storage"));
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
     [getAllItems, key],
   );
 
   return {
+    getAllItems,
     getItemById,
     removeItemById,
     handleChangeItem,

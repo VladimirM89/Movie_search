@@ -12,6 +12,7 @@ import Image from "next/image";
 import StandardButton from "@/components/UI/Button/StandardButton";
 import { useRouter } from "next/router";
 import { PATH } from "@/constants/enums";
+import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";
 
 export default function RatingPage() {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -19,6 +20,8 @@ export default function RatingPage() {
   const [page, setPage] = useState<number>(INITIAL_PAGE);
   const [filteredMovies, setFilteredMovies] = useState<Array<RatedMovie>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { getAllItems } = useRatedMoviesLocalStorage(LOCAL_STORAGE_MOVIES_KEY);
 
   useEffect(() => {
     setIsLoading(true);
@@ -29,6 +32,18 @@ export default function RatingPage() {
     setFilteredMovies(initialValues);
     setIsLoading(false);
   }, []);
+
+  useEffect(() => {
+    function storageEventHandler() {
+      const existingRatedMovies = getAllItems();
+      setRatedMovies(existingRatedMovies || []);
+    }
+
+    window.addEventListener("storage", storageEventHandler);
+    return () => {
+      window.removeEventListener("storage", storageEventHandler);
+    };
+  }, [getAllItems]);
 
   useEffect(() => {
     setPage(INITIAL_PAGE);

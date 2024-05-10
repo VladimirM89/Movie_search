@@ -81,9 +81,9 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters, filters }) => {
       try {
         const data = await getMovies(normalizedFilterParams);
 
-        console.log(normalizedFilterParams);
+        // console.log(normalizedFilterParams);
 
-        console.log(data.results);
+        // console.log(data.results);
 
         if (data && data.results.length) {
           const minYear = new Date(
@@ -98,11 +98,11 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters, filters }) => {
 
           // setYears(yearsArray.sort((a, b) => Number(a) - Number(b)));
           // setYears(yearsArray);
-          console.log(yearsArray);
+          // console.log(yearsArray);
 
           const selectedYear = refYear.current?.value || "";
 
-          console.log("selected Year", selectedYear);
+          // console.log("selected Year", selectedYear);
 
           !yearsArray.includes(selectedYear) &&
             selectedYear?.length &&

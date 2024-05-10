@@ -29,7 +29,7 @@ const SearchPage = memo(() => {
   useEffect(() => {
     const normalizedQueryParams = normalizeQueryParams(filterParams);
 
-    console.log(normalizedQueryParams);
+    // console.log(normalizedQueryParams);
 
     const fetchData = async () => {
       setIsLoading(true);

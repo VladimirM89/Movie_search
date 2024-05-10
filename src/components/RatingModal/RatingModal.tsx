@@ -2,7 +2,7 @@ import { Modal, Rating, getThemeColor, useMantineTheme } from "@mantine/core";
 import StandardButton from "../UI/Button/StandardButton";
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { MANTINE_COLOR_YELLOW_6 } from "@/constants/colorConstants";
-import { RATING_MODAL_TITLE } from "@/constants/constants";
+import { RATING_MODAL_TITLE, REMOVE_RATING } from "@/constants/constants";
 
 type RatingModalProps = {
   title: string;
@@ -33,6 +33,13 @@ const RatingModal: FC<RatingModalProps> = ({
     close();
     setValue(rating);
   };
+
+  const handleResetRating = () => {
+    setValue(0);
+    setRating(0);
+    close();
+  };
+
   return (
     <Modal
       closeButtonProps={{ size: "sm" }}
@@ -55,6 +62,7 @@ const RatingModal: FC<RatingModalProps> = ({
         size="md"
         onClick={saveRating}
       ></StandardButton>
+      <p onClick={handleResetRating}>{REMOVE_RATING}</p>
     </Modal>
   );
 };
