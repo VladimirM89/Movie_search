@@ -9,15 +9,18 @@ import classes from "./SearchFilters.module.css";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { getGenreParam, normalizeQueryParams } from "../utils/queryParams";
 import {
-  FILTER_PARAMS_MIN_YEARS,
+  FILTER_PARAMS_SORT_BY_MIN_YEARS,
   INITIAL_FILTER_PARAMS,
 } from "@/constants/initialFormQuery";
 import {
+  DEBOUNCE_TIME,
   LABEL_GENRES,
   LABEL_RATINGS,
   LABEL_SORT_BY,
   LABEL_YEAR,
   LOCAL_STORAGE_GENRES_KEY,
+  MAX_RATING_VALUE,
+  MIN_RATING_VALUE,
   PLACEHOLDER_GENRE_ERROR,
   PLACEHOLDER_GENRE_OK,
   PLACEHOLDER_YEARS_ERROR,
@@ -25,15 +28,16 @@ import {
 } from "@/constants/constants";
 import {
   VALIDATION_FORM_RATING_LESS_THAN_MIN,
+  VALIDATION_FORM_RATING_MAX_VALUE,
   VALIDATION_FORM_RATING_MORE_THAN_MAX,
 } from "@/constants/errorText";
 
 type SearchFiltersProps = {
-  // filters: FilterParams;
+  filters: FilterParams;
   handleFilters: Dispatch<FilterParams>;
 };
 
-const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
+const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters, filters }) => {
   const [genres, setGenres] = useState<Array<Genre>>([]);
   const [isLoadingGenres, setIsLoadingGenres] = useState<boolean>(false);
   const [isGenresError, setIsGenresError] = useState<boolean>(false);
@@ -69,9 +73,9 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
     const fetchReleaseYears = async () => {
       setIsLoadingYears(true);
       const normalizedFilterParams = normalizeQueryParams({
-        // ...filters,
+        ...filters,
         // primary_release_year: "",
-        ...FILTER_PARAMS_MIN_YEARS,
+        ...FILTER_PARAMS_SORT_BY_MIN_YEARS,
       });
 
       try {
@@ -93,21 +97,18 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
           );
 
           // setYears(yearsArray.sort((a, b) => Number(a) - Number(b)));
-          setYears(yearsArray);
+          // setYears(yearsArray);
           console.log(yearsArray);
+
+          const selectedYear = refYear.current?.value || "";
+
+          console.log("selected Year", selectedYear);
+
+          !yearsArray.includes(selectedYear) &&
+            selectedYear?.length &&
+            yearsArray.push(selectedYear!);
+          setYears(yearsArray.sort((a, b) => Number(a) - Number(b)));
         }
-
-        // const selectedYear = form
-        //   .getInputProps("primary_release_year")
-        //   .value.toString();
-
-        // const selectedYear = refYear.current?.value || "";
-
-        // console.log("selected Year", selectedYear);
-
-        // !yearsArray.includes(selectedYear) &&
-        //   selectedYear?.length &&
-        //   yearsArray.push(selectedYear!);
       } catch {
         setIsYearsError(true);
         setYears([]);
@@ -117,19 +118,29 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
     };
 
     fetchReleaseYears();
-  }, []);
+  }, [filters]);
 
-  //TODO: find bug
+  //TODO: refactor validation rating fields
   const compareVoteAverage = (): boolean => {
-    const ratingFrom: number = form.getInputProps("vote_average-gte").value;
-    const ratingTo: number = form.getInputProps("vote_average-lte").value;
+    const ratingMin: number = form.getInputProps("vote_average-gte").value;
+    const ratingMax: number = form.getInputProps("vote_average-lte").value;
 
-    // console.log("ratingFrom ", ratingFrom, "ratingTo", ratingTo);
+    // console.log("ratingFrom ", ratingMin, "ratingTo", ratingMax);
 
-    if (ratingTo === 0 && ratingFrom > 0) {
+    if (ratingMax === MIN_RATING_VALUE && ratingMin > MIN_RATING_VALUE) {
       return false;
     }
-    return ratingTo && ratingFrom >= ratingTo ? false : true;
+    if (ratingMax && ratingMin > ratingMax) {
+      return false;
+    } else {
+      form.clearFieldError("vote_average-gte");
+      return true;
+    }
+  };
+
+  const checkMaxRatingValue = (key: string): boolean => {
+    const ratingValue: number = form.getInputProps(key).value;
+    return ratingValue > MAX_RATING_VALUE;
   };
 
   //TODO: separate interfaces for form and for query: Array<string> for form, string for query
@@ -139,10 +150,18 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
     validateInputOnChange: true,
     validate: {
       "vote_average-gte": () =>
-        !compareVoteAverage() ? VALIDATION_FORM_RATING_MORE_THAN_MAX : null,
+        !compareVoteAverage()
+          ? VALIDATION_FORM_RATING_MORE_THAN_MAX
+          : checkMaxRatingValue("vote_average-gte")
+            ? VALIDATION_FORM_RATING_MAX_VALUE
+            : null,
 
       "vote_average-lte": () =>
-        !compareVoteAverage() ? VALIDATION_FORM_RATING_LESS_THAN_MIN : null,
+        !compareVoteAverage()
+          ? VALIDATION_FORM_RATING_LESS_THAN_MIN
+          : checkMaxRatingValue("vote_average-lte")
+            ? VALIDATION_FORM_RATING_MAX_VALUE
+            : null,
     },
 
     onValuesChange: useDebouncedCallback((values, previous) => {
@@ -158,13 +177,8 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
           with_genres: [genreArray],
         });
       }
-    }, 1000),
+    }, DEBOUNCE_TIME),
   });
-
-  const handleClearFilters = () => {
-    form.reset();
-    handleFilters(form.getValues());
-  };
 
   return (
     <form>
@@ -183,7 +197,7 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
         withCheckIcon={false}
         disabled={isGenresError}
       />
-      {/* // TODO: find bug with clear value */}
+
       <Select
         ref={refYear}
         classNames={{ option: classes.option }}
@@ -220,7 +234,7 @@ const SearchFilters: FC<SearchFiltersProps> = ({ handleFilters }) => {
         placeholder="To"
         allowNegative={false}
       />
-      <p onClick={handleClearFilters}>Reset filters</p>
+      <p onClick={form.reset}>Reset filters</p>
       <Select
         key={form.key("sort_by")}
         {...form.getInputProps("sort_by")}

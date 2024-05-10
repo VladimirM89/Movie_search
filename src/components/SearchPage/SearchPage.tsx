@@ -29,6 +29,8 @@ const SearchPage = memo(() => {
   useEffect(() => {
     const normalizedQueryParams = normalizeQueryParams(filterParams);
 
+    console.log(normalizedQueryParams);
+
     const fetchData = async () => {
       setIsLoading(true);
       try {
@@ -62,18 +64,18 @@ const SearchPage = memo(() => {
     setPage(INITIAL_PAGE);
   };
 
-  // const deleteReleaseYearFromParams = () => {
-  //   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  //   const { primary_release_year, ...rest } = filterParams;
-  //   return rest;
-  // };
+  const deleteReleaseYearFromParams = () => {
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    const { primary_release_year, ...rest } = filterParams;
+    return rest;
+  };
 
   return (
     <div>
       <h2>Movie</h2>
       <SearchFilters
         handleFilters={handleChangeFilter}
-        // filters={deleteReleaseYearFromParams()}
+        filters={deleteReleaseYearFromParams()}
       />
       {isLoading ? (
         <Loader />
