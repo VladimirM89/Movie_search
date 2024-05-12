@@ -1,6 +1,6 @@
 import { MovieDetails } from "@/types/Movies";
 import dynamic from "next/dynamic";
-import { getMovie } from "@/components/utils/api";
+import { getMovie } from "@/services/apiService";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

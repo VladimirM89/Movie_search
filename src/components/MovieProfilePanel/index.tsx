@@ -2,8 +2,8 @@ import { MANTINE_COLOR_YELLOW_6 } from "@/constants/colorConstants";
 import { ALT_RATING_ICON } from "@/constants/constants";
 import { useMantineTheme, getThemeColor } from "@mantine/core";
 import { RatingImage } from "../../../public/images";
-import convertToShortFormat from "../utils/convertToShortFormat";
-import validateDate from "../utils/validateDate";
+import convertToShortFormat from "../../utils/convertToShortFormat";
+import validateDate from "../../utils/validateDate";
 import { FC } from "react";
 
 type MovieProfilePanelType = {

@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Genre } from "@/types/Response";
 import classes from "./index.module.css";
-import formatTime from "../utils/formatTime";
-import formatDate from "../utils/formatDate";
-import formatMoney from "../utils/formatMoney";
+import formatTime from "../../utils/formatTime";
+import formatDate from "../../utils/formatDate";
+import formatMoney from "../../utils/formatMoney";
 import {
   BUDGET_SUBTITLE,
   DURATION_SUBTITLE,

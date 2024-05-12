@@ -1,10 +1,8 @@
 import { useState, useEffect, memo } from "react";
 import MovieList from "../MovieList/MovieList";
-import { getMovies } from "../utils/api";
+import { getMovies } from "../../services/apiService";
 import SearchFilters from "../SearchFilters/SearchFilters";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
-import { FilterParams } from "@/types/QueryParams";
-import { normalizeQueryParams } from "../utils/queryParams";
 import { Loader, Pagination } from "@mantine/core";
 import {
   API_MAX_REQUEST_PAGE,
@@ -13,11 +11,12 @@ import {
 } from "@/constants/constants";
 import { Movie } from "@/types/Movies";
 import Image from "next/image";
+import { FiltersFormType } from "@/utils/filtersFormSchema";
 
 const SearchPage = memo(() => {
-  console.log("Render main page");
+  // console.log("Render main page");
 
-  const [filterParams, setFilterParams] = useState<FilterParams>(
+  const [filterParams, setFilterParams] = useState<FiltersFormType>(
     INITIAL_FILTER_PARAMS,
   );
   const [movies, setMovies] = useState<Array<Movie>>([]);
@@ -27,15 +26,10 @@ const SearchPage = memo(() => {
   const [page, setPage] = useState<number>(INITIAL_PAGE);
 
   useEffect(() => {
-    const normalizedQueryParams = normalizeQueryParams(filterParams);
-
-    // console.log(normalizedQueryParams);
-
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const data = await getMovies(normalizedQueryParams);
-        // console.log(data);
+        const data = await getMovies(filterParams);
         if (data && data.results) {
           setMovies(data.results);
           setTotalPages(
@@ -55,12 +49,12 @@ const SearchPage = memo(() => {
   }, [filterParams]);
 
   const handleChangePage = (value: number): void => {
-    setFilterParams({ ...filterParams, page: value.toString() });
+    setFilterParams({ ...filterParams, page: value });
     setPage(value);
   };
 
-  const handleChangeFilter = (params: FilterParams): void => {
-    setFilterParams({ ...params, page: INITIAL_PAGE.toString() });
+  const handleChangeFilter = (params: FiltersFormType): void => {
+    setFilterParams({ ...params, page: INITIAL_PAGE });
     setPage(INITIAL_PAGE);
   };
 

@@ -8,7 +8,7 @@ import { PATH } from "@/constants/enums";
 const NavigationPanel = () => {
   const router = useRouter();
 
-  console.log("Render nav panel");
+  // console.log("Render nav panel");
 
   const handleClick = (path: string) => {
     router.pathname !== path && router.push(path);

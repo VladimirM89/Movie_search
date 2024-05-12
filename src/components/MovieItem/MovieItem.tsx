@@ -10,7 +10,7 @@ import {
 } from "@/constants/constants";
 import { Movie } from "@/types/Movies";
 import { useRouter } from "next/router";
-import parseGenreIds from "../utils/parseGenreIds";
+import parseGenreIds from "../../utils/parseGenreIds";
 import MovieProfilePanel from "../MovieProfilePanel";
 
 type MovieItemProps = {

@@ -1,4 +1,4 @@
-const sortingValues: Array<{ value: string; label: string }> = [
+const sortValues: Array<{ value: string; label: string }> = [
   { value: "popularity.desc", label: "Most Popular" },
   { value: "popularity.asc", label: "Least Popular" },
   { value: "vote_count.desc", label: "Most Voted" },
@@ -13,4 +13,4 @@ const sortingValues: Array<{ value: string; label: string }> = [
   { value: "primary_release_date.asc", label: "Release Date ACS" },
 ];
 
-export default sortingValues;
+export default sortValues;

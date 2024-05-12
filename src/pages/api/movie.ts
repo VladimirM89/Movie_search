@@ -1,44 +1,52 @@
-import { API_ENDPOINTS, STATUS_CODE } from "@/constants/enums";
+import {
+  API_ENDPOINTS,
+  HTTP_METHOD,
+  HTTP_STATUS_CODE,
+} from "@/constants/enums";
 import { ERROR_MESSAGE_PROXY_MOVIE } from "@/constants/errorText";
+import validate from "@/middleware/validate";
+import {
+  RequestMovieDetailsApiType,
+  schemaRequestMovieDetails,
+} from "@/utils/filtersFormSchema";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const apiKey = process.env.NEXT_PUBLIC_API_KEY!;
 
   const url = new URL(API_ENDPOINTS.MOVIE, apiUrl);
-  const {
-    query: { id },
-  } = req;
+
+  const requestParams: RequestMovieDetailsApiType = req.body;
 
   const searchParams = new URLSearchParams({
     api_key: apiKey,
     append_to_response: "videos",
   });
 
-  // console.log(`PROXY !!!!!!!!!!!${url}/${id}?${searchParams.toString()}`);
-
   try {
-    const response = await fetch(`${url}/${id}?${searchParams.toString()}`, {
-      method: "GET",
-      cache: "no-cache",
-    });
+    const response = await fetch(
+      `${url}/${requestParams.id}?${searchParams.toString()}`,
+      {
+        method: HTTP_METHOD.GET,
+        cache: "no-cache",
+      },
+    );
 
     const data = await response.json();
 
-    if (response.status === 404) {
+    if (response.status === HTTP_STATUS_CODE.NOT_FOUND) {
       return res.status(response.status).json(data);
     }
 
     if (response.ok) {
-      return res.status(STATUS_CODE.OK).json(data);
+      return res.status(HTTP_STATUS_CODE.OK).json(data);
     }
   } catch (error) {
-    return res.status(STATUS_CODE.SERVER_ERROR).json({
+    return res.status(HTTP_STATUS_CODE.SERVER_ERROR).json({
       message: `${ERROR_MESSAGE_PROXY_MOVIE} ${(error as Error).message}`,
     });
   }
 }
+
+export default validate(schemaRequestMovieDetails, handler);
