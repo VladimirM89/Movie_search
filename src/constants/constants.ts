@@ -4,6 +4,8 @@ export const ITEMS_PER_PAGE = 4;
 export const DEBOUNCE_TIME = 1000;
 export const MAX_RATING_VALUE = 10;
 export const MIN_RATING_VALUE = 0;
+export const NOTIFICATION_AUTOCLOSE_TIME = 4000;
+
 export const LOCAL_STORAGE_MOVIES_KEY = "ratedMovies";
 export const LOCAL_STORAGE_GENRES_KEY = "genres";
 

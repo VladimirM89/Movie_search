@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import MovieList from "../MovieList/MovieList";
 import { getMovies } from "../../services/apiService";
 import SearchFilters from "../SearchFilters/SearchFilters";
@@ -12,6 +12,7 @@ import {
 import { Movie } from "@/types/Movies";
 import Image from "next/image";
 import { FiltersFormType } from "@/utils/filtersFormSchema";
+import { notifications } from "@mantine/notifications";
 
 const SearchPage = memo(() => {
   // console.log("Render main page");
@@ -38,7 +39,11 @@ const SearchPage = memo(() => {
               : data.total_pages,
           );
         }
-      } catch {
+      } catch (error) {
+        notifications.show({
+          title: (error as Error).name,
+          message: (error as Error).message,
+        });
         setIsMovieError(true);
       } finally {
         setIsLoading(false);
@@ -48,28 +53,31 @@ const SearchPage = memo(() => {
     fetchData();
   }, [filterParams]);
 
-  const handleChangePage = (value: number): void => {
-    setFilterParams({ ...filterParams, page: value });
-    setPage(value);
-  };
+  const handleChangePage = useCallback(
+    (value: number): void => {
+      setFilterParams({ ...filterParams, page: value });
+      setPage(value);
+    },
+    [filterParams],
+  );
 
-  const handleChangeFilter = (params: FiltersFormType): void => {
+  const handleChangeFilter = useCallback((params: FiltersFormType): void => {
     setFilterParams({ ...params, page: INITIAL_PAGE });
     setPage(INITIAL_PAGE);
-  };
+  }, []);
 
-  const deleteReleaseYearFromParams = () => {
-    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-    const { primary_release_year, ...rest } = filterParams;
-    return rest;
-  };
+  // const deleteReleaseYearFromParams = useCallback(() => {
+  //   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  //   const { primary_release_year, ...rest } = filterParams;
+  //   return rest;
+  // }, [filterParams]);
 
   return (
     <div>
       <h2>Movie</h2>
       <SearchFilters
         handleFilters={handleChangeFilter}
-        filters={deleteReleaseYearFromParams()}
+        // filters={deleteReleaseYearFromParams()}
       />
       {isLoading ? (
         <Loader />

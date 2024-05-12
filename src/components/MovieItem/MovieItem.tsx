@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import Image from "next/image";
 import Rating from "../UI/Rating";
 import { Card } from "@mantine/core";
@@ -24,9 +24,9 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
 
   const router = useRouter();
 
-  const navigateToDetailPage = () => {
+  const navigateToDetailPage = useCallback(() => {
     router.push(`${movieInfo.id}`);
-  };
+  }, [movieInfo.id, router]);
 
   return (
     <Card radius={"md"} classNames={{ root: classes.content }}>

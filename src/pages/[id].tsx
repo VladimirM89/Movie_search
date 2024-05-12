@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Loader } from "@mantine/core";
 import { NO_INFO_MOVIE_DETAILS } from "@/constants/constants";
+import { notifications } from "@mantine/notifications";
 
 const MovieDetailsPage = dynamic(
   () => import("../components/MovieDetailsPage/index"),
@@ -44,7 +45,11 @@ export default function DetailsPage() {
             router.push("404");
           }
         }
-      } catch {
+      } catch (error) {
+        notifications.show({
+          title: (error as Error).name,
+          message: (error as Error).message,
+        });
         setIsMovieError(true);
       } finally {
         setIsLoading(false);
