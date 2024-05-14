@@ -1,4 +1,5 @@
 .navigation {
+  width: 280px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -10,9 +11,6 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 1.5rem;
-  line-height: 150%;
-  font-weight: 600;
   color: var(--mantine-color-purple-4);
 }
 
@@ -22,21 +20,22 @@
   gap: 1rem;
 }
 
-.nav_link {
-  width: 14.5rem;
-  padding: 0.6rem;
-  line-height: var(--mantine-line-height-xs);
+.nav_link_root {
+  padding: 0.55rem;
   background-color: transparent;
   color: var(--mantine-color-text);
 }
 
-.nav_link:hover {
-  color: var(--mantine-color-purple-4);
-  background-color: transparent;
-  font-weight: 700;
+.nav_link_label {
+  font-size: var(--mantine-font-size-md);
 }
 
-.nav_link[data-active] {
+.nav_link_root:hover {
+  color: var(--mantine-color-purple-3);
+  background-color: transparent;
+}
+
+.nav_link_root[data-active] {
   color: var(--mantine-color-purple-4);
   background-color: var(--mantine-color-purple-1);
   border-radius: 0.5rem;

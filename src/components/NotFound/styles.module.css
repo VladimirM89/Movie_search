@@ -1,0 +1,12 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.description_text {
+  font-size: var(--mantine-font-size-xl);
+  font-weight: 600;
+  line-height: 120%;
+}

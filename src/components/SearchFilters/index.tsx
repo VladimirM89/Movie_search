@@ -1,7 +1,3 @@
-import { MultiSelect, Select, NumberInput, Loader } from "@mantine/core";
-
-import { useForm } from "@mantine/form";
-import { Genre } from "@/types/Response";
 import {
   useState,
   useEffect,
@@ -11,9 +7,15 @@ import {
   memo,
   useCallback,
 } from "react";
-import { getGenres, getMovies } from "../../services/apiService";
-import classes from "./SearchFilters.module.css";
+import { MultiSelect, Select, NumberInput, Loader } from "@mantine/core";
+import { yupResolver } from "mantine-form-yup-resolver";
+import { useForm } from "@mantine/form";
 import { useDebouncedCallback } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
+import { getGenres, getMovies } from "../../services/apiService";
+import { FiltersFormType, filtersFormSchema } from "@/utils/filtersFormSchema";
+import fillYearsArray from "@/utils/fillYearsArray";
+import { Genre } from "@/types/Response";
 import {
   FILTER_PARAMS_SORT_BY_MIN_YEARS,
   INITIAL_FILTER_PARAMS,
@@ -29,12 +31,11 @@ import {
   PLACEHOLDER_GENRE_OK,
   PLACEHOLDER_YEARS_ERROR,
   PLACEHOLDER_YEARS_OK,
+  RESET_FILTERS_TEXT,
 } from "@/constants/constants";
-import { FiltersFormType, filtersFormSchema } from "@/utils/filtersFormSchema";
-import { yupResolver } from "mantine-form-yup-resolver";
-import fillYearsArray from "@/utils/fillYearsArray";
 import sortValues from "@/constants/sortValues";
-import { notifications } from "@mantine/notifications";
+import { ArrowDownImage } from "../../../public/images";
+import classes from "./styles.module.css";
 
 type SearchFiltersProps = {
   // filters: FiltersFormType;
@@ -145,10 +146,14 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   }, [form]);
 
   return (
-    <>
-      <form>
+    <form className={classes.filters_content}>
+      <div className={classes.input_filters_content}>
         <MultiSelect
-          classNames={{ pill: classes.pill }}
+          classNames={{
+            input: classes.multiselect_input,
+            option: classes.option,
+            pill: classes.multiselect_pill,
+          }}
           key={form.key("with_genres")}
           {...form.getInputProps("with_genres")}
           label={LABEL_GENRES}
@@ -160,7 +165,9 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
             label: item.name,
           }))}
           maxDropdownHeight={200}
-          rightSection={!isLoadingGenres ? "v" : <Loader size="xs" />}
+          rightSection={
+            !isLoadingGenres ? <ArrowDownImage /> : <Loader size="xs" />
+          }
           searchable
           withCheckIcon={false}
           disabled={isGenresError}
@@ -177,46 +184,60 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           }
           data={years}
           maxDropdownHeight={200}
-          rightSection={!isLoadingYears ? "v" : <Loader size="xs" />}
+          rightSection={
+            !isLoadingYears ? <ArrowDownImage /> : <Loader size="xs" />
+          }
           searchable
           withCheckIcon={false}
           disabled={isYearsError}
         />
-        <NumberInput
-          key={form.key("vote_average-gte")}
-          {...form.getInputProps("vote_average-gte")}
-          label={LABEL_RATINGS}
-          min={0}
-          max={10}
-          step={0.1}
-          placeholder="From"
-          allowNegative={false}
-          onValueChange={handleChangeRating}
-        />
-        <NumberInput
-          key={form.key("vote_average-lte")}
-          {...form.getInputProps("vote_average-lte")}
-          label=" "
-          min={0}
-          max={10}
-          step={0.1}
-          placeholder="To"
-          allowNegative={false}
-          onValueChange={handleChangeRating}
-        />
-        <p onClick={form.reset}>Reset filters</p>
-        <Select
-          key={form.key("sort_by")}
-          {...form.getInputProps("sort_by")}
-          label={LABEL_SORT_BY}
-          defaultValue={sortValues[0].value}
-          data={sortValues}
-          rightSection={"v"}
-          withCheckIcon={false}
-          allowDeselect={false}
-        />
-      </form>
-    </>
+        <div className={classes.rating_container}>
+          <NumberInput
+            classNames={{
+              wrapper: classes.numberinput_wrapper,
+              control: classes.numberinput_control,
+            }}
+            key={form.key("vote_average-gte")}
+            {...form.getInputProps("vote_average-gte")}
+            label={LABEL_RATINGS}
+            min={0}
+            max={10}
+            step={0.1}
+            placeholder="From"
+            allowNegative={false}
+            onValueChange={handleChangeRating}
+          />
+          <NumberInput
+            classNames={{
+              wrapper: classes.numberinput_wrapper,
+              control: classes.numberinput_control,
+            }}
+            key={form.key("vote_average-lte")}
+            {...form.getInputProps("vote_average-lte")}
+            min={0}
+            max={10}
+            step={0.1}
+            placeholder="To"
+            allowNegative={false}
+            onValueChange={handleChangeRating}
+          />
+        </div>
+
+        <p className={classes.reset} onClick={form.reset}>
+          {RESET_FILTERS_TEXT}
+        </p>
+      </div>
+      <Select
+        key={form.key("sort_by")}
+        {...form.getInputProps("sort_by")}
+        label={LABEL_SORT_BY}
+        defaultValue={sortValues[0].value}
+        data={sortValues}
+        rightSection={<ArrowDownImage />}
+        withCheckIcon={false}
+        allowDeselect={false}
+      />
+    </form>
   );
 });
 

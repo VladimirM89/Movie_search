@@ -1,0 +1,61 @@
+.filters_content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.input_filters_content {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.multiselect_input {
+  padding: 0.5625rem;
+}
+
+.option[data-combobox-active],
+.option[data-combobox-active]:hover {
+  background-color: var(--mantine-color-purple-4);
+  color: var(--mantine-color-white);
+}
+
+.option:hover {
+  background-color: var(--mantine-color-purple-0);
+  color: var(--mantine-color-text);
+}
+
+.multiselect_pill {
+  background-color: transparent;
+  font-size: var(--mantine-font-size-sm)
+}
+
+.multiselect_pill button {
+  display: none;
+}
+
+.rating_container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.numberinput_wrapper {
+  width: 8.625rem;
+}
+
+.numberinput_control {
+  border: none;
+}
+
+.reset {
+  padding-bottom: 0.7rem;
+  align-self: flex-end;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+  line-height: var(--mantine-line-height-sm);
+  color: var(--mantine-color-gray_scale-5);
+  cursor: pointer;
+}

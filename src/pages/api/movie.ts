@@ -20,7 +20,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const requestParams: RequestMovieDetailsApiType = req.body;
 
   const searchParams = new URLSearchParams({
-    api_key: apiKey,
+    // api_key: apiKey,
     append_to_response: "videos",
   });
 
@@ -30,6 +30,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       {
         method: HTTP_METHOD.GET,
         cache: "no-cache",
+        headers: {
+          accept: "application/json",
+          Authorization: apiKey,
+        },
       },
     );
 

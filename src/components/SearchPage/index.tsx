@@ -1,22 +1,24 @@
 import { useState, useEffect, memo, useCallback } from "react";
-import MovieList from "../MovieList/MovieList";
-import { getMovies } from "../../services/apiService";
-import SearchFilters from "../SearchFilters/SearchFilters";
+import { Loader, Pagination, Title } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { FiltersFormType } from "@/utils/filtersFormSchema";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
-import { Loader, Pagination } from "@mantine/core";
 import {
   API_MAX_REQUEST_PAGE,
   INITIAL_PAGE,
+  MOVIES_TITLE,
+  NOT_FOUND_MOVIES_TEXT,
   NO_INFO_MOVIE_LIST,
 } from "@/constants/constants";
 import { Movie } from "@/types/Movies";
-import Image from "next/image";
-import { FiltersFormType } from "@/utils/filtersFormSchema";
-import { notifications } from "@mantine/notifications";
+import MovieList from "../MovieList/MovieList";
+import { getMovies } from "../../services/apiService";
+import SearchFilters from "../SearchFilters";
+import NotFound from "../NotFound";
+import { NotFoundMoviesImage } from "../../../public/images";
+import classes from "./styles.module.css";
 
 const SearchPage = memo(() => {
-  // console.log("Render main page");
-
   const [filterParams, setFilterParams] = useState<FiltersFormType>(
     INITIAL_FILTER_PARAMS,
   );
@@ -40,11 +42,12 @@ const SearchPage = memo(() => {
           );
         }
       } catch (error) {
-        notifications.show({
-          title: (error as Error).name,
-          message: (error as Error).message,
-        });
         setIsMovieError(true);
+        const errorWithType = error as Error;
+        notifications.show({
+          title: errorWithType.name,
+          message: errorWithType.message,
+        });
       } finally {
         setIsLoading(false);
       }
@@ -73,38 +76,37 @@ const SearchPage = memo(() => {
   // }, [filterParams]);
 
   return (
-    <div>
-      <h2>Movie</h2>
-      <SearchFilters
-        handleFilters={handleChangeFilter}
-        // filters={deleteReleaseYearFromParams()}
-      />
-      {isLoading ? (
-        <Loader />
-      ) : movies.length ? (
-        <>
-          <MovieList movies={movies} />
-          {totalPages > 1 && (
-            <Pagination
-              total={totalPages}
-              onChange={handleChangePage}
-              value={page}
-            />
-          )}
-        </>
-      ) : !isMovieError ? (
-        <div>
-          <Image
-            src="/images/notFoundMovies.png"
-            alt="Not found results image"
+    <div className={classes.content}>
+      <Title>{MOVIES_TITLE}</Title>
+      <div>
+        <SearchFilters
+          handleFilters={handleChangeFilter}
+          // filters={deleteReleaseYearFromParams()}
+        />
+        {isLoading ? (
+          <Loader />
+        ) : movies.length ? (
+          <>
+            <MovieList movies={movies} />
+            {totalPages > 1 && (
+              <Pagination
+                total={totalPages}
+                onChange={handleChangePage}
+                value={page}
+              />
+            )}
+          </>
+        ) : !isMovieError ? (
+          <NotFound
+            img={NotFoundMoviesImage}
+            text={NOT_FOUND_MOVIES_TEXT}
             width={311}
             height={252}
           />
-          <p>We don&apos;t have such movies, look for another one</p>
-        </div>
-      ) : (
-        <p>{NO_INFO_MOVIE_LIST}</p>
-      )}
+        ) : (
+          <p>{NO_INFO_MOVIE_LIST}</p>
+        )}
+      </div>
     </div>
   );
 });

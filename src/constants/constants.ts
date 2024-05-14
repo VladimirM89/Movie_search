@@ -9,6 +9,7 @@ export const NOTIFICATION_AUTOCLOSE_TIME = 4000;
 export const LOCAL_STORAGE_MOVIES_KEY = "ratedMovies";
 export const LOCAL_STORAGE_GENRES_KEY = "genres";
 
+export const ALT_DEFAULT_NOT_FOUND_IMG = "Not found results image";
 export const PATH_TO_NO_MOVIE_POSTER = "/images/noMoviePoster.png";
 export const ALT_POSTER_IMG = "Poster movie";
 export const ALT_404_PAGE_IMG = "Not found page image";
@@ -17,6 +18,12 @@ export const PATH_TO_PRODUCTION_COMPANY_DEFAULT_LOGO =
   "/images/defaultCompanyLogo.svg";
 export const ALT_PRODUCTION_COMPANY_DEFAULT_LOGO_ICON =
   "Production company icon image";
+
+export const NAVIGATION_HEADER = "ArrowFlicks";
+export const MOVIES_TITLE = "Movies";
+export const NOT_FOUND_MOVIES_TEXT =
+  "We don't have such movies, look for another one";
+export const RESET_FILTERS_TEXT = "Reset filters";
 
 export const RATING_MODAL_TITLE = "Your rating";
 export const NO_RELEASE_YEAR = "No release year";

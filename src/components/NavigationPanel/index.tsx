@@ -1,9 +1,10 @@
-import { NavLink } from "@mantine/core";
 import { useRouter } from "next/router";
+import { NavLink, Title } from "@mantine/core";
 import navigationItems from "./navigationPanelInfo";
-import styles from "./NavigationPanel.module.css";
-import FlickIcon from "../UI/FlickIcon/FlickIcon";
 import { PATH } from "@/constants/enums";
+import { NAVIGATION_HEADER } from "@/constants/constants";
+import { MainLogoImage } from "../../../public/images";
+import classes from "./styles.module.css";
 
 const NavigationPanel = () => {
   const router = useRouter();
@@ -15,15 +16,18 @@ const NavigationPanel = () => {
   };
 
   return (
-    <div className={styles.navigation}>
-      <div className={styles.navigation_header}>
-        <FlickIcon />
-        <span>ArrowFlicks</span>
+    <div className={classes.navigation}>
+      <div className={classes.navigation_header}>
+        <MainLogoImage />
+        <Title order={3}>{NAVIGATION_HEADER}</Title>
       </div>
-      <nav className={styles.navigation_list}>
+      <nav className={classes.navigation_list}>
         {navigationItems.map((item) => (
           <NavLink
-            className={styles.nav_link}
+            classNames={{
+              root: classes.nav_link_root,
+              label: classes.nav_link_label,
+            }}
             key={item.id}
             active={
               item.path === (router.query.id ? PATH.HOME : router.pathname)

@@ -1,13 +1,14 @@
-import { MantineProvider } from "@mantine/core";
 import type { AppProps } from "next/app";
-import "@mantine/core/styles.css";
-import "@mantine/notifications/styles.css";
-import { theme } from "@/theme";
-import Layout from "@/components/Layout/Layout";
 import { useRouter } from "next/router";
+import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { theme } from "@/theme";
 import { NOTIFICATION_AUTOCLOSE_TIME } from "@/constants/constants";
 import { PATH } from "@/constants/enums";
+import "@mantine/core/styles.css";
+import Layout from "@/components/Layout";
+import "@mantine/notifications/styles.css";
+import "@/styles/global.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();

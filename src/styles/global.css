@@ -1,0 +1,41 @@
+body {
+  background-color: var(--mantine-color-gray_scale-1);
+  height: 100vh;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.input_wrapper {
+  width: 17.729375rem;
+}
+
+.input_input {
+  min-height: 2.625rem;
+  border-color: var(--mantine-color-gray_scale-3);
+  border-radius: 0.5rem;
+  padding-inline: 0.7rem 2rem;
+}
+
+.input_input:focus,
+.input_input:focus-within {
+  border-color: var(--mantine-color-purple-4);
+}
+
+.input_section[data-position="right"] {
+  --section-end: 6px;
+}
+
+.input_wrapper_root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4375rem;
+}
+
+.input_wrapper_label {
+  font-size: var(--mantine-font-size-md);
+  font-weight: 700;
+  line-height: var(--mantine-line-height-xs);
+}

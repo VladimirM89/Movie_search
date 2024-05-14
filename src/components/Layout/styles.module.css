@@ -1,0 +1,13 @@
+.page_content {
+  display: flex;
+  justify-content: center;
+}
+.wrapper {
+  max-width: 1440px;
+  height: 100vh;
+  display: flex;
+}
+
+.main_content {
+  padding: 2.6rem 5.625rem 5.125rem;
+}

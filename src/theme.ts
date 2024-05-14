@@ -1,4 +1,4 @@
-import { createTheme } from "@mantine/core";
+import { Input, InputWrapper, createTheme, rem } from "@mantine/core";
 
 export const theme = createTheme({
   colors: {
@@ -29,5 +29,34 @@ export const theme = createTheme({
   },
   fontFamily: "Inter, sans-serif",
   black: "#000000",
+  headings: {
+    sizes: {
+      h1: {
+        fontWeight: "700",
+        fontSize: rem(32),
+        lineHeight: "1.4",
+      },
+      h3: {
+        fontWeight: "600",
+        fontSize: rem(24),
+        lineHeight: "1.5",
+      },
+    },
+  },
   primaryColor: "purple",
+  components: {
+    Input: Input.extend({
+      classNames: {
+        wrapper: "input_wrapper",
+        input: "input_input",
+        section: "input_section",
+      },
+    }),
+    InputWrapper: InputWrapper.extend({
+      classNames: {
+        root: "input_wrapper_root",
+        label: "input_wrapper_label",
+      },
+    }),
+  },
 });
