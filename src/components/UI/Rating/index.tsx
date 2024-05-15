@@ -1,19 +1,19 @@
 import { FC, memo, useEffect, useState } from "react";
-import { RatingImage } from "../../../../public/images";
+import { useMantineTheme, getThemeColor } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";
 import {
   MANTINE_COLOR_PURPLE_4,
   MANTINE_COLOR_GRAY_SCALE_3,
 } from "@/constants/colorConstants";
-import { useMantineTheme, getThemeColor } from "@mantine/core";
 import {
   ALT_RATING_ICON,
   LOCAL_STORAGE_MOVIES_KEY,
 } from "@/constants/constants";
-import classes from "./index.module.css";
-import RatingModal from "@/components/RatingModal/RatingModal";
-import { useDisclosure } from "@mantine/hooks";
-import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";
+import RatingModal from "@/components/RatingModal";
+import { RatingImage } from "../../../../public/images";
 import { Movie, RatedMovie } from "@/types/Movies";
+import classes from "./styles.module.css";
 
 type RatingProps = {
   movieInfo: Movie;
@@ -61,7 +61,6 @@ const Rating: FC<RatingProps> = memo(({ movieInfo }) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const theme = useMantineTheme();
-  // const colorRatedFromApi = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
   const colorUserRated = getThemeColor(MANTINE_COLOR_PURPLE_4, theme);
   const colorNotRated = getThemeColor(MANTINE_COLOR_GRAY_SCALE_3, theme);
 

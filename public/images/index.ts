@@ -7,3 +7,4 @@ export { default as ArrowDownImage } from "./arrowDown.svg";
 export { default as ArrowUpColoredImage } from "./arrowUpColored.svg";
 export { default as ArrowDownSmallImage } from "./arrowDownSmall.svg";
 export { default as ArrowUpSmallImage } from "./arrowUpSmall.svg";
+export { default as NoMoviePosterImage } from "./noMoviePoster.png";

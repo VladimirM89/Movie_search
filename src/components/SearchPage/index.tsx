@@ -91,6 +91,9 @@ const SearchPage = memo(() => {
             <MovieList movies={movies} />
             {totalPages > 1 && (
               <Pagination
+                classNames={{
+                  root: classes.pagination_root,
+                }}
                 total={totalPages}
                 onChange={handleChangePage}
                 value={page}

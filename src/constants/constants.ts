@@ -42,6 +42,7 @@ export const GENRES_SUBTITLE = "Genres";
 export const NO_INFO_MOVIE_DETAILS = "No details movie info. Please try again";
 export const NO_INFO_MOVIE_LIST = "No movie list info";
 export const REMOVE_RATING = "Remove rating";
+export const BUTTON_SAVE = "Save";
 
 export const URL_SEPARATOR = "/";
 export const DYNAMIC_IMPORT_PATH = "/[id]";

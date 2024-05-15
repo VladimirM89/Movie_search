@@ -1,0 +1,33 @@
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.profile_title {
+  font-size: var(--mantine-font-size-xl);
+  color: var(--mantine-color-purple-4);
+  line-height: 121%;
+  font-weight: 600;
+}
+
+.profile_year,
+.profile_voting {
+  color: var(--mantine-color-gray_scale-5);
+}
+
+.rating_container {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.rating_info {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.profile_rating {
+  font-weight: 600;
+}

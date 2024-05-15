@@ -1,0 +1,36 @@
+.modal_header {
+  padding: 1rem 0.4375rem 1rem 1rem;
+  line-height: var(--mantine-line-height-xs);
+  min-height: min-content;
+}
+
+.modal_content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.modal_title {
+  line-height: var(--mantine-line-height-xs);
+}
+
+.rating_start_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons_container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.reset_button {
+  font-size: var(--mantine-font-size-sm);
+  line-height: var(--mantine-line-height-xs);
+  font-weight: 600;
+  color: var(--mantine-color-purple-4);
+  cursor: pointer;
+}

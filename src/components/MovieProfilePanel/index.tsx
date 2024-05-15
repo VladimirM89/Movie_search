@@ -1,10 +1,11 @@
+import { FC } from "react";
+import { useMantineTheme, getThemeColor } from "@mantine/core";
+import validateDate from "../../utils/validateDate";
+import convertToShortFormat from "../../utils/convertToShortFormat";
 import { MANTINE_COLOR_YELLOW_6 } from "@/constants/colorConstants";
 import { ALT_RATING_ICON } from "@/constants/constants";
-import { useMantineTheme, getThemeColor } from "@mantine/core";
 import { RatingImage } from "../../../public/images";
-import convertToShortFormat from "../../utils/convertToShortFormat";
-import validateDate from "../../utils/validateDate";
-import { FC } from "react";
+import classes from "./styles.module.css";
 
 type MovieProfilePanelType = {
   title: string;
@@ -23,19 +24,23 @@ const MovieProfilePanel: FC<MovieProfilePanelType> = ({
   const colorRatedFromApi = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
 
   return (
-    <div>
-      <p>{title}</p>
-      <p>{validateDate(release_date)}</p>
-      <div>
-        <RatingImage
-          fill={colorRatedFromApi}
-          stroke={colorRatedFromApi}
-          width={28}
-          height={28}
-          alt={ALT_RATING_ICON}
-        />
-        <span>{vote_average}</span>
-        <span>({convertToShortFormat(vote_count)})</span>
+    <div className={classes.profile_container}>
+      <p className={classes.profile_title}>{title}</p>
+      <p className={classes.profile_year}>{validateDate(release_date)}</p>
+      <div className={classes.rating_container}>
+        <div className={classes.rating_info}>
+          <RatingImage
+            fill={colorRatedFromApi}
+            stroke={colorRatedFromApi}
+            width={28}
+            height={28}
+            alt={ALT_RATING_ICON}
+          />
+          <p className={classes.profile_rating}>{vote_average}</p>
+        </div>
+        <p className={classes.profile_voting}>
+          ({convertToShortFormat(vote_count)})
+        </p>
       </div>
     </div>
   );

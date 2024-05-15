@@ -1,30 +1,27 @@
-import { Button, MantineSize } from "@mantine/core";
 import { FC } from "react";
+import { Button, ButtonProps } from "@mantine/core";
+import classes from "./styles.module.css";
 
-type StandardButtonProps = {
+interface StandardButtonProps extends ButtonProps {
   text: string;
   type?: "button" | "submit" | "reset";
-  size:
-    | (string & object)
-    | MantineSize
-    | "compact-xs"
-    | "compact-sm"
-    | "compact-md"
-    | "compact-lg"
-    | "compact-xl";
+  btnSize?: "fat" | "standard";
   onClick?: () => void;
-};
+}
 
 const StandardButton: FC<StandardButtonProps> = ({
   text,
   type,
-  size,
   onClick,
+  btnSize = "standard",
   ...rest
 }) => {
   return (
     <Button
-      size={size}
+      className={classes[btnSize]}
+      classNames={{
+        root: classes.button_root,
+      }}
       type={type ? type : "button"}
       variant="filled"
       radius="md"

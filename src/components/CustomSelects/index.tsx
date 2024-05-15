@@ -62,13 +62,13 @@ export const CustomSelect: FC<CustomSelectProps> = ({
 
 interface CustomMultiSelectProps extends ComboboxLikeProps {
   isError: boolean;
-  value: Array<Genre>;
+  genres: Array<Genre>;
   isLoading: boolean;
 }
 
 export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
   isError,
-  value,
+  genres,
   isLoading,
   ...props
 }) => {
@@ -84,7 +84,7 @@ export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
       }}
       label={LABEL_GENRES}
       placeholder={!isError ? PLACEHOLDER_GENRE_OK : PLACEHOLDER_GENRE_ERROR}
-      data={value.map((item) => ({
+      data={genres.map((item) => ({
         value: `${item.id}`,
         label: item.name,
       }))}

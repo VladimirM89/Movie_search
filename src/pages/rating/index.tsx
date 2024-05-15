@@ -9,7 +9,7 @@ import { RatedMovie } from "@/types/Movies";
 import { Pagination } from "@mantine/core";
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import StandardButton from "@/components/UI/Button/StandardButton";
+import StandardButton from "@/components/UI/Button";
 import { useRouter } from "next/router";
 import { PATH } from "@/constants/enums";
 import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";

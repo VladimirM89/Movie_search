@@ -142,7 +142,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
         <CustomMultiSelect
           key={form.key("with_genres")}
           {...form.getInputProps("with_genres")}
-          value={genres}
+          genres={genres}
           isError={isGenresError}
           isLoading={isLoadingGenres}
         />
@@ -174,7 +174,13 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           />
         </div>
 
-        <p className={classes.reset} onClick={form.reset}>
+        <p
+          className={classes.reset}
+          onClick={() => {
+            form.reset();
+            console.log(form.getValues());
+          }}
+        >
           {RESET_FILTERS_TEXT}
         </p>
       </div>

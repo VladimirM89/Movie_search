@@ -1,5 +1,5 @@
 import { TextInput } from "@mantine/core";
-import StandardButton from "../UI/Button/StandardButton";
+import StandardButton from "../UI/Button";
 import { useForm } from "@mantine/form";
 import SearchIcon from "../UI/SearchIcon/SearchIcon";
 import classes from "./SearchBar.module.css";
@@ -35,7 +35,7 @@ const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
         {...form.getInputProps("query")}
         placeholder="Search movie title"
         leftSection={<SearchIcon />}
-        rightSection={<StandardButton text="Search" type="submit" size="sm" />}
+        rightSection={<StandardButton text="Search" type="submit" />}
         rightSectionWidth={"110px"}
         radius="md"
       />

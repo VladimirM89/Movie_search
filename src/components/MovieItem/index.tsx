@@ -41,18 +41,18 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
           priority={true}
           alt={ALT_POSTER_IMG}
         />
-        <div>
+        <div className={classes.info_container}>
           <MovieProfilePanel
             title={movieInfo.original_title}
             release_date={movieInfo.release_date}
             vote_average={movieInfo.vote_average}
             vote_count={movieInfo.vote_count}
           />
-          <div>
+          <div className={classes.genres_container}>
             {movieInfo.genre_ids && movieInfo.genre_ids.length ? (
               <>
-                <span>Genres </span>
-                <span>
+                <span className={classes.genres_title}>Genres </span>
+                <span className={classes.genres}>
                   {movieInfo.genre_ids &&
                     movieInfo.genre_ids.length &&
                     parseGenreIds(movieInfo.genre_ids)}
