@@ -157,6 +157,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           data={years}
           isLoading={isLoadingYears}
           disabled={isYearsError}
+          allowDeselect={true}
         />
         <div className={classes.rating_container}>
           <CustomNumberInput
@@ -191,6 +192,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
         label={LABEL_SORT_BY}
         defaultValue={sortValues[0].value}
         data={sortValues}
+        allowDeselect={false}
       />
     </form>
   );

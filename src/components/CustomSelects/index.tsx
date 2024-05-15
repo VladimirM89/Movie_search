@@ -1,5 +1,10 @@
 import { FC } from "react";
-import { ComboboxLikeProps, MultiSelect, Select } from "@mantine/core";
+import {
+  ComboboxLikeProps,
+  MultiSelect,
+  Select,
+  SelectProps,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Genre } from "@/types/Response";
 import {
@@ -11,7 +16,7 @@ import { ArrowDownImage, ArrowUpColoredImage } from "../../../public/images";
 import CustomLoader from "../UI/Loader";
 import classes from "./styles.module.css";
 
-interface CustomSelectProps extends ComboboxLikeProps {
+interface CustomSelectProps extends ComboboxLikeProps, SelectProps {
   placeholder?: string;
   label: string;
   disabled?: boolean;
@@ -50,7 +55,6 @@ export const CustomSelect: FC<CustomSelectProps> = ({
         )
       }
       withCheckIcon={false}
-      allowDeselect={false}
       searchable
       maxDropdownHeight={200}
       onDropdownOpen={toggle}
