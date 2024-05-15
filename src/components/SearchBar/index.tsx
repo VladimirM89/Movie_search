@@ -1,10 +1,10 @@
-import { TextInput } from "@mantine/core";
-import StandardButton from "../UI/Button";
-import { useForm } from "@mantine/form";
-import SearchIcon from "../UI/SearchIcon/SearchIcon";
-import classes from "./SearchBar.module.css";
 import { Dispatch, FC, SetStateAction } from "react";
+import { TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import StandardButton from "../UI/Button";
 import { SearchParam } from "../../types/QueryParams";
+import SearchIcon from "../UI/SearchIcon/SearchIcon";
+import classes from "./styles.module.css";
 
 type SearchBarProps = {
   handleSearch: Dispatch<SetStateAction<string>>;
@@ -29,8 +29,9 @@ const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
     >
       <TextInput
         classNames={{
-          wrapper: classes.inputWrapper,
+          wrapper: classes.input_wrapper,
           input: classes.input,
+          section: classes.input_section,
         }}
         {...form.getInputProps("query")}
         placeholder="Search movie title"

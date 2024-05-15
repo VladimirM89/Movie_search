@@ -18,6 +18,7 @@ export const PATH_TO_PRODUCTION_COMPANY_DEFAULT_LOGO =
   "/images/defaultCompanyLogo.svg";
 export const ALT_PRODUCTION_COMPANY_DEFAULT_LOGO_ICON =
   "Production company icon image";
+export const ALT_NO_RATED_MOVIES = "Not found results image";
 
 export const NAVIGATION_HEADER = "ArrowFlicks";
 export const MOVIES_TITLE = "Movies";
@@ -43,6 +44,9 @@ export const NO_INFO_MOVIE_DETAILS = "No details movie info. Please try again";
 export const NO_INFO_MOVIE_LIST = "No movie list info";
 export const REMOVE_RATING = "Remove rating";
 export const BUTTON_SAVE = "Save";
+export const BUTTON_FIND_MOVIES = "Find Movies";
+export const RATED_PAGE_TITLE = "Rated movies";
+export const NO_RATED_MOVIES_TEXT = "You haven't rated any films yet";
 
 export const URL_SEPARATOR = "/";
 export const DYNAMIC_IMPORT_PATH = "/[id]";

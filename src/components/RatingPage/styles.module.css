@@ -1,0 +1,29 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.header_content {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.page_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pagination_root {
+  display: flex;
+  justify-content: center;
+}
+
+.not_found_container {
+  display: flex;
+  height: calc(100vh - 6.3rem);
+  align-items: center;
+  justify-content: center;
+}
