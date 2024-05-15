@@ -1,17 +1,17 @@
 import { FC, memo, useCallback } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
-import Rating from "../UI/Rating";
 import { Card } from "@mantine/core";
-import classes from "./MovieItem.module.css";
+import parseGenreIds from "../../utils/parseGenreIds";
 import {
   ALT_POSTER_IMG,
   NO_GENRES_INFO,
   PATH_TO_NO_MOVIE_POSTER,
 } from "@/constants/constants";
 import { Movie } from "@/types/Movies";
-import { useRouter } from "next/router";
-import parseGenreIds from "../../utils/parseGenreIds";
+import Rating from "../UI/Rating";
 import MovieProfilePanel from "../MovieProfilePanel";
+import classes from "./styles.module.css";
 
 type MovieItemProps = {
   movieInfo: Movie;

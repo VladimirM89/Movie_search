@@ -24,8 +24,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const searchParams = new URLSearchParams(normalizedParams);
 
-  console.log("!!!!!!!", `${url}?${searchParams.toString()}`);
-
   try {
     const response = await fetch(`${url}?${searchParams.toString()}`, {
       method: HTTP_METHOD.GET,
@@ -41,7 +39,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(HTTP_STATUS_CODE.OK).json(data);
     }
   } catch (error) {
-    console.log("!!!!!!!!!!!!!!!!!!!!", (error as Error).cause);
     return res.status(HTTP_STATUS_CODE.SERVER_ERROR).json({
       message: `${ERROR_MESSAGE_PROXY_MOVIES} ${(error as Error).message}`,
     });

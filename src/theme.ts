@@ -56,6 +56,7 @@ export const theme = createTheme({
       classNames: {
         root: "input_wrapper_root",
         label: "input_wrapper_label",
+        error: "input_wrapper_error",
       },
     }),
   },

@@ -10,6 +10,7 @@ p {
 
 .input_wrapper {
   width: 17.729375rem;
+  margin: 0;
 }
 
 .input_input {
@@ -32,10 +33,16 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.4375rem;
+  position: relative;
 }
 
 .input_wrapper_label {
   font-size: var(--mantine-font-size-md);
   font-weight: 700;
   line-height: var(--mantine-line-height-xs);
+}
+
+.input_wrapper_error {
+  position: absolute;
+  bottom: -1.3rem;
 }

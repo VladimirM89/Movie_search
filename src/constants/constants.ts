@@ -60,3 +60,5 @@ export const PLACEHOLDER_GENRE_OK = "Select genre";
 export const PLACEHOLDER_GENRE_ERROR = "No genres info";
 export const PLACEHOLDER_YEARS_OK = "Select release year";
 export const PLACEHOLDER_YEARS_ERROR = "No release year info";
+export const PLACEHOLDER_RATING_FROM = "From";
+export const PLACEHOLDER_RATING_TO = "To";

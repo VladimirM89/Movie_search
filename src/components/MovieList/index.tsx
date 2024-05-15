@@ -1,6 +1,7 @@
-import MovieItem from "../MovieItem/MovieItem";
 import { FC, memo } from "react";
 import { Movie } from "@/types/Movies";
+import MovieItem from "../MovieItem";
+import classes from "./styles.module.css";
 
 type MovieListProps = {
   movies: Array<Movie>;
@@ -8,7 +9,7 @@ type MovieListProps = {
 
 const MovieList: FC<MovieListProps> = memo(({ movies }) => {
   return (
-    <ul>
+    <ul className={classes.cards_container}>
       {movies.map((movie) => (
         <MovieItem key={movie.id} movieInfo={movie} />
       ))}

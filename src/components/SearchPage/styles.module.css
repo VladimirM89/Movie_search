@@ -1,5 +1,11 @@
-.content {
+.search_container {
   display: flex;
   flex-direction: column;
   gap: 2.65rem;
+}
+
+.search_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }

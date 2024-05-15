@@ -20,7 +20,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const requestParams: RequestMovieDetailsApiType = req.body;
 
   const searchParams = new URLSearchParams({
-    // api_key: apiKey,
     append_to_response: "videos",
   });
 

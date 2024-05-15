@@ -4,9 +4,9 @@ import { getMovie } from "@/services/apiService";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Loader } from "@mantine/core";
 import { NO_INFO_MOVIE_DETAILS } from "@/constants/constants";
 import { notifications } from "@mantine/notifications";
+import CustomLoader from "@/components/UI/Loader";
 
 const MovieDetailsPage = dynamic(
   () => import("../components/MovieDetailsPage/index"),
@@ -72,7 +72,7 @@ export default function DetailsPage() {
       </Head>
       <div>
         {isLoading ? (
-          <Loader />
+          <CustomLoader size={"xs"} />
         ) : isMovieError ? (
           <p>{NO_INFO_MOVIE_DETAILS}</p>
         ) : (

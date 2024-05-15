@@ -4,5 +4,6 @@ export { default as MainLogoImage } from "./mainLogo.svg";
 export { default as FavIcon } from "./favicon.ico";
 export { default as NotFoundMoviesImage } from "./notFoundMovies.png";
 export { default as ArrowDownImage } from "./arrowDown.svg";
+export { default as ArrowUpColoredImage } from "./arrowUpColored.svg";
 export { default as ArrowDownSmallImage } from "./arrowDownSmall.svg";
 export { default as ArrowUpSmallImage } from "./arrowUpSmall.svg";

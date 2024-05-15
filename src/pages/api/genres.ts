@@ -13,10 +13,6 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
 
   const url = new URL(API_ENDPOINTS.GENRE, apiUrl);
 
-  // const searchParams = new URLSearchParams({ api_key: apiKey });
-
-  // console.log(`!!!!!!!!${url}?${searchParams.toString()}`);
-
   try {
     const response = await fetch(url, {
       method: HTTP_METHOD.GET,

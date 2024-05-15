@@ -1,0 +1,28 @@
+.multiselect_input {
+  padding: 0.5625rem;
+}
+
+.option[data-combobox-active],
+.option[data-combobox-active]:hover {
+  background-color: var(--mantine-color-purple-4);
+  color: var(--mantine-color-white);
+}
+
+.option:hover {
+  background-color: var(--mantine-color-purple-0);
+  color: var(--mantine-color-text);
+}
+
+.multiselect_pill {
+  padding: 0;
+  background-color: transparent;
+  font-size: var(--mantine-font-size-sm)
+}
+
+.multiselect_pill button {
+  display: none;
+}
+
+.multiselect_pill:first-child::after {
+  content: ",";
+}

@@ -1,5 +1,5 @@
 import { useState, useEffect, memo, useCallback } from "react";
-import { Loader, Pagination, Title } from "@mantine/core";
+import { Pagination, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { FiltersFormType } from "@/utils/filtersFormSchema";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
@@ -11,19 +11,20 @@ import {
   NO_INFO_MOVIE_LIST,
 } from "@/constants/constants";
 import { Movie } from "@/types/Movies";
-import MovieList from "../MovieList/MovieList";
+import MovieList from "../MovieList";
 import { getMovies } from "../../services/apiService";
 import SearchFilters from "../SearchFilters";
 import NotFound from "../NotFound";
 import { NotFoundMoviesImage } from "../../../public/images";
 import classes from "./styles.module.css";
+import CustomLoader from "../UI/Loader";
 
 const SearchPage = memo(() => {
   const [filterParams, setFilterParams] = useState<FiltersFormType>(
     INITIAL_FILTER_PARAMS,
   );
   const [movies, setMovies] = useState<Array<Movie>>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isMovieError, setIsMovieError] = useState<boolean>(false);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [page, setPage] = useState<number>(INITIAL_PAGE);
@@ -76,15 +77,15 @@ const SearchPage = memo(() => {
   // }, [filterParams]);
 
   return (
-    <div className={classes.content}>
+    <div className={classes.search_container}>
       <Title>{MOVIES_TITLE}</Title>
-      <div>
+      <div className={classes.search_content}>
         <SearchFilters
           handleFilters={handleChangeFilter}
           // filters={deleteReleaseYearFromParams()}
         />
         {isLoading ? (
-          <Loader />
+          <CustomLoader />
         ) : movies.length ? (
           <>
             <MovieList movies={movies} />

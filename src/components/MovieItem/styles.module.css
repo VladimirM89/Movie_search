@@ -1,4 +1,6 @@
 .content {
+  width: 30.125rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;

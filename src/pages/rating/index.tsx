@@ -1,4 +1,4 @@
-import MovieList from "@/components/MovieList/MovieList";
+import MovieList from "@/components/MovieList";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import {
   INITIAL_PAGE,
@@ -6,13 +6,14 @@ import {
   LOCAL_STORAGE_MOVIES_KEY,
 } from "@/constants/constants";
 import { RatedMovie } from "@/types/Movies";
-import { Loader, Pagination } from "@mantine/core";
+import { Pagination } from "@mantine/core";
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import StandardButton from "@/components/UI/Button/StandardButton";
 import { useRouter } from "next/router";
 import { PATH } from "@/constants/enums";
 import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";
+import CustomLoader from "@/components/UI/Loader";
 
 export default function RatingPage() {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -74,7 +75,7 @@ export default function RatingPage() {
   );
 
   return isLoading ? (
-    <Loader />
+    <CustomLoader size={"xs"} />
   ) : filteredMovies.length ? (
     <div>
       <div>

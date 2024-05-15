@@ -1,13 +1,4 @@
-import {
-  useState,
-  useEffect,
-  FC,
-  Dispatch,
-  useRef,
-  memo,
-  useCallback,
-} from "react";
-import { MultiSelect, Select, NumberInput, Loader } from "@mantine/core";
+import { useState, useEffect, FC, Dispatch, memo, useCallback } from "react";
 import { yupResolver } from "mantine-form-yup-resolver";
 import { useForm } from "@mantine/form";
 import { useDebouncedCallback } from "@mantine/hooks";
@@ -22,19 +13,19 @@ import {
 } from "@/constants/initialFormQuery";
 import {
   DEBOUNCE_TIME,
-  LABEL_GENRES,
   LABEL_RATINGS,
   LABEL_SORT_BY,
   LABEL_YEAR,
   LOCAL_STORAGE_GENRES_KEY,
-  PLACEHOLDER_GENRE_ERROR,
-  PLACEHOLDER_GENRE_OK,
+  PLACEHOLDER_RATING_FROM,
+  PLACEHOLDER_RATING_TO,
   PLACEHOLDER_YEARS_ERROR,
   PLACEHOLDER_YEARS_OK,
   RESET_FILTERS_TEXT,
 } from "@/constants/constants";
 import sortValues from "@/constants/sortValues";
-import { ArrowDownImage } from "../../../public/images";
+import CustomNumberInput from "../CustomNumberInput";
+import { CustomMultiSelect, CustomSelect } from "../CustomSelects";
 import classes from "./styles.module.css";
 
 type SearchFiltersProps = {
@@ -51,7 +42,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   const [isLoadingYears, setIsLoadingYears] = useState<boolean>(false);
   const [isYearsError, setIsYearsError] = useState<boolean>(false);
 
-  const refYear = useRef<HTMLInputElement>(null);
+  // const refYear = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -148,78 +139,38 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   return (
     <form className={classes.filters_content}>
       <div className={classes.input_filters_content}>
-        <MultiSelect
-          classNames={{
-            input: classes.multiselect_input,
-            option: classes.option,
-            pill: classes.multiselect_pill,
-          }}
+        <CustomMultiSelect
           key={form.key("with_genres")}
           {...form.getInputProps("with_genres")}
-          label={LABEL_GENRES}
-          placeholder={
-            !isGenresError ? PLACEHOLDER_GENRE_OK : PLACEHOLDER_GENRE_ERROR
-          }
-          data={genres.map((item) => ({
-            value: `${item.id}`,
-            label: item.name,
-          }))}
-          maxDropdownHeight={200}
-          rightSection={
-            !isLoadingGenres ? <ArrowDownImage /> : <Loader size="xs" />
-          }
-          searchable
-          withCheckIcon={false}
-          disabled={isGenresError}
+          value={genres}
+          isError={isGenresError}
+          isLoading={isLoadingGenres}
         />
 
-        <Select
-          ref={refYear}
-          classNames={{ option: classes.option }}
+        <CustomSelect
           key={form.key("primary_release_year")}
           {...form.getInputProps("primary_release_year")}
-          label={LABEL_YEAR}
           placeholder={
             !isYearsError ? PLACEHOLDER_YEARS_OK : PLACEHOLDER_YEARS_ERROR
           }
+          label={LABEL_YEAR}
           data={years}
-          maxDropdownHeight={200}
-          rightSection={
-            !isLoadingYears ? <ArrowDownImage /> : <Loader size="xs" />
-          }
-          searchable
-          withCheckIcon={false}
+          isLoading={isLoadingYears}
           disabled={isYearsError}
         />
         <div className={classes.rating_container}>
-          <NumberInput
-            classNames={{
-              wrapper: classes.numberinput_wrapper,
-              control: classes.numberinput_control,
-            }}
+          <CustomNumberInput
             key={form.key("vote_average-gte")}
             {...form.getInputProps("vote_average-gte")}
             label={LABEL_RATINGS}
-            min={0}
-            max={10}
-            step={0.1}
-            placeholder="From"
-            allowNegative={false}
-            onValueChange={handleChangeRating}
+            placeholder={PLACEHOLDER_RATING_FROM}
+            handleChangeRating={handleChangeRating}
           />
-          <NumberInput
-            classNames={{
-              wrapper: classes.numberinput_wrapper,
-              control: classes.numberinput_control,
-            }}
+          <CustomNumberInput
             key={form.key("vote_average-lte")}
             {...form.getInputProps("vote_average-lte")}
-            min={0}
-            max={10}
-            step={0.1}
-            placeholder="To"
-            allowNegative={false}
-            onValueChange={handleChangeRating}
+            placeholder={PLACEHOLDER_RATING_TO}
+            handleChangeRating={handleChangeRating}
           />
         </div>
 
@@ -227,15 +178,13 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           {RESET_FILTERS_TEXT}
         </p>
       </div>
-      <Select
+
+      <CustomSelect
         key={form.key("sort_by")}
         {...form.getInputProps("sort_by")}
         label={LABEL_SORT_BY}
         defaultValue={sortValues[0].value}
         data={sortValues}
-        rightSection={<ArrowDownImage />}
-        withCheckIcon={false}
-        allowDeselect={false}
       />
     </form>
   );
