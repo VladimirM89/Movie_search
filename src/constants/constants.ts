@@ -47,6 +47,8 @@ export const BUTTON_SAVE = "Save";
 export const BUTTON_FIND_MOVIES = "Find Movies";
 export const RATED_PAGE_TITLE = "Rated movies";
 export const NO_RATED_MOVIES_TEXT = "You haven't rated any films yet";
+export const NO_RESULT_ACCORDING_SEARCH_TEXT =
+  "No result according search value";
 
 export const URL_SEPARATOR = "/";
 export const DYNAMIC_IMPORT_PATH = "/[id]";

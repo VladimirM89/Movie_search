@@ -21,6 +21,10 @@
   justify-content: center;
 }
 
+.empty_results_text {
+  text-align: center;
+}
+
 .not_found_container {
   display: flex;
   height: calc(100vh - 6.3rem);

@@ -10,6 +10,7 @@ import {
   NO_RATED_MOVIES_TEXT,
   ALT_NO_RATED_MOVIES,
   BUTTON_FIND_MOVIES,
+  NO_RESULT_ACCORDING_SEARCH_TEXT,
 } from "@/constants/constants";
 import { PATH } from "@/constants/enums";
 import { RatedMovie } from "@/types/Movies";
@@ -89,6 +90,11 @@ export default function RatingPage() {
       </div>
 
       <div className={classes.page_content}>
+        {!filteredMovies.length && (
+          <p className={classes.empty_results_text}>
+            {NO_RESULT_ACCORDING_SEARCH_TEXT}
+          </p>
+        )}
         <MovieList movies={getMovieOnPage()} />
         {totalPages > 1 && (
           <Pagination
