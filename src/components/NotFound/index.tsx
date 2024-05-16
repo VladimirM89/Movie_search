@@ -1,16 +1,16 @@
-import { FC, ReactNode } from "react";
+import { FC, HTMLAttributes, ReactNode } from "react";
 import Image, { StaticImageData } from "next/image";
 import { ALT_DEFAULT_NOT_FOUND_IMG } from "@/constants/constants";
 import classes from "./styles.module.css";
 
-type NotFoundProps = {
+interface NotFoundProps extends HTMLAttributes<HTMLDivElement> {
   img: StaticImageData;
   text?: string;
   alt?: string;
   width: number | `${number}` | undefined;
   height: number | `${number}` | undefined;
   children?: ReactNode;
-};
+}
 
 const NotFound: FC<NotFoundProps> = ({
   img,
@@ -19,17 +19,21 @@ const NotFound: FC<NotFoundProps> = ({
   children,
   width,
   height,
+  ...rest
 }) => {
   return (
-    <div className={classes.content}>
+    <div className={classes.content} {...rest}>
       <Image
         src={img}
         alt={alt || ALT_DEFAULT_NOT_FOUND_IMG}
         width={width}
         height={height}
+        priority={true}
       />
-      <p className={classes.description_text}>{text}</p>
-      {children}
+      <div className={classes.content}>
+        <p className={classes.description_text}>{text}</p>
+        {children}
+      </div>
     </div>
   );
 };

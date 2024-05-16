@@ -1,0 +1,19 @@
+.wrapper_not_found_page {
+  display: flex;
+  padding: 1.5rem;
+  flex-direction: column;
+}
+
+.content {
+  width: 100%;
+  height: calc(100vh - 8.9rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner_block_content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}

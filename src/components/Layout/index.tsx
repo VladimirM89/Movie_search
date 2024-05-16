@@ -8,8 +8,8 @@ type LayoutProps = {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-    <div className={classes.page_content}>
-      <div className={classes.wrapper}>
+    <div>
+      <div className="wrapper">
         <NavigationPanel />
         {<main className={classes.main_content}>{children}</main>}
       </div>

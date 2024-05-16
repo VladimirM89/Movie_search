@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
-import { NavLink, Title } from "@mantine/core";
+import { NavLink } from "@mantine/core";
 import navigationItems from "./navigationPanelInfo";
 import { PATH } from "@/constants/enums";
-import { NAVIGATION_HEADER } from "@/constants/constants";
-import { MainLogoImage } from "../../../public/images";
 import classes from "./styles.module.css";
+import MainLogo from "../UI/MainLogo";
 
 const NavigationPanel = () => {
   const router = useRouter();
@@ -17,10 +16,11 @@ const NavigationPanel = () => {
 
   return (
     <div className={classes.navigation}>
-      <div className={classes.navigation_header}>
+      {/* <div className={classes.navigation_header}>
         <MainLogoImage />
         <Title order={3}>{NAVIGATION_HEADER}</Title>
-      </div>
+      </div> */}
+      <MainLogo />
       <nav className={classes.navigation_list}>
         {navigationItems.map((item) => (
           <NavLink

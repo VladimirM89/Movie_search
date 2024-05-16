@@ -45,8 +45,10 @@ export const NO_INFO_MOVIE_LIST = "No movie list info";
 export const REMOVE_RATING = "Remove rating";
 export const BUTTON_SAVE = "Save";
 export const BUTTON_FIND_MOVIES = "Find Movies";
+export const BUTTON_GO_HOME = "Go Home";
 export const RATED_PAGE_TITLE = "Rated movies";
 export const NO_RATED_MOVIES_TEXT = "You haven't rated any films yet";
+export const NO_FOUND_PAGE_TEXT = "We can’t find the page you are looking for";
 export const NO_RESULT_ACCORDING_SEARCH_TEXT =
   "No result according search value";
 
