@@ -17,13 +17,9 @@ const CustomNumberInput: FC<CustomNumberInputProps> = ({
         wrapper: classes.numberinput_root,
         control: classes.numberinput_control,
       }}
-      // key={form.key("vote_average-gte")}
-      // {...form.getInputProps("vote_average-gte")}
-      // label={LABEL_RATINGS}
       min={0}
       max={10}
       step={0.1}
-      placeholder="From"
       allowNegative={false}
       onValueChange={handleChangeRating}
       {...props}

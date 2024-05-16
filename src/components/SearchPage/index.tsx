@@ -1,5 +1,5 @@
 import { useState, useEffect, memo, useCallback } from "react";
-import { Pagination, Title } from "@mantine/core";
+import { Group, Pagination, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { FiltersFormType } from "@/utils/filtersFormSchema";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
@@ -8,7 +8,7 @@ import {
   INITIAL_PAGE,
   MOVIES_TITLE,
   NOT_FOUND_MOVIES_TEXT,
-  NO_INFO_MOVIE_LIST,
+  ERROR_MESSAGE_FAIL_FETCHING_MOVIE_LIST,
 } from "@/constants/constants";
 import { Movie } from "@/types/Movies";
 import MovieList from "../MovieList";
@@ -18,6 +18,7 @@ import NotFound from "../NotFound";
 import { NotFoundMoviesImage } from "../../../public/images";
 import classes from "./styles.module.css";
 import CustomLoader from "../UI/Loader";
+import NoSearchResult from "../UI/NoSearchResult";
 
 const SearchPage = memo(() => {
   const [filterParams, setFilterParams] = useState<FiltersFormType>(
@@ -78,7 +79,7 @@ const SearchPage = memo(() => {
 
   return (
     <div className={classes.search_container}>
-      <Title>{MOVIES_TITLE}</Title>
+      <Title className="page_title">{MOVIES_TITLE}</Title>
       <div className={classes.search_content}>
         <SearchFilters
           handleFilters={handleChangeFilter}
@@ -90,14 +91,16 @@ const SearchPage = memo(() => {
           <>
             <MovieList movies={movies} />
             {totalPages > 1 && (
-              <Pagination
-                classNames={{
-                  root: classes.pagination_root,
-                }}
-                total={totalPages}
-                onChange={handleChangePage}
-                value={page}
-              />
+              <Group>
+                <Pagination
+                  classNames={{
+                    root: classes.pagination_root,
+                  }}
+                  total={totalPages}
+                  onChange={handleChangePage}
+                  value={page}
+                />
+              </Group>
             )}
           </>
         ) : !isMovieError ? (
@@ -108,7 +111,7 @@ const SearchPage = memo(() => {
             height={252}
           />
         ) : (
-          <p>{NO_INFO_MOVIE_LIST}</p>
+          <NoSearchResult text={ERROR_MESSAGE_FAIL_FETCHING_MOVIE_LIST} />
         )}
       </div>
     </div>

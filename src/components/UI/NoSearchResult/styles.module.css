@@ -1,0 +1,6 @@
+
+.empty_results_text {
+  padding-top: 5rem;
+  font-size: var(--mantine-font-size-xl);
+  text-align: center;
+}

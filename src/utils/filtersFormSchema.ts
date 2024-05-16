@@ -37,8 +37,6 @@ const baseSchema = object().shape(
               : schema;
           })
           .optional();
-        // .nullable(),
-        // .transform((val, orig) => (orig === "" && orig === 0 ? "" : val));
       }
       return string();
     }),
@@ -57,8 +55,6 @@ const baseSchema = object().shape(
               : schema;
           })
           .optional();
-        // .nullable();
-        // .transform((val, orig) => (orig == "" ? "" : val));
       }
       return string();
     }),

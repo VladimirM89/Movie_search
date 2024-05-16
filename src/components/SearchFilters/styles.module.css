@@ -4,55 +4,39 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   align-items: flex-end;
+
+  @media screen and (max-width: 1440px) {
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media screen and (max-width: 952px) {
+    /* gap: 0rem; */
+}
 }
 
 .input_filters_content {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-}
 
-/* .multiselect_input {
-  padding: 0.5625rem;
-}
+  @media screen and (max-width: 1440px) {
+    justify-content: center;
+  }
 
-.option[data-combobox-active],
-.option[data-combobox-active]:hover {
-  background-color: var(--mantine-color-purple-4);
-  color: var(--mantine-color-white);
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 }
-
-.option:hover {
-  background-color: var(--mantine-color-purple-0);
-  color: var(--mantine-color-text);
-}
-
-.multiselect_list_pill::after:last-child {
-  content: "!!!";
-}
-
-.multiselect_pill {
-  padding: 0;
-  background-color: transparent;
-  font-size: var(--mantine-font-size-sm)
-}
-
-.multiselect_pill button {
-  display: none;
-}
-
-.multiselect_pill::after {
-  content: ",";
-}
-
-.multiselect_pill:last-child::after {
-  content: "";
-} */
 
 .rating_container {
   display: flex;
   gap: 0.5rem;
   align-items: flex-end;
+
+  @media screen and (max-width: 700px) {
+    justify-content: space-between;;
+  }
 }
 
 .numberinput_root {
@@ -71,4 +55,9 @@
   line-height: var(--mantine-line-height-sm);
   color: var(--mantine-color-gray_scale-5);
   cursor: pointer;
+
+  @media screen and (max-width: 700px) {
+    padding-bottom: 0;;
+    align-self: center;
+  }
 }

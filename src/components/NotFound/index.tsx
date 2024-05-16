@@ -24,6 +24,7 @@ const NotFound: FC<NotFoundProps> = ({
   return (
     <div className={classes.content} {...rest}>
       <Image
+        className={classes.not_found_image}
         src={img}
         alt={alt || ALT_DEFAULT_NOT_FOUND_IMG}
         width={width}

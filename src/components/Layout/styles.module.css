@@ -1,4 +1,16 @@
 .main_content {
   width: 100%;
   padding: 2.6rem 5.625rem 5.125rem;
+
+  @media screen and (max-width: 1200px) {
+    padding: 1.82rem 4rem 3.6rem;
+  };
+
+  @media screen and (max-width: 1200px) {
+    padding: 1.5rem 2rem;
+  };
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem;
+  };
 }

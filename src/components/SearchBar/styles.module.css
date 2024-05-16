@@ -1,6 +1,18 @@
 .input_wrapper {
   width: 30.625rem;
   --input-height: 3rem;
+
+  @media screen and (max-width: 800px) {
+    width: 25rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 21rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 18rem;
+  }
 }
 
 .input {

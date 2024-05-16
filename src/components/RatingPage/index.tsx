@@ -21,6 +21,7 @@ import CustomLoader from "../UI/Loader";
 import NotFound from "../NotFound";
 import { NotFoundRatedMovieImage } from "../../../public/images";
 import classes from "./styles.module.css";
+import NoSearchResult from "../UI/NoSearchResult";
 
 export default function RatingPage() {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -85,15 +86,13 @@ export default function RatingPage() {
   ) : ratedMovies.length ? (
     <div className={classes.content}>
       <div className={classes.header_content}>
-        <Title>{RATED_PAGE_TITLE}</Title>
+        <Title className="page_title">{RATED_PAGE_TITLE}</Title>
         <SearchBar handleSearch={setSearchValue} />
       </div>
 
       <div className={classes.page_content}>
         {!filteredMovies.length && (
-          <p className={classes.empty_results_text}>
-            {NO_RESULT_ACCORDING_SEARCH_TEXT}
-          </p>
+          <NoSearchResult text={NO_RESULT_ACCORDING_SEARCH_TEXT} />
         )}
         <MovieList movies={getMovieOnPage()} />
         {totalPages > 1 && (
