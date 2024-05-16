@@ -11,7 +11,6 @@ type SearchBarProps = {
 };
 
 const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
-  // console.log("Render search bar");
   const form = useForm<SearchParam>({
     initialValues: {
       query: "",

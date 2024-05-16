@@ -1,0 +1,15 @@
+.stats_container {
+  display: flex;
+  gap: 1.875rem;
+  line-height: 125%;
+}
+
+.content_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.info_title {
+  color: var(--mantine-color-gray_scale-5);
+}

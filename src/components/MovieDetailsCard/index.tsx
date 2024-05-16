@@ -6,7 +6,7 @@ import { ALT_POSTER_IMG, PATH_TO_NO_MOVIE_POSTER } from "@/constants/constants";
 import Image from "next/image";
 import MovieProfilePanel from "../MovieProfilePanel";
 import MovieStatsPanel from "../MovieStatsPanel";
-import classes from "./index.module.css";
+import classes from "./styles.module.css";
 
 type MovieDetailsCardProps = {
   movieInfo: MovieDetails;
@@ -30,7 +30,11 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
     : PATH_TO_NO_MOVIE_POSTER;
 
   return (
-    <Card radius={"md"} className={classes.details_container}>
+    <Card
+      radius={"md"}
+      className={classes.details_container}
+      padding={"1.5rem"}
+    >
       <div className={classes.details_content}>
         <Image
           src={posterPath}
@@ -39,7 +43,7 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
           priority={true}
           alt={ALT_POSTER_IMG}
         />
-        <div>
+        <div className={classes.info_container}>
           <MovieProfilePanel
             title={original_title}
             release_date={release_date}

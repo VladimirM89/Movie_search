@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { NO_INFO_MOVIE_DETAILS } from "@/constants/constants";
 import { notifications } from "@mantine/notifications";
 import CustomLoader from "@/components/UI/Loader";
+import { PATH } from "@/constants/enums";
+import classes from "../styles/[id].module.css";
 
 const MovieDetailsPage = dynamic(
   () => import("../components/MovieDetailsPage/index"),
@@ -22,12 +24,9 @@ export default function DetailsPage() {
 
   useEffect(() => {
     const id = Number(router.query.id) || Number(location.pathname.slice(1));
-
-    // console.log(id, isNaN(id));
-
     if (isNaN(id) && id !== undefined) {
       setIsLoading(false);
-      router.push("404");
+      router.push(PATH.NOT_FOUND);
     }
 
     setId(id);
@@ -38,11 +37,10 @@ export default function DetailsPage() {
       try {
         if (id && router.isReady) {
           const data = await getMovie(id);
-          // console.log(data, "id" in data);
           if ("id" in data) {
             setMovie(data as MovieDetails);
           } else {
-            router.push("404");
+            router.push(PATH.NOT_FOUND);
           }
         }
       } catch (error) {
@@ -70,9 +68,9 @@ export default function DetailsPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div>
+      <div className={classes.content}>
         {isLoading ? (
-          <CustomLoader size={"xs"} />
+          <CustomLoader />
         ) : isMovieError ? (
           <p>{NO_INFO_MOVIE_DETAILS}</p>
         ) : (

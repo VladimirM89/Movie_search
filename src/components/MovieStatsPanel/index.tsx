@@ -1,9 +1,4 @@
 import { FC } from "react";
-import { Genre } from "@/types/Response";
-import classes from "./index.module.css";
-import formatTime from "../../utils/formatTime";
-import formatDate from "../../utils/formatDate";
-import formatMoney from "../../utils/formatMoney";
 import {
   BUDGET_SUBTITLE,
   DURATION_SUBTITLE,
@@ -11,6 +6,11 @@ import {
   PREMIERE_SUBTITLE,
   REVENUE_SUBTITLE,
 } from "@/constants/constants";
+import { Genre } from "@/types/Response";
+import formatTime from "../../utils/formatTime";
+import formatDate from "../../utils/formatDate";
+import formatMoney from "../../utils/formatMoney";
+import classes from "./styles.module.css";
 
 type MovieStatsPanelProps = {
   runtime: number;
@@ -29,14 +29,14 @@ const MovieStatsPanel: FC<MovieStatsPanelProps> = ({
 }) => {
   return (
     <div className={classes.stats_container}>
-      <div>
+      <div className={(classes.content_list, classes.info_title)}>
         <p>{DURATION_SUBTITLE}</p>
         <p>{PREMIERE_SUBTITLE}</p>
         <p>{BUDGET_SUBTITLE}</p>
         <p>{REVENUE_SUBTITLE}</p>
         <p>{GENRES_SUBTITLE}</p>
       </div>
-      <div>
+      <div className={classes.content_list}>
         <p>{formatTime(runtime)}</p>
         <p>{formatDate(release_date)}</p>
         <p>{formatMoney(budget)}</p>

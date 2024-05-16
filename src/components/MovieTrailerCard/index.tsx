@@ -1,17 +1,15 @@
+import { FC, useCallback } from "react";
+import Image from "next/image";
+import { Card, Divider } from "@mantine/core";
+import { MovieTrailer, ProductionCompanies } from "@/types/Response";
 import {
   ALT_PRODUCTION_COMPANY_DEFAULT_LOGO_ICON,
   DESCRIPTION_TEXT,
-  OFFICIAL_TRAILER_NOT_FOUND,
   PATH_TO_PRODUCTION_COMPANY_DEFAULT_LOGO,
   PRODUCTION_TEXT,
-  TRAILER_NOT_FOUND,
   TRAILER_TEXT,
 } from "@/constants/constants";
-import { MovieTrailer, ProductionCompanies } from "@/types/Response";
-import { Card } from "@mantine/core";
-import Image from "next/image";
-import { FC, useCallback } from "react";
-import classes from "./index.module.css";
+import classes from "./styles.module.css";
 
 type MovieTrailerCardProps = {
   overview: string;
@@ -38,39 +36,54 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
               height={40}
               alt={ALT_PRODUCTION_COMPANY_DEFAULT_LOGO_ICON}
             />
-            <span>{item.name}</span>
+            <p className={classes.production_title}>{item.name}</p>
           </li>
         ))}
       </ul>
     );
   }, [production]);
 
-  return (
-    <Card radius={"md"}>
-      <div>
-        <p>{TRAILER_TEXT}</p>
-        {!(videos && videos.results.length) && <p>{TRAILER_NOT_FOUND}</p>}
-        {officialTrailer ? (
-          <iframe
-            className={classes.trailer_frame}
-            allowFullScreen
-            width={500}
-            height={281}
-            src={`${process.env.NEXT_PUBLIC_BASE_TRAILER_PATH}${officialTrailer.key}`}
-          ></iframe>
-        ) : (
-          <p>{OFFICIAL_TRAILER_NOT_FOUND}</p>
-        )}
+  return overview || officialTrailer || officialTrailer ? (
+    <Card radius={"md"} padding={"1.5rem"}>
+      {officialTrailer && (
+        <>
+          <div className={classes.trailer_container}>
+            <p className={classes.title}>{TRAILER_TEXT}</p>
+            <iframe
+              className={classes.trailer_frame}
+              allowFullScreen
+              width={498}
+              height={281}
+              src={`${process.env.NEXT_PUBLIC_BASE_TRAILER_PATH}${officialTrailer?.key}`}
+            ></iframe>
+          </div>
+          <Divider />
+        </>
+      )}
+      <div
+        className={
+          officialTrailer
+            ? classes.info_container
+            : production.length
+              ? (classes.info_container, classes.without_top_padding)
+              : (classes.without_top_padding, classes.without_bottom_padding)
+        }
+      >
+        <p className={classes.title}>{DESCRIPTION_TEXT}</p>
+        <p className={classes.overview}>{overview}</p>
       </div>
-      <div>
-        <p>{DESCRIPTION_TEXT}</p>
-        <p>{overview}</p>
-      </div>
-      <div>
-        <p>{PRODUCTION_TEXT}</p>
-        <>{productionsInfo()}</>
-      </div>
+      {production.length > 0 && (
+        <>
+          <Divider />
+          <div className={classes.info_container}>
+            <p className={classes.title}>{PRODUCTION_TEXT}</p>
+            <>{productionsInfo()}</>
+          </div>
+        </>
+      )}
     </Card>
+  ) : (
+    <></>
   );
 };
 

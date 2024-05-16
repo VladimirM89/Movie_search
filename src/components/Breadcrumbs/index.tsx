@@ -1,3 +1,7 @@
+import { useRouter } from "next/router";
+import { FC, MouseEvent } from "react";
+import Link from "next/link";
+import { Breadcrumbs } from "@mantine/core";
 import {
   ATTRIBUTE_HREF,
   BREADCRUMBS_HOME_ELEMENT,
@@ -5,10 +9,7 @@ import {
   URL_SEPARATOR,
 } from "@/constants/constants";
 import { PATH } from "@/constants/enums";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { FC, MouseEvent } from "react";
-import { Breadcrumbs } from "@mantine/core";
+import classes from "./styles.module.css";
 
 type BreadcrumdsItemsType = {
   id: number;
@@ -45,7 +46,11 @@ const CustomBreadcrumbs: FC<CustomBreadcrumbsType> = ({ title }) => {
     </Link>
   ));
 
-  return <Breadcrumbs>{breadcrumbsElements}</Breadcrumbs>;
+  return (
+    <Breadcrumbs classNames={{ breadcrumb: classes.breadcrumb }}>
+      {breadcrumbsElements}
+    </Breadcrumbs>
+  );
 };
 
 export default CustomBreadcrumbs;

@@ -5,7 +5,6 @@ import { ObjectSchema, AnyObject } from "yup";
 const validate = (schema: ObjectSchema<AnyObject>, handler: NextApiHandler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      // console.log("!!!!!!!!!!!!!!!!!req.body", req.body);
       await schema.validate(req.body, {
         stripUnknown: true,
         abortEarly: false,

@@ -28,9 +28,7 @@ export default function CustomNotFound() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div
-        className={["wrapper", `${classes.wrapper_not_found_page}`].join(" ")}
-      >
+      <div className={["wrapper", classes.wrapper_not_found_page].join(" ")}>
         <MainLogo />
         <div className={classes.content}>
           <NotFound

@@ -1,0 +1,6 @@
+.breadcrumb {
+  text-decoration: none;
+  color: var(--mantine-color-purple-4);
+  font-size: var(--mantine-font-size-sm);
+  line-height: 125%;
+}
