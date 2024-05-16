@@ -12,6 +12,7 @@ type MovieProfilePanelType = {
   release_date: string;
   vote_average: number;
   vote_count: number;
+  isDetailsPage?: boolean;
 };
 
 const MovieProfilePanel: FC<MovieProfilePanelType> = ({
@@ -19,12 +20,19 @@ const MovieProfilePanel: FC<MovieProfilePanelType> = ({
   release_date,
   vote_average,
   vote_count,
+  isDetailsPage,
 }) => {
   const theme = useMantineTheme();
   const colorRatedFromApi = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
 
   return (
-    <div className={classes.profile_container}>
+    <div
+      className={
+        !isDetailsPage
+          ? classes.profile_container
+          : classes.profile_container_details
+      }
+    >
       <p className={classes.profile_title}>{title}</p>
       <p className={classes.profile_year}>{validateDate(release_date)}</p>
       <div className={classes.rating_container}>

@@ -4,6 +4,10 @@
   min-height: min-content;
 }
 
+.modal_inner {
+  top: 4rem;
+}
+
 .modal_content {
   padding: 1rem;
   display: flex;

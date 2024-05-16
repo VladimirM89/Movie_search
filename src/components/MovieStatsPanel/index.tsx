@@ -29,7 +29,7 @@ const MovieStatsPanel: FC<MovieStatsPanelProps> = ({
 }) => {
   return (
     <div className={classes.stats_container}>
-      <div className={(classes.content_list, classes.info_title)}>
+      <div className={[classes.info_title, classes.content_list].join(" ")}>
         <p>{DURATION_SUBTITLE}</p>
         <p>{PREMIERE_SUBTITLE}</p>
         <p>{BUDGET_SUBTITLE}</p>

@@ -27,6 +27,7 @@ import sortValues from "@/constants/sortValues";
 import CustomNumberInput from "../CustomNumberInput";
 import { CustomMultiSelect, CustomSelect } from "../CustomSelects";
 import classes from "./styles.module.css";
+import { ERROR_MESSAGE_API_SERVICE_YEARS } from "@/constants/errorText";
 
 type SearchFiltersProps = {
   // filters: FiltersFormType;
@@ -60,6 +61,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
         notifications.show({
           title: (error as Error).name,
           message: (error as Error).message,
+          color: "red",
         });
         setIsGenresError(true);
       } finally {
@@ -103,7 +105,8 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
         setYears([]);
         notifications.show({
           title: (error as Error).name,
-          message: "Fail to fetch released years",
+          message: ERROR_MESSAGE_API_SERVICE_YEARS,
+          color: "red",
         });
       } finally {
         setIsLoadingYears(false);

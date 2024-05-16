@@ -17,7 +17,7 @@ const MovieDetailsPage = dynamic(
 export default function DetailsPage() {
   const router = useRouter();
 
-  const [, setId] = useState<number | null>(null);
+  // const [, setId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isMovieError, setIsMovieError] = useState<boolean>(false);
   const [movie, setMovie] = useState<MovieDetails | null>(null);
@@ -29,7 +29,7 @@ export default function DetailsPage() {
       router.push(PATH.NOT_FOUND);
     }
 
-    setId(id);
+    // setId(id);
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -47,6 +47,7 @@ export default function DetailsPage() {
         notifications.show({
           title: (error as Error).name,
           message: (error as Error).message,
+          color: "red",
         });
         setIsMovieError(true);
       } finally {

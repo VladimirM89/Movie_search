@@ -30,13 +30,10 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
     : PATH_TO_NO_MOVIE_POSTER;
 
   return (
-    <Card
-      radius={"md"}
-      className={classes.details_container}
-      padding={"1.5rem"}
-    >
+    <Card radius={"md"} className={classes.details_container}>
       <div className={classes.details_content}>
         <Image
+          className={classes.details_image}
           src={posterPath}
           width={250}
           height={352}
@@ -45,6 +42,7 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
         />
         <div className={classes.info_container}>
           <MovieProfilePanel
+            isDetailsPage={true}
             title={original_title}
             release_date={release_date}
             vote_average={vote_average}

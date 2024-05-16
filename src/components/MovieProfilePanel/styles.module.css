@@ -8,6 +8,15 @@
   }
 }
 
+.profile_container_details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  @media screen and (max-width: 950px) {
+    align-items: center;
+  }
+}
+
 .profile_title {
   font-size: var(--mantine-font-size-xl);
   color: var(--mantine-color-purple-4);

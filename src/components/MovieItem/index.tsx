@@ -35,6 +35,7 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
         onClick={navigateToDetailPage}
       >
         <Image
+          className={classes.poster_image}
           src={posterPath}
           width={119}
           height={170}

@@ -56,6 +56,7 @@ const RatingModal: FC<RatingModalProps> = ({
     <Modal
       classNames={{
         header: classes.modal_header,
+        inner: classes.modal_inner,
       }}
       closeButtonProps={{ size: "sm" }}
       opened={opened}
@@ -64,6 +65,7 @@ const RatingModal: FC<RatingModalProps> = ({
       radius={"md"}
       size={"sm"}
       centered
+      returnFocus={true}
       padding={0}
     >
       <Divider />

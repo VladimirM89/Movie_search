@@ -44,7 +44,7 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
   }, [production]);
 
   return overview || officialTrailer || officialTrailer ? (
-    <Card radius={"md"} padding={"1.5rem"}>
+    <Card radius={"md"} className={classes.card_content}>
       {officialTrailer && (
         <>
           <div className={classes.trailer_container}>
