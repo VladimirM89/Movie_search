@@ -5,14 +5,12 @@ import {
   ComboboxLikeProps,
   Group,
   Input,
-  InputBase,
   Pill,
   PillsInput,
   ScrollArea,
   useCombobox,
 } from "@mantine/core";
 import { Genre } from "@/types/Response";
-import { useDisclosure } from "@mantine/hooks";
 import {
   LABEL_GENRES,
   PLACEHOLDER_GENRE_ERROR,
@@ -48,7 +46,6 @@ const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
   });
 
   const [genre, setGenre] = useState<Array<Genre>>([]);
-  const [search, setSearch] = useState("");
 
   const handleGenreSelect = (val: string) =>
     setGenre((current) => {
@@ -87,22 +84,18 @@ const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
       </Pill>
     ));
 
-  const optionsGenres = genres
-    .filter((item) =>
-      item.name.toLowerCase().includes(search.trim().toLowerCase()),
-    )
-    .map((item) => (
-      <Combobox.Option
-        value={item.name}
-        key={item.id}
-        active={genre.includes(item)}
-      >
-        <Group gap="sm">
-          {genre.includes(item) ? <CheckIcon size={12} /> : null}
-          <span>{item.name}</span>
-        </Group>
-      </Combobox.Option>
-    ));
+  const optionsGenres = genres.map((item) => (
+    <Combobox.Option
+      value={item.name}
+      key={item.id}
+      active={genre.includes(item)}
+    >
+      <Group gap="sm">
+        {genre.includes(item) ? <CheckIcon size={12} /> : null}
+        <span>{item.name}</span>
+      </Group>
+    </Combobox.Option>
+  ));
 
   return (
     <Combobox
