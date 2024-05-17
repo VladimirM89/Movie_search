@@ -1,0 +1,10 @@
+
+.group_root {
+  @media screen and (max-width: 1440px) {
+    justify-content: center;
+  }
+}
+
+.pagination_control {
+  line-height: var(--mantine-line-height-xs);
+}

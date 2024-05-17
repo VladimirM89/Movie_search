@@ -1,6 +1,6 @@
 .button_root {
   height: auto;
-  line-height: 125%;
+  line-height: var(--mantine-line-height-xs);
 }
 
 .button_root:hover {

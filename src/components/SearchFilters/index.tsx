@@ -30,11 +30,9 @@ import classes from "./styles.module.css";
 import { ERROR_MESSAGE_API_SERVICE_YEARS } from "@/constants/errorText";
 
 type SearchFiltersProps = {
-  // filters: FiltersFormType;
   handleFilters: Dispatch<FiltersFormType>;
 };
 
-// TODO: optimize component rendering. Add update years when filters are changed?
 const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   const [genres, setGenres] = useState<Array<Genre>>([]);
   const [isLoadingGenres, setIsLoadingGenres] = useState<boolean>(false);
@@ -42,8 +40,6 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   const [years, setYears] = useState<Array<string>>([]);
   const [isLoadingYears, setIsLoadingYears] = useState<boolean>(false);
   const [isYearsError, setIsYearsError] = useState<boolean>(false);
-
-  // const refYear = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -75,30 +71,16 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   useEffect(() => {
     const fetchReleaseYears = async () => {
       setIsLoadingYears(true);
-      // const normalizedFilterParams = normalizeQueryParams({
-      //   ...filters,
-      //   ...FILTER_PARAMS_SORT_BY_MIN_YEARS,
-      // });
 
       try {
         const data = await getMovies({
-          // ...filters,
           ...FILTER_PARAMS_SORT_BY_MIN_YEARS,
         });
-
-        // console.log(normalizedFilterParams);
 
         if (data && data.results.length) {
           const yearsArray = fillYearsArray(data.results);
 
-          //const selectedYear = refYear.current?.value || "";
-
-          // !yearsArray.includes(selectedYear) &&
-          //  selectedYear?.length &&
-          //  yearsArray.push(selectedYear!);
-
           setYears(yearsArray);
-          //setYears(yearsArray.sort((a, b) => Number(a) - Number(b)));
         }
       } catch (error) {
         setIsYearsError(true);
@@ -142,6 +124,13 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   return (
     <form className={classes.filters_content}>
       <div className={classes.input_filters_content}>
+        {/* <CustomMultiSelect
+          key={form.key("with_genres")}
+          {...form.getInputProps("with_genres")}
+          genres={genres}
+          isError={isGenresError}
+          isLoading={isLoadingGenres}
+        /> */}
         <CustomMultiSelect
           key={form.key("with_genres")}
           {...form.getInputProps("with_genres")}

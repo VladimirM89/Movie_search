@@ -1,5 +1,5 @@
 import { useState, useEffect, memo, useCallback } from "react";
-import { Group, Pagination, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { FiltersFormType } from "@/utils/filtersFormSchema";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
@@ -16,9 +16,10 @@ import { getMovies } from "../../services/apiService";
 import SearchFilters from "../SearchFilters";
 import NotFound from "../NotFound";
 import { NotFoundMoviesImage } from "../../../public/images";
-import classes from "./styles.module.css";
 import CustomLoader from "../UI/Loader";
 import NoSearchResult from "../UI/NoSearchResult";
+import CustomPagination from "../CustomPagination";
+import classes from "./styles.module.css";
 
 const SearchPage = memo(() => {
   const [filterParams, setFilterParams] = useState<FiltersFormType>(
@@ -49,6 +50,7 @@ const SearchPage = memo(() => {
         notifications.show({
           title: errorWithType.name,
           message: errorWithType.message,
+          color: "red",
         });
       } finally {
         setIsLoading(false);
@@ -60,6 +62,7 @@ const SearchPage = memo(() => {
 
   const handleChangePage = useCallback(
     (value: number): void => {
+      console.log("PAGE ", value);
       setFilterParams({ ...filterParams, page: value });
       setPage(value);
     },
@@ -71,36 +74,23 @@ const SearchPage = memo(() => {
     setPage(INITIAL_PAGE);
   }, []);
 
-  // const deleteReleaseYearFromParams = useCallback(() => {
-  //   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  //   const { primary_release_year, ...rest } = filterParams;
-  //   return rest;
-  // }, [filterParams]);
-
   return (
     <div className={classes.search_container}>
       <Title className="page_title">{MOVIES_TITLE}</Title>
       <div className={classes.search_content}>
-        <SearchFilters
-          handleFilters={handleChangeFilter}
-          // filters={deleteReleaseYearFromParams()}
-        />
+        <SearchFilters handleFilters={handleChangeFilter} />
         {isLoading ? (
           <CustomLoader />
         ) : movies.length ? (
           <>
             <MovieList movies={movies} />
             {totalPages > 1 && (
-              <Group>
-                <Pagination
-                  classNames={{
-                    root: classes.pagination_root,
-                  }}
-                  total={totalPages}
-                  onChange={handleChangePage}
-                  value={page}
-                />
-              </Group>
+              <CustomPagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={handleChangePage}
+                position="flex-end"
+              />
             )}
           </>
         ) : !isMovieError ? (

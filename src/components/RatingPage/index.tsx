@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
-import { Pagination, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";
 import {
   INITIAL_PAGE,
@@ -19,9 +19,10 @@ import SearchBar from "../SearchBar";
 import StandardButton from "../UI/Button";
 import CustomLoader from "../UI/Loader";
 import NotFound from "../NotFound";
+import NoSearchResult from "../UI/NoSearchResult";
+import CustomPagination from "../CustomPagination";
 import { NotFoundRatedMovieImage } from "../../../public/images";
 import classes from "./styles.module.css";
-import NoSearchResult from "../UI/NoSearchResult";
 
 export default function RatingPage() {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -96,13 +97,10 @@ export default function RatingPage() {
         )}
         <MovieList movies={getMovieOnPage()} />
         {totalPages > 1 && (
-          <Pagination
-            classNames={{
-              root: classes.pagination_root,
-            }}
-            total={totalPages}
-            value={page}
-            onChange={setPage}
+          <CustomPagination
+            totalPages={totalPages}
+            currentPage={page}
+            onPageChange={setPage}
           />
         )}
       </div>
