@@ -62,7 +62,6 @@ const SearchPage = memo(() => {
 
   const handleChangePage = useCallback(
     (value: number): void => {
-      console.log("PAGE ", value);
       setFilterParams({ ...filterParams, page: value });
       setPage(value);
     },

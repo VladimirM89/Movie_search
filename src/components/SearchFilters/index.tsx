@@ -167,13 +167,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           />
         </div>
 
-        <p
-          className={classes.reset}
-          onClick={() => {
-            form.reset();
-            console.log(form.getValues());
-          }}
-        >
+        <p className={classes.reset} onClick={form.reset}>
           {RESET_FILTERS_TEXT}
         </p>
       </div>

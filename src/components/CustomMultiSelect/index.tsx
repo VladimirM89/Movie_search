@@ -16,8 +16,8 @@ import {
   PLACEHOLDER_GENRE_ERROR,
   PLACEHOLDER_GENRE_OK,
 } from "@/constants/constants";
-import { ArrowDownImage, ArrowUpColoredImage } from "../../../public/images";
 import CustomLoader from "../UI/Loader";
+import { ArrowDownImage, ArrowUpColoredImage } from "../../../public/images";
 
 const MAX_DISPLAYED_VALUES = 2;
 
@@ -35,35 +35,24 @@ const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
 }) => {
   // const [dropdownOpened, { toggle }] = useDisclosure();
   const combobox = useCombobox({
-    onDropdownClose: () => {
-      // combobox.toggleDropdown();
-      combobox.resetSelectedOption();
-    },
-    onDropdownOpen: () => {
-      // combobox.toggleDropdown();
-      combobox.updateSelectedOptionIndex("active");
-    },
+    onDropdownClose: () => combobox.resetSelectedOption(),
+    onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
   });
 
   const [genre, setGenre] = useState<Array<Genre>>([]);
 
   const handleGenreSelect = (val: string) =>
     setGenre((current) => {
-      console.log(val, current);
       const newValue = current.find((item) => item.name === val)!;
-      console.log(newValue);
       if (!newValue) {
         const genreToAdd = genres.find((item) => item.name === val)!;
-        console.log(genreToAdd);
         return [...current, genreToAdd];
       }
-      console.log(current.filter((item) => item.name !== val));
       return current.filter((item) => item.name !== val);
       // return newValue ? [...current] : [...current, newValue],
     });
 
   const handleGenreRemove = (val: string) => {
-    console.log("REMOVE", val);
     setGenre((current) => current.filter((v) => v.name !== val));
   };
 
