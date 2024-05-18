@@ -13,6 +13,7 @@ type MovieProfilePanelType = {
   vote_average: number;
   vote_count: number;
   isDetailsPage?: boolean;
+  onClick?: () => void;
 };
 
 const MovieProfilePanel: FC<MovieProfilePanelType> = ({
@@ -21,12 +22,14 @@ const MovieProfilePanel: FC<MovieProfilePanelType> = ({
   vote_average,
   vote_count,
   isDetailsPage,
+  onClick,
 }) => {
   const theme = useMantineTheme();
   const colorRatedFromApi = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
 
   return (
     <div
+      onClick={onClick}
       className={
         !isDetailsPage
           ? classes.profile_container

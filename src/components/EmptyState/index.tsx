@@ -1,9 +1,9 @@
 import { FC, HTMLAttributes, ReactNode } from "react";
 import Image, { StaticImageData } from "next/image";
-import { ALT_DEFAULT_NOT_FOUND_IMG } from "@/constants/constants";
+import { ALT_DEFAULT_EMPTY_IMG } from "@/constants/constants";
 import classes from "./styles.module.css";
 
-interface NotFoundProps extends HTMLAttributes<HTMLDivElement> {
+interface EmptyStateProps extends HTMLAttributes<HTMLDivElement> {
   img: StaticImageData;
   text?: string;
   alt?: string;
@@ -12,7 +12,7 @@ interface NotFoundProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-const NotFound: FC<NotFoundProps> = ({
+const EmptyState: FC<EmptyStateProps> = ({
   img,
   text,
   alt,
@@ -24,9 +24,9 @@ const NotFound: FC<NotFoundProps> = ({
   return (
     <div className={classes.content} {...rest}>
       <Image
-        className={classes.not_found_image}
+        className={classes.empty_image}
         src={img}
-        alt={alt || ALT_DEFAULT_NOT_FOUND_IMG}
+        alt={alt || ALT_DEFAULT_EMPTY_IMG}
         width={width}
         height={height}
         priority={true}
@@ -39,4 +39,4 @@ const NotFound: FC<NotFoundProps> = ({
   );
 };
 
-export default NotFound;
+export default EmptyState;

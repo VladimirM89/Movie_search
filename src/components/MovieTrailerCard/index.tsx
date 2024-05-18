@@ -1,6 +1,7 @@
 import { FC, useCallback } from "react";
 import Image from "next/image";
 import { Card, Divider } from "@mantine/core";
+import cn from "classnames";
 import { MovieTrailer, ProductionCompanies } from "@/types/Response";
 import {
   ALT_PRODUCTION_COMPANY_DEFAULT_LOGO_ICON,
@@ -65,8 +66,12 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
           officialTrailer
             ? classes.info_container
             : production.length
-              ? (classes.info_container, classes.without_top_padding)
-              : (classes.without_top_padding, classes.without_bottom_padding)
+              ? cn(classes.info_container, classes.without_top_padding)
+              : cn(
+                  classes.info_container,
+                  classes.without_top_padding,
+                  classes.without_bottom_padding,
+                )
         }
       >
         <p className={classes.title}>{DESCRIPTION_TEXT}</p>
@@ -75,7 +80,12 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
       {production.length > 0 && (
         <>
           <Divider />
-          <div className={classes.info_container}>
+          <div
+            className={cn(
+              classes.info_container,
+              classes.without_bottom_padding,
+            )}
+          >
             <p className={classes.title}>{PRODUCTION_TEXT}</p>
             <>{productionsInfo()}</>
           </div>

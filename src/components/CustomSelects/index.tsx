@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   ComboboxLikeProps,
   MultiSelect,
@@ -6,9 +6,11 @@ import {
   SelectProps,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import cn from "classnames";
 import { Genre } from "@/types/Response";
 import {
   LABEL_GENRES,
+  MAX_SELECTED_GENRES,
   PLACEHOLDER_GENRE_ERROR,
   PLACEHOLDER_GENRE_OK,
 } from "@/constants/constants";
@@ -77,6 +79,27 @@ export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
   ...props
 }) => {
   const [dropdownOpened, { toggle }] = useDisclosure();
+  const [selectedGenre, setSelectedGenre] = useState<Array<string>>([]);
+
+  const selectHandler = (value: string) => {
+    const existGenre = selectedGenre.find((item) => item === value);
+    existGenre
+      ? deleteGenre(value)
+      : selectedGenre.length !== MAX_SELECTED_GENRES &&
+        setSelectedGenre([...selectedGenre, value]);
+  };
+
+  const deleteGenre = (value: string) => {
+    setSelectedGenre((current) => current.filter((item) => item !== value));
+  };
+
+  const deleteHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Backspace") {
+      event.preventDefault();
+      selectedGenre.length &&
+        deleteGenre(selectedGenre[selectedGenre.length - 1]);
+    }
+  };
 
   return (
     <MultiSelect
@@ -84,14 +107,27 @@ export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
         input: classes.multiselect_input,
         option: classes.option,
         pillsList: classes.multiselect_list_pill,
-        pill: classes.multiselect_pill,
+        pill: cn(
+          classes.multiselect_pill,
+          selectedGenre.length === MAX_SELECTED_GENRES
+            ? classes.multiselect_pill_full
+            : "",
+        ),
       }}
       label={LABEL_GENRES}
-      placeholder={!isError ? PLACEHOLDER_GENRE_OK : PLACEHOLDER_GENRE_ERROR}
+      placeholder={
+        !isError
+          ? selectedGenre.length < MAX_SELECTED_GENRES
+            ? PLACEHOLDER_GENRE_OK
+            : ""
+          : PLACEHOLDER_GENRE_ERROR
+      }
       data={genres.map((item) => ({
         value: `${item.id}`,
         label: item.name,
       }))}
+      onKeyDown={deleteHandler}
+      onOptionSubmit={selectHandler}
       rightSection={
         !isLoading ? (
           !dropdownOpened ? (
@@ -104,10 +140,10 @@ export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
         )
       }
       maxDropdownHeight={200}
-      searchable
+      pointer
       withCheckIcon={false}
       disabled={isError}
-      maxValues={2}
+      maxValues={MAX_SELECTED_GENRES}
       onDropdownOpen={toggle}
       onDropdownClose={toggle}
       {...props}

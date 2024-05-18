@@ -2,10 +2,11 @@ import { Card } from "@mantine/core";
 import Rating from "../UI/Rating";
 import { MovieDetails } from "@/types/Movies";
 import { FC, memo } from "react";
-import { ALT_POSTER_IMG, PATH_TO_NO_MOVIE_POSTER } from "@/constants/constants";
+import { ALT_POSTER_IMG } from "@/constants/constants";
 import Image from "next/image";
 import MovieProfilePanel from "../MovieProfilePanel";
 import MovieStatsPanel from "../MovieStatsPanel";
+import { NoMoviePosterBigImage } from "../../../public/images";
 import classes from "./styles.module.css";
 
 type MovieDetailsCardProps = {
@@ -27,7 +28,7 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
 
   const posterPath = poster_path
     ? `${process.env.NEXT_PUBLIC_IMG_BASE_URL}${poster_path}`
-    : PATH_TO_NO_MOVIE_POSTER;
+    : NoMoviePosterBigImage;
 
   return (
     <Card radius={"md"} className={classes.details_container}>
@@ -41,13 +42,18 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
           alt={ALT_POSTER_IMG}
         />
         <div className={classes.info_container}>
-          <MovieProfilePanel
-            isDetailsPage={true}
-            title={original_title}
-            release_date={release_date}
-            vote_average={vote_average}
-            vote_count={vote_count}
-          />
+          <div className={classes.info_container_content}>
+            <MovieProfilePanel
+              isDetailsPage={true}
+              title={original_title}
+              release_date={release_date}
+              vote_average={vote_average}
+              vote_count={vote_count}
+            />
+            <div className={classes.rating_container}>
+              <Rating movieInfo={movieInfo} />
+            </div>
+          </div>
           <MovieStatsPanel
             runtime={runtime}
             release_date={release_date}
@@ -57,7 +63,6 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
           />
         </div>
       </div>
-      <Rating movieInfo={movieInfo} />
     </Card>
   );
 });

@@ -23,6 +23,6 @@
   display: none;
 }
 
-.multiselect_pill:first-child::after {
+.multiselect_pill_full:first-child::after {
   content: ",";
 }

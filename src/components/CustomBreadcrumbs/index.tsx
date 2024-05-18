@@ -47,7 +47,12 @@ const CustomBreadcrumbs: FC<CustomBreadcrumbsType> = ({ title }) => {
   ));
 
   return (
-    <Breadcrumbs classNames={{ breadcrumb: classes.breadcrumb }}>
+    <Breadcrumbs
+      classNames={{
+        root: classes.breadcrumbs_root,
+        breadcrumb: classes.breadcrumb,
+      }}
+    >
       {breadcrumbsElements}
     </Breadcrumbs>
   );

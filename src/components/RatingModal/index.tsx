@@ -70,7 +70,7 @@ const RatingModal: FC<RatingModalProps> = ({
     >
       <Divider />
       <div className={classes.modal_content}>
-        <Title order={4} className={classes.modal_title}>
+        <Title order={5} className={classes.modal_title}>
           {title}
         </Title>
         <Rating

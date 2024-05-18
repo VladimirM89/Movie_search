@@ -5,12 +5,13 @@ import { Card } from "@mantine/core";
 import parseGenreIds from "../../utils/parseGenreIds";
 import {
   ALT_POSTER_IMG,
+  GENRES_SUBTITLE,
   NO_GENRES_INFO,
-  PATH_TO_NO_MOVIE_POSTER,
 } from "@/constants/constants";
 import { Movie } from "@/types/Movies";
 import Rating from "../UI/Rating";
 import MovieProfilePanel from "../MovieProfilePanel";
+import { NoMoviePosterSmallImage } from "../../../public/images";
 import classes from "./styles.module.css";
 
 type MovieItemProps = {
@@ -20,7 +21,7 @@ type MovieItemProps = {
 const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
   const posterPath = movieInfo.poster_path
     ? `${process.env.NEXT_PUBLIC_IMG_BASE_URL}${movieInfo.poster_path}`
-    : PATH_TO_NO_MOVIE_POSTER;
+    : NoMoviePosterSmallImage;
 
   const router = useRouter();
 
@@ -29,12 +30,10 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
   }, [movieInfo.id, router]);
 
   return (
-    <Card radius={"md"} classNames={{ root: classes.content }}>
-      <div
-        className={classes.description_container}
-        onClick={navigateToDetailPage}
-      >
+    <Card radius={"md"} classNames={{ root: classes.container }}>
+      <div className={classes.content}>
         <Image
+          onClick={navigateToDetailPage}
           className={classes.poster_image}
           src={posterPath}
           width={119}
@@ -42,17 +41,21 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
           priority={true}
           alt={ALT_POSTER_IMG}
         />
-        <div className={classes.info_container}>
-          <MovieProfilePanel
-            title={movieInfo.original_title}
-            release_date={movieInfo.release_date}
-            vote_average={movieInfo.vote_average}
-            vote_count={movieInfo.vote_count}
-          />
+        <div className={classes.description_container}>
+          <div className={classes.info_container}>
+            <MovieProfilePanel
+              onClick={navigateToDetailPage}
+              title={movieInfo.original_title}
+              release_date={movieInfo.release_date}
+              vote_average={movieInfo.vote_average}
+              vote_count={movieInfo.vote_count}
+            />
+            <Rating movieInfo={movieInfo} />
+          </div>
           <div className={classes.genres_container}>
             {movieInfo.genre_ids && movieInfo.genre_ids.length ? (
               <>
-                <span className={classes.genres_title}>Genres </span>
+                <span className={classes.genres_title}>{GENRES_SUBTITLE}</span>
                 <span className={classes.genres}>
                   {movieInfo.genre_ids &&
                     movieInfo.genre_ids.length &&
@@ -60,14 +63,14 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
                 </span>
               </>
             ) : (
-              NO_GENRES_INFO
+              <span className={classes.genres}>{NO_GENRES_INFO}</span>
             )}
           </div>
         </div>
       </div>
-      <div>
+      {/* <div>
         <Rating movieInfo={movieInfo} />
-      </div>
+      </div> */}
     </Card>
   );
 });

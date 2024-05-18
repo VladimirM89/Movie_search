@@ -6,5 +6,6 @@
 }
 
 .pagination_control {
+  border-color: var(--mantine-color-gray_scale-2);
   line-height: var(--mantine-line-height-xs);
 }

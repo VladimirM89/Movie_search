@@ -5,12 +5,13 @@ export const DEBOUNCE_TIME = 1000;
 export const MAX_RATING_VALUE = 10;
 export const MIN_RATING_VALUE = 0;
 export const NOTIFICATION_AUTOCLOSE_TIME = 4000;
+export const MAX_DISPLAYED_GENRES = 3;
+export const MAX_SELECTED_GENRES = 2;
 
 export const LOCAL_STORAGE_MOVIES_KEY = "ratedMovies";
 export const LOCAL_STORAGE_GENRES_KEY = "genres";
 
-export const ALT_DEFAULT_NOT_FOUND_IMG = "Not found results image";
-export const PATH_TO_NO_MOVIE_POSTER = "/images/noMoviePoster.png";
+export const ALT_DEFAULT_EMPTY_IMG = "Not found results image";
 export const ALT_POSTER_IMG = "Poster movie";
 export const ALT_404_PAGE_IMG = "Not found page image";
 export const ALT_RATING_ICON = "Rating icon image";

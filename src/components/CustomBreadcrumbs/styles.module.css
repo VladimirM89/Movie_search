@@ -1,3 +1,9 @@
+.breadcrumbs_root {
+  @media screen and (max-width: 600px) {
+    overflow: hidden;;
+  }
+}
+
 .breadcrumb {
   text-decoration: none;
   color: var(--mantine-color-purple-4);

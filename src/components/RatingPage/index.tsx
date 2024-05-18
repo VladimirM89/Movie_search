@@ -18,7 +18,7 @@ import MovieList from "../MovieList";
 import SearchBar from "../SearchBar";
 import StandardButton from "../UI/Button";
 import CustomLoader from "../UI/Loader";
-import NotFound from "../NotFound";
+import EmptyState from "../EmptyState";
 import NoSearchResult from "../UI/NoSearchResult";
 import CustomPagination from "../CustomPagination";
 import { NotFoundRatedMovieImage } from "../../../public/images";
@@ -107,19 +107,19 @@ export default function RatingPage() {
     </div>
   ) : (
     <div className={classes.not_found_container}>
-      <NotFound
+      <EmptyState
         img={NotFoundRatedMovieImage}
         text={NO_RATED_MOVIES_TEXT}
         alt={ALT_NO_RATED_MOVIES}
-        width={399}
-        height={298}
+        width={400}
+        height={300}
       >
         <StandardButton
           btnSize="fat"
           text={BUTTON_FIND_MOVIES}
           onClick={navigateToMain}
         />
-      </NotFound>
+      </EmptyState>
     </div>
   );
 }

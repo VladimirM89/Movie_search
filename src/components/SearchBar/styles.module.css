@@ -24,3 +24,7 @@
 .input_section[data-position="right"] {
   --section-end: 1px;
 }
+
+.input_section[data-position="left"] {
+  --section-start: -2px;
+}

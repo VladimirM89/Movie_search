@@ -14,7 +14,7 @@ import { Movie } from "@/types/Movies";
 import MovieList from "../MovieList";
 import { getMovies } from "../../services/apiService";
 import SearchFilters from "../SearchFilters";
-import NotFound from "../NotFound";
+import EmptyState from "../EmptyState";
 import { NotFoundMoviesImage } from "../../../public/images";
 import CustomLoader from "../UI/Loader";
 import NoSearchResult from "../UI/NoSearchResult";
@@ -93,7 +93,7 @@ const SearchPage = memo(() => {
             )}
           </>
         ) : !isMovieError ? (
-          <NotFound
+          <EmptyState
             img={NotFoundMoviesImage}
             text={NOT_FOUND_MOVIES_TEXT}
             width={311}
