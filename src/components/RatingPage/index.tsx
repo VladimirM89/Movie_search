@@ -19,7 +19,7 @@ import SearchBar from "../SearchBar";
 import StandardButton from "../UI/Button";
 import CustomLoader from "../UI/Loader";
 import EmptyState from "../EmptyState";
-import NoSearchResult from "../UI/NoSearchResult";
+import NoSearchResultWithError from "../UI/NoSearchResultWithError";
 import CustomPagination from "../CustomPagination";
 import { NotFoundRatedMovieImage } from "../../../public/images";
 import classes from "./styles.module.css";
@@ -93,7 +93,7 @@ export default function RatingPage() {
 
       <div className={classes.page_content}>
         {!filteredMovies.length && (
-          <NoSearchResult text={NO_RESULT_ACCORDING_SEARCH_TEXT} />
+          <NoSearchResultWithError text={NO_RESULT_ACCORDING_SEARCH_TEXT} />
         )}
         <MovieList movies={getMovieOnPage()} />
         {totalPages > 1 && (

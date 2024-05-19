@@ -14,6 +14,7 @@ import { notifications } from "@mantine/notifications";
 import { getGenres, getMovies } from "../../services/apiService";
 import { FiltersFormType, filtersFormSchema } from "@/utils/filtersFormSchema";
 import fillYearsArray from "@/utils/fillYearsArray";
+import showError from "@/utils/showError";
 import { Genre } from "@/types/Response";
 import {
   FILTER_PARAMS_SORT_BY_MIN_YEARS,
@@ -25,6 +26,7 @@ import {
   LABEL_SORT_BY,
   LABEL_YEAR,
   LOCAL_STORAGE_GENRES_KEY,
+  NO_GENRES_INFO,
   PLACEHOLDER_RATING_FROM,
   PLACEHOLDER_RATING_TO,
   PLACEHOLDER_YEARS_ERROR,
@@ -32,6 +34,8 @@ import {
   RESET_FILTERS_TEXT,
 } from "@/constants/constants";
 import sortValues from "@/constants/sortValues";
+import { ERROR_MESSAGE_API_SERVICE_YEARS } from "@/constants/errorText";
+import { HTTP_STATUS_CODE } from "@/constants/enums";
 import CustomNumberInput from "../CustomNumberInput";
 import {
   CustomMultiSelect,
@@ -39,7 +43,6 @@ import {
   CustomSelect,
 } from "../CustomSelects";
 import classes from "./styles.module.css";
-import { ERROR_MESSAGE_API_SERVICE_YEARS } from "@/constants/errorText";
 
 type SearchFiltersProps = {
   handleFilters: Dispatch<FiltersFormType>;
@@ -58,6 +61,10 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
       setIsLoadingGenres(true);
       try {
         const data = await getGenres();
+        if (!data) {
+          showError(HTTP_STATUS_CODE.NOT_FOUND, NO_GENRES_INFO);
+          setIsGenresError(true);
+        }
         if (data && data.genres.length) {
           setGenres(data.genres);
           localStorage.setItem(
@@ -66,11 +73,9 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           );
         }
       } catch (error) {
-        notifications.show({
-          title: (error as Error).name,
-          message: (error as Error).message,
-          color: "red",
-        });
+        if (error instanceof Error) {
+          showError(error.name, error.message);
+        }
         setIsGenresError(true);
       } finally {
         setIsLoadingGenres(false);

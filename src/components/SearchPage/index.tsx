@@ -1,7 +1,7 @@
 import { useState, useEffect, memo, useCallback } from "react";
 import { Title } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
 import { FiltersFormType } from "@/utils/filtersFormSchema";
+import showError from "@/utils/showError";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
 import {
   API_MAX_REQUEST_PAGE,
@@ -17,7 +17,7 @@ import SearchFilters from "../SearchFilters";
 import EmptyState from "../EmptyState";
 import { NotFoundMoviesImage } from "../../../public/images";
 import CustomLoader from "../UI/Loader";
-import NoSearchResult from "../UI/NoSearchResult";
+import NoSearchResultWithError from "../UI/NoSearchResultWithError";
 import CustomPagination from "../CustomPagination";
 import classes from "./styles.module.css";
 
@@ -36,6 +36,7 @@ const SearchPage = memo(() => {
       setIsLoading(true);
       try {
         const data = await getMovies(filterParams);
+
         if (data && data.results) {
           setMovies(data.results);
           setTotalPages(
@@ -45,13 +46,10 @@ const SearchPage = memo(() => {
           );
         }
       } catch (error) {
+        if (error instanceof Error) {
+          showError(error.name, error.message);
+        }
         setIsMovieError(true);
-        const errorWithType = error as Error;
-        notifications.show({
-          title: errorWithType.name,
-          message: errorWithType.message,
-          color: "red",
-        });
       } finally {
         setIsLoading(false);
       }
@@ -100,7 +98,9 @@ const SearchPage = memo(() => {
             height={252}
           />
         ) : (
-          <NoSearchResult text={ERROR_MESSAGE_FAIL_FETCHING_MOVIE_LIST} />
+          <NoSearchResultWithError
+            text={ERROR_MESSAGE_FAIL_FETCHING_MOVIE_LIST}
+          />
         )}
       </div>
     </div>

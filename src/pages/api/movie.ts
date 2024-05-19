@@ -1,15 +1,15 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import validate from "@/middleware/validate";
+import {
+  RequestMovieDetailsApiType,
+  schemaRequestMovieDetails,
+} from "@/utils/filtersFormSchema";
 import {
   API_ENDPOINTS,
   HTTP_METHOD,
   HTTP_STATUS_CODE,
 } from "@/constants/enums";
 import { ERROR_MESSAGE_PROXY_MOVIE } from "@/constants/errorText";
-import validate from "@/middleware/validate";
-import {
-  RequestMovieDetailsApiType,
-  schemaRequestMovieDetails,
-} from "@/utils/filtersFormSchema";
-import type { NextApiRequest, NextApiResponse } from "next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -37,14 +37,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     );
 
     const data = await response.json();
-
-    if (response.status === HTTP_STATUS_CODE.NOT_FOUND) {
-      return res.status(response.status).json(data);
-    }
-
-    if (response.ok) {
-      return res.status(HTTP_STATUS_CODE.OK).json(data);
-    }
+    return res.status(response.status).json(data);
   } catch (error) {
     return res.status(HTTP_STATUS_CODE.SERVER_ERROR).json({
       message: `${ERROR_MESSAGE_PROXY_MOVIE} ${(error as Error).message}`,

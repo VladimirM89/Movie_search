@@ -4,10 +4,11 @@ import { getMovie } from "@/services/apiService";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import showError from "@/utils/showError";
 import { NO_INFO_MOVIE_DETAILS } from "@/constants/constants";
-import { notifications } from "@mantine/notifications";
 import CustomLoader from "@/components/UI/Loader";
-import { PATH } from "@/constants/enums";
+import { HTTP_STATUS_CODE, PATH } from "@/constants/enums";
+import NoSearchResultWithError from "@/components/UI/NoSearchResultWithError";
 import classes from "../styles/[id].module.css";
 
 const MovieDetailsPage = dynamic(
@@ -24,6 +25,7 @@ export default function DetailsPage() {
   useEffect(() => {
     const id = Number(router.query.id) || Number(location.pathname.slice(1));
     if (isNaN(id) && id !== undefined) {
+      // showError(HTTP_STATUS_CODE.BAD_REQUEST, ERROR_INCORRECT_MOVIE_ID);
       setIsLoading(false);
       router.push(PATH.NOT_FOUND);
     }
@@ -33,19 +35,27 @@ export default function DetailsPage() {
 
       try {
         if (id && router.isReady) {
-          const data = await getMovie(id);
-          if ("id" in data) {
-            setMovie(data as MovieDetails);
-          } else {
+          const response = await getMovie(id);
+
+          if (response.status === HTTP_STATUS_CODE.NOT_FOUND) {
+            setIsLoading(false);
+            showError(response.status, response.statusText);
             router.push(PATH.NOT_FOUND);
+            return;
+          }
+
+          const data = (await response.json()) as MovieDetails;
+          if (data && "id" in data) {
+            setMovie(data);
+          } else {
+            showError(response.status, response.statusText);
+            setIsMovieError(true);
           }
         }
       } catch (error) {
-        notifications.show({
-          title: (error as Error).name,
-          message: (error as Error).message,
-          color: "red",
-        });
+        if (error instanceof Error) {
+          showError(error.name, error.message);
+        }
         setIsMovieError(true);
       } finally {
         setIsLoading(false);
@@ -70,7 +80,7 @@ export default function DetailsPage() {
         {isLoading ? (
           <CustomLoader />
         ) : isMovieError ? (
-          <p>{NO_INFO_MOVIE_DETAILS}</p>
+          <NoSearchResultWithError text={NO_INFO_MOVIE_DETAILS} />
         ) : (
           movie && <MovieDetailsPage data={movie} />
         )}

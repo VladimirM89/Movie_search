@@ -1,10 +1,3 @@
-import {
-  API_ENDPOINTS,
-  HTTP_METHOD,
-  HTTP_STATUS_CODE,
-} from "@/constants/enums";
-import { ERROR_MESSAGE_PROXY_MOVIES } from "@/constants/errorText";
-import { SearchResponse } from "@/types/Response";
 import type { NextApiRequest, NextApiResponse } from "next";
 import validate from "../../middleware/validate";
 import {
@@ -12,6 +5,12 @@ import {
   schemaRequestMovies,
 } from "@/utils/filtersFormSchema";
 import { normalizeQueryParams } from "@/utils/queryParams";
+import {
+  API_ENDPOINTS,
+  HTTP_METHOD,
+  HTTP_STATUS_CODE,
+} from "@/constants/enums";
+import { ERROR_MESSAGE_PROXY_MOVIES } from "@/constants/errorText";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -34,10 +33,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       },
     });
 
-    if (response.ok) {
-      const data = (await response.json()) as SearchResponse;
-      res.status(HTTP_STATUS_CODE.OK).json(data);
-    }
+    const data = await response.json();
+    res.status(HTTP_STATUS_CODE.OK).json(data);
   } catch (error) {
     return res.status(HTTP_STATUS_CODE.SERVER_ERROR).json({
       message: `${ERROR_MESSAGE_PROXY_MOVIES} ${(error as Error).message}`,

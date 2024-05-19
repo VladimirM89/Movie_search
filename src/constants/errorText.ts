@@ -22,3 +22,5 @@ export const ERROR_MESSAGE_API_SERVICE_GENRES =
   "500 Internal Server Error. Fetch genres";
 export const ERROR_MESSAGE_API_SERVICE_YEARS =
   "500 Internal Server Error. Fetch years";
+export const ERROR_INCORRECT_MOVIE_ID = "Incorrect movie id";
+export const ERROR_UNHANDLED_TEXT = "Unhandled error";
