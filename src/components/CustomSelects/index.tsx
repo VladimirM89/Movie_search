@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, forwardRef, useImperativeHandle, useState } from "react";
 import {
   ComboboxLikeProps,
   MultiSelect,
@@ -72,12 +72,14 @@ interface CustomMultiSelectProps extends ComboboxLikeProps {
   isLoading: boolean;
 }
 
-export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
-  isError,
-  genres,
-  isLoading,
-  ...props
-}) => {
+export type CustomMultiSelectRef = {
+  clearSelectedGenre: () => void;
+};
+
+export const CustomMultiSelect = forwardRef<
+  CustomMultiSelectRef,
+  CustomMultiSelectProps
+>(({ isError, genres, isLoading, ...props }, ref) => {
   const [dropdownOpened, { toggle }] = useDisclosure();
   const [selectedGenre, setSelectedGenre] = useState<Array<string>>([]);
 
@@ -100,6 +102,12 @@ export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
         deleteGenre(selectedGenre[selectedGenre.length - 1]);
     }
   };
+
+  useImperativeHandle(ref, () => ({
+    clearSelectedGenre() {
+      setSelectedGenre([]);
+    },
+  }));
 
   return (
     <MultiSelect
@@ -140,7 +148,6 @@ export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
         )
       }
       maxDropdownHeight={200}
-      pointer
       withCheckIcon={false}
       disabled={isError}
       maxValues={MAX_SELECTED_GENRES}
@@ -149,4 +156,4 @@ export const CustomMultiSelect: FC<CustomMultiSelectProps> = ({
       {...props}
     />
   );
-};
+});

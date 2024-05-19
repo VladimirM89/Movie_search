@@ -9,10 +9,6 @@
     align-items: center;
     gap: 1rem;
   }
-
-  @media screen and (max-width: 952px) {
-    /* gap: 0rem; */
-}
 }
 
 .input_filters_content {

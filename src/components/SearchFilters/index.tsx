@@ -1,4 +1,12 @@
-import { useState, useEffect, FC, Dispatch, memo, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  FC,
+  Dispatch,
+  memo,
+  useCallback,
+  useRef,
+} from "react";
 import { yupResolver } from "mantine-form-yup-resolver";
 import { useForm } from "@mantine/form";
 import { useDebouncedCallback } from "@mantine/hooks";
@@ -25,7 +33,11 @@ import {
 } from "@/constants/constants";
 import sortValues from "@/constants/sortValues";
 import CustomNumberInput from "../CustomNumberInput";
-import { CustomMultiSelect, CustomSelect } from "../CustomSelects";
+import {
+  CustomMultiSelect,
+  CustomMultiSelectRef,
+  CustomSelect,
+} from "../CustomSelects";
 import classes from "./styles.module.css";
 import { ERROR_MESSAGE_API_SERVICE_YEARS } from "@/constants/errorText";
 
@@ -121,22 +133,23 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
       form.clearFieldError("vote_average-lte"));
   }, [form]);
 
+  const multiSelectRef = useRef<CustomMultiSelectRef>(null);
+
+  const handleReset = () => {
+    multiSelectRef.current?.clearSelectedGenre();
+    form.reset();
+  };
+
   return (
     <form className={classes.filters_content}>
       <div className={classes.input_filters_content}>
-        {/* <CustomMultiSelect
-          key={form.key("with_genres")}
-          {...form.getInputProps("with_genres")}
-          genres={genres}
-          isError={isGenresError}
-          isLoading={isLoadingGenres}
-        /> */}
         <CustomMultiSelect
           key={form.key("with_genres")}
           {...form.getInputProps("with_genres")}
           genres={genres}
           isError={isGenresError}
           isLoading={isLoadingGenres}
+          ref={multiSelectRef}
         />
 
         <CustomSelect
@@ -167,7 +180,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           />
         </div>
 
-        <p className={classes.reset} onClick={form.reset}>
+        <p className={classes.reset} onClick={handleReset}>
           {RESET_FILTERS_TEXT}
         </p>
       </div>

@@ -68,9 +68,6 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
           </div>
         </div>
       </div>
-      {/* <div>
-        <Rating movieInfo={movieInfo} />
-      </div> */}
     </Card>
   );
 });

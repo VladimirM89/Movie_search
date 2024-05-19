@@ -3,7 +3,6 @@ import {
   BUDGET_SUBTITLE,
   DURATION_SUBTITLE,
   GENRES_SUBTITLE,
-  MAX_DISPLAYED_GENRES,
   PREMIERE_SUBTITLE,
   REVENUE_SUBTITLE,
 } from "@/constants/constants";
@@ -28,10 +27,7 @@ const MovieStatsPanel: FC<MovieStatsPanelProps> = ({
   revenue,
   genres,
 }) => {
-  const displayedGenres = genres
-    .slice(0, MAX_DISPLAYED_GENRES)
-    .map((item) => item.name)
-    .join(", ");
+  const displayedGenres = genres.map((item) => item.name).join(", ");
   return (
     <div className={classes.stats_container}>
       <div className={[classes.info_title, classes.content_list].join(" ")}>

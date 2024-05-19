@@ -1,7 +1,4 @@
-import {
-  LOCAL_STORAGE_GENRES_KEY,
-  MAX_DISPLAYED_GENRES,
-} from "@/constants/constants";
+import { LOCAL_STORAGE_GENRES_KEY } from "@/constants/constants";
 import { Genre } from "@/types/Response";
 
 const parseGenreIds = (value: Array<string>): string => {
@@ -13,9 +10,7 @@ const parseGenreIds = (value: Array<string>): string => {
     (acc, { id, name }: Genre) => ({ ...acc, [id]: name }),
     {},
   );
-  const genresArray = value
-    .map((item) => obj[item])
-    .slice(0, MAX_DISPLAYED_GENRES);
+  const genresArray = value.map((item) => obj[item]);
   return genresArray.join(", ");
 };
 
