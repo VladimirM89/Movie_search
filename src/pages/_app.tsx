@@ -8,6 +8,7 @@ import { PATH } from "@/constants/enums";
 import "@mantine/core/styles.css";
 import Layout from "@/components/Layout";
 import "@mantine/notifications/styles.css";
+import "@/styles/common.css";
 import "@/styles/global.css";
 
 export default function App({ Component, pageProps }: AppProps) {
