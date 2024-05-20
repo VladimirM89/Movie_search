@@ -58,7 +58,7 @@ export const URL_SEPARATOR = "/";
 export const DYNAMIC_IMPORT_PATH = "/[id]";
 export const ATTRIBUTE_HREF = "href";
 
-export const LOCALE = "en-us";
+export const LOCALE = "en-Us";
 export const MONTH_FORMAT = "long";
 export const CURRENCY_FORMAT = "USD";
 

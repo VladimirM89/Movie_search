@@ -19,6 +19,7 @@
 }
 
 .profile_title {
+  width: 100%;
   font-size: var(--mantine-font-size-xl);
   color: var(--mantine-color-purple-4);
   line-height: 121%;
@@ -38,7 +39,7 @@
 .rating_container {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.5rem;
   line-height: 125%;
 }
 

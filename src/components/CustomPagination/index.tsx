@@ -33,16 +33,19 @@ const CustomPagination: FC<CustomPaginationProps> = memo(
         onPreviousPage={handlePreviousPage}
         onNextPage={handleNextPage}
         total={3}
+        classNames={{ control: classes.pagination_control }}
       >
         <Group
           gap={8}
           justify={position || "center"}
           classNames={{ root: classes.group_root }}
         >
-          <Pagination.Previous disabled={currentPage - 1 === 0} />
+          <Pagination.Previous
+            className={classes.control_edge}
+            disabled={currentPage - 1 === 0}
+          />
           {createPageArray().map((item) => (
             <Pagination.Control
-              classNames={{ control: classes.pagination_control }}
               key={item}
               active={item === currentPage}
               onClick={() => onPageChange(item)}
@@ -51,7 +54,10 @@ const CustomPagination: FC<CustomPaginationProps> = memo(
             </Pagination.Control>
           ))}
 
-          <Pagination.Next disabled={currentPage === totalPages} />
+          <Pagination.Next
+            className={classes.control_edge}
+            disabled={currentPage === totalPages}
+          />
         </Group>
       </Pagination.Root>
     );

@@ -1,5 +1,5 @@
 .multiselect_input {
-  padding: 0.5rem;
+  padding: 0.5rem 0.7rem;
 }
 
 .option[data-combobox-active],
@@ -11,6 +11,10 @@
 .option:hover {
   background-color: var(--mantine-color-purple-0);
   color: var(--mantine-color-text);
+}
+
+.multiselect_list_pill {
+  gap: 0.2rem;
 }
 
 .multiselect_pill {

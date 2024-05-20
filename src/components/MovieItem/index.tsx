@@ -1,7 +1,8 @@
-import { FC, memo, useCallback } from "react";
+import { FC, useCallback } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Card } from "@mantine/core";
+import cn from "classnames";
 import parseGenreIds from "../../utils/parseGenreIds";
 import {
   ALT_POSTER_IMG,
@@ -18,7 +19,7 @@ type MovieItemProps = {
   movieInfo: Movie;
 };
 
-const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
+const MovieItem: FC<MovieItemProps> = ({ movieInfo }) => {
   const posterPath = movieInfo.poster_path
     ? `${process.env.NEXT_PUBLIC_IMG_BASE_URL}${movieInfo.poster_path}`
     : NoMoviePosterSmallImage;
@@ -30,7 +31,7 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
   }, [movieInfo.id, router]);
 
   return (
-    <Card radius={"md"} classNames={{ root: classes.container }}>
+    <Card classNames={{ root: classes.container }}>
       <div className={classes.content}>
         <Image
           onClick={navigateToDetailPage}
@@ -56,7 +57,9 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
             {movieInfo.genre_ids && movieInfo.genre_ids.length ? (
               <>
                 <span className={classes.genres_title}>{GENRES_SUBTITLE}</span>
-                <span className={classes.genres}>
+                <span
+                  className={cn(classes.genres_list, "long_text_container")}
+                >
                   {movieInfo.genre_ids &&
                     movieInfo.genre_ids.length &&
                     parseGenreIds(movieInfo.genre_ids)}
@@ -70,6 +73,6 @@ const MovieItem: FC<MovieItemProps> = memo(({ movieInfo }) => {
       </div>
     </Card>
   );
-});
+};
 
 export default MovieItem;

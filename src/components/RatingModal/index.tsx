@@ -56,6 +56,7 @@ const RatingModal: FC<RatingModalProps> = ({
     <Modal
       classNames={{
         header: classes.modal_header,
+        title: classes.modal_title,
         inner: classes.modal_inner,
       }}
       closeButtonProps={{ size: "sm" }}
@@ -68,7 +69,7 @@ const RatingModal: FC<RatingModalProps> = ({
       returnFocus={true}
       padding={0}
     >
-      <Divider />
+      <Divider className={classes.divider} />
       <div className={classes.modal_content}>
         <Title order={5} className={classes.modal_title}>
           {title}

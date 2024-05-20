@@ -12,6 +12,6 @@
 .search_content {
   display: flex;
   flex-direction: column;
-  gap: 1.45rem;
+  gap: 1.5rem;
 }
 

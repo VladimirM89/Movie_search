@@ -1,4 +1,8 @@
-import { MAX_RATING_VALUE, MIN_RATING_VALUE } from "@/constants/constants";
+import {
+  LOCALE,
+  MAX_RATING_VALUE,
+  MIN_RATING_VALUE,
+} from "@/constants/constants";
 import {
   VALIDATION_MAX_RATING_POSITIVE,
   VALIDATION_MIN_RATING_POSITIVE,
@@ -62,6 +66,7 @@ const baseSchema = object().shape(
       .oneOf(sortValues.map((item) => item.value))
       .optional()
       .default(() => sortValues[0].value),
+    language: string().oneOf([LOCALE]).optional(),
     page: number()
       .positive(VALIDATION_PAGE_POSITIVE)
       .min(1, VALIDATION_MIN_PAGE_VALUE)

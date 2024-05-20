@@ -90,9 +90,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
       setIsLoadingYears(true);
 
       try {
-        const data = await getMovies({
-          ...FILTER_PARAMS_SORT_BY_MIN_YEARS,
-        });
+        const data = await getMovies(FILTER_PARAMS_SORT_BY_MIN_YEARS);
 
         if (data && data.results.length) {
           const yearsArray = fillYearsArray(data.results);
@@ -125,7 +123,6 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
         const filterParams = form.values;
 
         handleFilters(filterParams);
-
         JSON.stringify(INITIAL_FILTER_PARAMS) !== JSON.stringify(values)
           ? setIsFiltersChange(true)
           : setIsFiltersChange(false);

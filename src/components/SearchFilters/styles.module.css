@@ -73,6 +73,7 @@
 
 .position_right {
   align-self: flex-end;
+  gap: 0.45rem;
 
   @media screen and (max-width: 1440px) {
     align-self: unset;

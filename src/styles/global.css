@@ -82,3 +82,11 @@ p {
     font-size: 1.7rem;
   }
 }
+
+.long_text_container {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

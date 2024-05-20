@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useMantineTheme, getThemeColor } from "@mantine/core";
+import cn from "classnames";
 import validateDate from "../../utils/validateDate";
 import convertToShortFormat from "../../utils/convertToShortFormat";
 import { MANTINE_COLOR_YELLOW_6 } from "@/constants/colorConstants";
@@ -36,7 +37,9 @@ const MovieProfilePanel: FC<MovieProfilePanelType> = ({
           : classes.profile_container_details
       }
     >
-      <p className={classes.profile_title}>{title}</p>
+      <p className={cn(classes.profile_title, "long_text_container")}>
+        {title}
+      </p>
       <p className={classes.profile_year}>{validateDate(release_date)}</p>
       <div className={classes.rating_container}>
         <div className={classes.rating_info}>
@@ -50,7 +53,7 @@ const MovieProfilePanel: FC<MovieProfilePanelType> = ({
           <p className={classes.profile_rating}>{vote_average}</p>
         </div>
         <p className={classes.profile_voting}>
-          {convertToShortFormat(vote_count)}
+          ({convertToShortFormat(vote_count)})
         </p>
       </div>
     </div>

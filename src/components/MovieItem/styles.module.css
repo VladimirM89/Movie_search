@@ -8,6 +8,7 @@
   flex-direction: row;
   gap: 0.5rem;
   justify-content: space-between;
+  border-radius: 0.75rem;
 
   @media screen and (max-width: 1440px) {
     max-width: 40rem;
@@ -70,10 +71,7 @@
 .genres_container {
   gap: 0.5rem;
   display: flex;
-
-  @media screen and (max-width: 450px) {
-    align-items: center;
-  }
+  align-items: center;
 }
 
 .genres_title {
@@ -81,8 +79,13 @@
   line-height: 121%;
 }
 
-.genres {
+.genres_list {
+  width: 14.3rem;
   line-height: 125%;
+
+  @media screen and (max-width: 1440px) {
+    width: unset;
+  }
 
   @media screen and (max-width: 450px) {
     text-align: center;
