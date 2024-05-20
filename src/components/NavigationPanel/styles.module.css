@@ -32,9 +32,10 @@
 
 .nav_link_root {
   max-width: 252px;
-  padding: 0.55rem;
+  padding: 0.625rem;
   background-color: transparent;
   color: var(--mantine-color-text);
+  line-height: var(--mantine-line-height-xs);
 
   @media screen and (max-width: 700px) {
     text-align: center;
@@ -43,7 +44,6 @@
 
 .nav_link_label {
   font-size: var(--mantine-font-size-md);
-  line-height: var(--mantine-line-height-xs);
 }
 
 .nav_link_root:hover {

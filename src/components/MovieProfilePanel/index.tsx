@@ -50,7 +50,7 @@ const MovieProfilePanel: FC<MovieProfilePanelType> = ({
           <p className={classes.profile_rating}>{vote_average}</p>
         </div>
         <p className={classes.profile_voting}>
-          ({convertToShortFormat(vote_count)})
+          {convertToShortFormat(vote_count)}
         </p>
       </div>
     </div>

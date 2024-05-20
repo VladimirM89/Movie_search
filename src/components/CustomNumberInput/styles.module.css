@@ -1,7 +1,25 @@
-.numberinput_root {
+.number_input_root {
   max-width: 8.625rem;
 }
 
-.numberinput_control {
+.number_input_control {
+  flex: 0 0 35%;
   border: none;
+  color: var(--mantine-color-gray_scale-4);
+}
+
+.number_input_controls {
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.number_input_control:hover {
+  color: var(--mantine-color-purple-3);
+  background-color: transparent;
+}
+
+.number_input_control:active {
+  color: var(--mantine-color-purple-4);
+  background-color: transparent;
 }

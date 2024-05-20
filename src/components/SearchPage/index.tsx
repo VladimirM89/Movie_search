@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Title } from "@mantine/core";
 import { FiltersFormType } from "@/utils/filtersFormSchema";
 import showError from "@/utils/showError";
@@ -21,7 +21,7 @@ import NoSearchResultWithError from "../UI/NoSearchResultWithError";
 import CustomPagination from "../CustomPagination";
 import classes from "./styles.module.css";
 
-const SearchPage = memo(() => {
+const SearchPage = () => {
   const [filterParams, setFilterParams] = useState<FiltersFormType>(
     INITIAL_FILTER_PARAMS,
   );
@@ -105,6 +105,6 @@ const SearchPage = memo(() => {
       </div>
     </div>
   );
-});
+};
 
 export default SearchPage;

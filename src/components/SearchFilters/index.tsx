@@ -10,7 +10,6 @@ import {
 import { yupResolver } from "mantine-form-yup-resolver";
 import { useForm } from "@mantine/form";
 import { useDebouncedCallback } from "@mantine/hooks";
-import { notifications } from "@mantine/notifications";
 import { getGenres, getMovies } from "../../services/apiService";
 import { FiltersFormType, filtersFormSchema } from "@/utils/filtersFormSchema";
 import fillYearsArray from "@/utils/fillYearsArray";
@@ -34,7 +33,6 @@ import {
   RESET_FILTERS_TEXT,
 } from "@/constants/constants";
 import sortValues from "@/constants/sortValues";
-import { ERROR_MESSAGE_API_SERVICE_YEARS } from "@/constants/errorText";
 import { HTTP_STATUS_CODE } from "@/constants/enums";
 import CustomNumberInput from "../CustomNumberInput";
 import {
@@ -42,6 +40,7 @@ import {
   CustomMultiSelectRef,
   CustomSelect,
 } from "../CustomSelects";
+import StandardButton from "../UI/Button";
 import classes from "./styles.module.css";
 
 type SearchFiltersProps = {
@@ -55,6 +54,7 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   const [years, setYears] = useState<Array<string>>([]);
   const [isLoadingYears, setIsLoadingYears] = useState<boolean>(false);
   const [isYearsError, setIsYearsError] = useState<boolean>(false);
+  const [isFiltersChange, setIsFiltersChange] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -102,11 +102,9 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
       } catch (error) {
         setIsYearsError(true);
         setYears([]);
-        notifications.show({
-          title: (error as Error).name,
-          message: ERROR_MESSAGE_API_SERVICE_YEARS,
-          color: "red",
-        });
+        if (error instanceof Error) {
+          showError(error.name, error.message);
+        }
       } finally {
         setIsLoadingYears(false);
       }
@@ -121,11 +119,16 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
     validateInputOnChange: true,
     validate: yupResolver(filtersFormSchema),
 
+    // TODO: add function compare objects
     onValuesChange: useDebouncedCallback((values, previous) => {
       if (!Object.keys(form.errors).length && !Object.is(previous, values)) {
         const filterParams = form.values;
 
         handleFilters(filterParams);
+
+        JSON.stringify(INITIAL_FILTER_PARAMS) !== JSON.stringify(values)
+          ? setIsFiltersChange(true)
+          : setIsFiltersChange(false);
       }
     }, DEBOUNCE_TIME),
   });
@@ -140,10 +143,11 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
 
   const multiSelectRef = useRef<CustomMultiSelectRef>(null);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     multiSelectRef.current?.clearSelectedGenre();
     form.reset();
-  };
+    setIsFiltersChange(false);
+  }, [form]);
 
   return (
     <form className={classes.filters_content}>
@@ -185,12 +189,19 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           />
         </div>
 
-        <p className={classes.reset} onClick={handleReset}>
-          {RESET_FILTERS_TEXT}
-        </p>
+        <div className={classes.reset_container}>
+          <StandardButton
+            className={classes.reset}
+            text={RESET_FILTERS_TEXT}
+            onClick={handleReset}
+            variant="subtle"
+            disabled={!isFiltersChange}
+          />
+        </div>
       </div>
 
       <CustomSelect
+        className={classes.position_right}
         key={form.key("sort_by")}
         {...form.getInputProps("sort_by")}
         label={LABEL_SORT_BY}

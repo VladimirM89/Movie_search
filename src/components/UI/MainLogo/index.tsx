@@ -7,7 +7,9 @@ const MainLogo = () => {
   return (
     <div className={classes.logo_container}>
       <MainLogoImage />
-      <Title order={3}>{NAVIGATION_HEADER}</Title>
+      <Title order={3} className={classes.logo_title}>
+        {NAVIGATION_HEADER}
+      </Title>
     </div>
   );
 };

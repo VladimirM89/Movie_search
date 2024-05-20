@@ -13,9 +13,10 @@ const CustomNumberInput: FC<CustomNumberInputProps> = ({
   return (
     <NumberInput
       classNames={{
-        root: classes.numberinput_root,
-        wrapper: classes.numberinput_root,
-        control: classes.numberinput_control,
+        root: classes.number_input_root,
+        wrapper: classes.number_input_root,
+        controls: classes.number_input_controls,
+        control: classes.number_input_control,
       }}
       min={0}
       max={10}
