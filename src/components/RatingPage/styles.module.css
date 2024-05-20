@@ -29,12 +29,14 @@
 }
 
 .not_found_container {
-  display: flex;
-  height: calc(100vh - 1rem);
-  align-items: center;
-  justify-content: center;
+  height: 100%;
+  /* display: flex; */
+  transform: translate(0, 30.5%);
+  /* height: calc(100vh - 1rem); */
+  /* align-items: center; */
+  /* justify-content: center; */
 
   @media screen and (max-width: 450px) {
-    height: calc(100vh - 14rem);
+    /* height: calc(100vh - 14rem); */
   }
 }

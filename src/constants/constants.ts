@@ -46,7 +46,7 @@ export const ERROR_MESSAGE_FAIL_FETCHING_MOVIE_LIST =
   "Oops... Something wrong. Please try again.";
 export const REMOVE_RATING = "Remove rating";
 export const BUTTON_SAVE = "Save";
-export const BUTTON_FIND_MOVIES = "Find Movies";
+export const BUTTON_FIND_MOVIES = "Find movies";
 export const BUTTON_GO_HOME = "Go Home";
 export const RATED_PAGE_TITLE = "Rated movies";
 export const NO_RATED_MOVIES_TEXT = "You haven't rated any films yet";

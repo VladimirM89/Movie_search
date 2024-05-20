@@ -1,5 +1,5 @@
 .modal_header {
-  padding: 1rem 0.4375rem 1rem 1rem;
+  padding: 1rem 0.4375rem calc(1rem - 1px) 1rem;
   line-height: var(--mantine-line-height-xs);
   min-height: min-content;
 }
@@ -9,7 +9,11 @@
 }
 
 .modal_inner {
-  top: 4.2rem;
+  top: 5.5rem;
+}
+
+.modal_close {
+  color: var(--mantine-color-gray_scale-4);
 }
 
 .divider {
@@ -20,7 +24,7 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 1rem;
 
   @media screen and (max-width: 370px) {
     padding: 0.5rem;

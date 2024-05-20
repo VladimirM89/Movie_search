@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   gap: 1.5rem;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1439px) {
     align-items: center;
     gap: 1rem;
   }
@@ -15,7 +15,7 @@
   gap: 1rem;
   flex-wrap: wrap;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1439px) {
     justify-content: center;
   }
 
@@ -35,10 +35,10 @@
 }
 
 .reset_container {
-  transform: translate(0%, 51%);
+  transform: translate(0%, 46%);
 
   
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 1439px) {
     transform: unset;
   }
 }
@@ -75,7 +75,7 @@
   align-self: flex-end;
   gap: 0.45rem;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1439px) {
     align-self: unset;
   }
 }

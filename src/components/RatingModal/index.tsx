@@ -58,6 +58,7 @@ const RatingModal: FC<RatingModalProps> = ({
         header: classes.modal_header,
         title: classes.modal_title,
         inner: classes.modal_inner,
+        close: classes.modal_close,
       }}
       closeButtonProps={{ size: "sm" }}
       opened={opened}

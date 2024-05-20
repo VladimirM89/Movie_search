@@ -10,11 +10,11 @@
   justify-content: space-between;
   border-radius: 0.75rem;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1439px) {
     max-width: 40rem;
   }
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1439px) {
     max-height: 20rem;
   }
 
@@ -83,7 +83,7 @@
   width: 14.3rem;
   line-height: 125%;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1439px) {
     width: unset;
   }
 
