@@ -12,6 +12,10 @@
   -webkit-line-clamp: 1;
 }
 
+.breadcrumb:first-child {
+  overflow: unset;
+}
+
 .separator {
   color: var(--mantine-color-black);
   line-height: 143%;
