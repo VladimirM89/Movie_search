@@ -17,7 +17,7 @@ import {
   VALIDATION_ID_REQUIRED,
 } from "@/constants/errorText";
 import sortValues from "@/constants/sortValues";
-import { object, string, number, InferType, array, lazy } from "yup";
+import { object, string, number, array, lazy } from "yup";
 
 const baseSchema = object().shape(
   {
@@ -88,8 +88,3 @@ export const schemaRequestMovieDetails = object({
     .positive(VALIDATION_ID_POSITIVE)
     .required(VALIDATION_ID_REQUIRED),
 });
-
-export type FiltersFormType = InferType<typeof filtersFormSchema>;
-export type RequestMovieDetailsApiType = InferType<
-  typeof schemaRequestMovieDetails
->;

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import cn from "classnames";
 import {
   BUDGET_SUBTITLE,
   DURATION_SUBTITLE,
@@ -30,7 +31,7 @@ const MovieStatsPanel: FC<MovieStatsPanelProps> = ({
   const displayedGenres = genres.map((item) => item.name).join(", ");
   return (
     <div className={classes.stats_container}>
-      <div className={[classes.info_title, classes.content_list].join(" ")}>
+      <div className={cn(classes.info_title, classes.content_list)}>
         <p>{DURATION_SUBTITLE}</p>
         <p>{PREMIERE_SUBTITLE}</p>
         <p>{BUDGET_SUBTITLE}</p>
@@ -42,7 +43,7 @@ const MovieStatsPanel: FC<MovieStatsPanelProps> = ({
         <p>{formatDate(release_date)}</p>
         <p>{formatMoney(budget)}</p>
         <p>{formatMoney(revenue)}</p>
-        <p>{displayedGenres}</p>
+        <p className="long_text_container">{displayedGenres}</p>
       </div>
     </div>
   );

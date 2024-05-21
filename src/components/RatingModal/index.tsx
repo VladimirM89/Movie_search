@@ -67,8 +67,8 @@ const RatingModal: FC<RatingModalProps> = ({
       radius={"md"}
       size={"sm"}
       centered
-      returnFocus={true}
       padding={0}
+      trapFocus={false}
     >
       <Divider className={classes.divider} />
       <div className={classes.modal_content}>

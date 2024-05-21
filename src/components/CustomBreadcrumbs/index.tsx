@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { FC, MouseEvent } from "react";
 import Link from "next/link";
 import { Breadcrumbs } from "@mantine/core";
+import cn from "classnames";
 import {
   ATTRIBUTE_HREF,
   BREADCRUMBS_HOME_ELEMENT,
@@ -50,7 +51,8 @@ const CustomBreadcrumbs: FC<CustomBreadcrumbsType> = ({ title }) => {
     <Breadcrumbs
       classNames={{
         root: classes.breadcrumbs_root,
-        breadcrumb: classes.breadcrumb,
+        breadcrumb: cn(classes.breadcrumb, "long_text_container"),
+        separator: classes.separator,
       }}
     >
       {breadcrumbsElements}

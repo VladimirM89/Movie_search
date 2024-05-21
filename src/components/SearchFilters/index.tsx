@@ -11,10 +11,12 @@ import { yupResolver } from "mantine-form-yup-resolver";
 import { useForm } from "@mantine/form";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { getGenres, getMovies } from "../../services/apiService";
-import { FiltersFormType, filtersFormSchema } from "@/utils/filtersFormSchema";
+import { filtersFormSchema } from "@/utils/filtersFormSchema";
 import fillYearsArray from "@/utils/fillYearsArray";
 import showError from "@/utils/showError";
+import compareFilterValue from "@/utils/compareFilterValue";
 import { Genre } from "@/types/Response";
+import { FiltersFormType } from "@/types/QueryParams";
 import {
   FILTER_PARAMS_SORT_BY_MIN_YEARS,
   INITIAL_FILTER_PARAMS,
@@ -117,17 +119,22 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
     validateInputOnChange: true,
     validate: yupResolver(filtersFormSchema),
 
-    // TODO: add function compare objects
-    onValuesChange: useDebouncedCallback((values, previous) => {
-      if (!Object.keys(form.errors).length && !Object.is(previous, values)) {
-        const filterParams = form.values;
+    onValuesChange: useDebouncedCallback(
+      (values: FiltersFormType, previous: FiltersFormType) => {
+        if (
+          !Object.keys(form.errors).length &&
+          !compareFilterValue(previous, values)
+        ) {
+          const filterParams = form.values;
 
-        handleFilters(filterParams);
-        JSON.stringify(INITIAL_FILTER_PARAMS) !== JSON.stringify(values)
-          ? setIsFiltersChange(true)
-          : setIsFiltersChange(false);
-      }
-    }, DEBOUNCE_TIME),
+          handleFilters(filterParams);
+          !compareFilterValue(INITIAL_FILTER_PARAMS, values)
+            ? setIsFiltersChange(true)
+            : setIsFiltersChange(false);
+        }
+      },
+      DEBOUNCE_TIME,
+    ),
   });
 
   const handleChangeRating = useCallback(() => {

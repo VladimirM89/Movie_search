@@ -25,7 +25,6 @@ export default function DetailsPage() {
   useEffect(() => {
     const id = Number(router.query.id) || Number(location.pathname.slice(1));
     if (isNaN(id) && id !== undefined) {
-      // showError(HTTP_STATUS_CODE.BAD_REQUEST, ERROR_INCORRECT_MOVIE_ID);
       setIsLoading(false);
       router.push(PATH.NOT_FOUND);
     }

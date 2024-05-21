@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useMantineTheme, getThemeColor } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import useRatedMoviesLocalStorage from "@/hooks/useRatedMoviesLocalStorage";
@@ -19,7 +19,7 @@ type RatingProps = {
   movieInfo: Movie;
 };
 
-const Rating: FC<RatingProps> = memo(({ movieInfo }) => {
+const Rating: FC<RatingProps> = ({ movieInfo }) => {
   const { handleChangeItem, removeItemById, getItemById } =
     useRatedMoviesLocalStorage(LOCAL_STORAGE_MOVIES_KEY);
 
@@ -87,6 +87,6 @@ const Rating: FC<RatingProps> = memo(({ movieInfo }) => {
       />
     </>
   );
-});
+};
 
 export default Rating;

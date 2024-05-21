@@ -1,7 +1,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 2.5rem;
 }
 
 .header_content {
@@ -29,14 +29,5 @@
 }
 
 .not_found_container {
-  height: 100%;
-  /* display: flex; */
-  transform: translate(0, 30.5%);
-  /* height: calc(100vh - 1rem); */
-  /* align-items: center; */
-  /* justify-content: center; */
-
-  @media screen and (max-width: 450px) {
-    /* height: calc(100vh - 14rem); */
-  }
+  transform: translate(0, 53.5%);
 }

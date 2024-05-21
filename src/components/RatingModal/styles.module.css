@@ -8,10 +8,6 @@
   line-height: var(--mantine-line-height-xs);
 }
 
-.modal_inner {
-  top: 5.5rem;
-}
-
 .modal_close {
   color: var(--mantine-color-gray_scale-4);
 }
