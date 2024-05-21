@@ -2,7 +2,7 @@ import { FC } from "react";
 import { MovieDetails } from "@/types/Movies";
 import CustomBreadcrumbs from "../CustomBreadcrumbs";
 import MovieDetailsCard from "../MovieDetailsCard";
-import MovieTrailerCard from "../MovieTrailerCard";
+import MovieDescriptionCard from "../MovieDescriptionCard";
 import classes from "./styles.module.css";
 
 type MovieDetailsProps = {
@@ -15,7 +15,7 @@ const Details: FC<MovieDetailsProps> = ({ data }) => {
     <div className={classes.content}>
       <CustomBreadcrumbs title={original_title} />
       <MovieDetailsCard movieInfo={data} />
-      <MovieTrailerCard
+      <MovieDescriptionCard
         overview={overview}
         videos={videos}
         production={production_companies}

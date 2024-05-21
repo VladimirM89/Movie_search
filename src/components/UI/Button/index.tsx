@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Button, ButtonProps } from "@mantine/core";
 import classes from "./styles.module.css";
 
@@ -9,28 +9,24 @@ interface StandardButtonProps extends ButtonProps {
   onClick?: () => void;
 }
 
-const StandardButton: FC<StandardButtonProps> = ({
-  text,
-  type,
-  onClick,
-  btnSize = "standard",
-  ...rest
-}) => {
-  return (
-    <Button
-      className={classes[btnSize]}
-      classNames={{
-        root: classes.button_root,
-      }}
-      type={type ? type : "button"}
-      variant="filled"
-      radius="md"
-      onClick={onClick}
-      {...rest}
-    >
-      {text}
-    </Button>
-  );
-};
+const StandardButton: FC<StandardButtonProps> = memo(
+  ({ text, type, onClick, btnSize = "standard", ...rest }) => {
+    return (
+      <Button
+        className={classes[btnSize]}
+        classNames={{
+          root: classes.button_root,
+        }}
+        type={type ? type : "button"}
+        variant="filled"
+        radius="md"
+        onClick={onClick}
+        {...rest}
+      >
+        {text}
+      </Button>
+    );
+  },
+);
 
 export default StandardButton;

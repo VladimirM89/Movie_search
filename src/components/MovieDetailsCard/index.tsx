@@ -1,7 +1,7 @@
 import { Card } from "@mantine/core";
 import Rating from "../UI/Rating";
 import { MovieDetails } from "@/types/Movies";
-import { FC, memo } from "react";
+import { FC } from "react";
 import { ALT_POSTER_IMG } from "@/constants/constants";
 import Image from "next/image";
 import MovieProfilePanel from "../MovieProfilePanel";
@@ -9,11 +9,11 @@ import MovieStatsPanel from "../MovieStatsPanel";
 import { NoMoviePosterBigImage } from "../../../public/images";
 import classes from "./styles.module.css";
 
-type MovieDetailsCardProps = {
+type MovieDescriptionCardProps = {
   movieInfo: MovieDetails;
 };
 
-const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
+const MovieDescriptionCard: FC<MovieDescriptionCardProps> = ({ movieInfo }) => {
   const {
     original_title,
     poster_path,
@@ -65,6 +65,6 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = memo(({ movieInfo }) => {
       </div>
     </Card>
   );
-});
+};
 
-export default MovieDetailsCard;
+export default MovieDescriptionCard;

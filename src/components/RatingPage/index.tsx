@@ -69,7 +69,7 @@ export default function RatingPage() {
     router.push(PATH.HOME);
   }, [router]);
 
-  const getMovieOnPage = useCallback(() => {
+  const filterMovieOnPage = useCallback(() => {
     const filteredMovie = filteredMovies.filter((item) =>
       item.original_title.toLowerCase().includes(searchValue.toLowerCase()),
     );
@@ -95,7 +95,7 @@ export default function RatingPage() {
         {!filteredMovies.length && (
           <NoSearchResultWithError text={NO_RESULT_ACCORDING_SEARCH_TEXT} />
         )}
-        <MovieList movies={getMovieOnPage()} />
+        <MovieList movies={filterMovieOnPage()} />
         {totalPages > 1 && (
           <CustomPagination
             totalPages={totalPages}

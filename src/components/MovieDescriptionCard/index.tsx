@@ -1,4 +1,4 @@
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import { Card, Divider } from "@mantine/core";
 import cn from "classnames";
@@ -25,7 +25,7 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
 }) => {
   const officialTrailer = videos?.results.find((item) => item.official);
 
-  const productionsInfo = useCallback(() => {
+  const productionsInfo = () => {
     return (
       <ul className={classes.production_list}>
         {production.map((item) => (
@@ -42,7 +42,7 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
         ))}
       </ul>
     );
-  }, [production]);
+  };
 
   return overview || officialTrailer || officialTrailer ? (
     <Card radius={"md"} className={classes.card_content}>

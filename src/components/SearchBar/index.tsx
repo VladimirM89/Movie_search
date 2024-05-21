@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, memo } from "react";
 import { TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import StandardButton from "../UI/Button";
@@ -10,7 +10,7 @@ type SearchBarProps = {
   handleSearch: Dispatch<SetStateAction<string>>;
 };
 
-const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
+const SearchBar: FC<SearchBarProps> = memo(({ handleSearch }) => {
   const form = useForm<SearchParam>({
     initialValues: {
       query: "",
@@ -41,6 +41,6 @@ const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
       />
     </form>
   );
-};
+});
 
 export default SearchBar;

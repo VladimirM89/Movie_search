@@ -1,4 +1,4 @@
-import { Dispatch, FC, memo, useCallback } from "react";
+import { Dispatch, FC, useCallback } from "react";
 import { Group, Pagination } from "@mantine/core";
 import { INITIAL_PAGE } from "@/constants/constants";
 import classes from "./styles.module.css";
@@ -10,58 +10,61 @@ type CustomPaginationProps = {
   position?: string;
 };
 
-const CustomPagination: FC<CustomPaginationProps> = memo(
-  ({ totalPages, currentPage, onPageChange, position }) => {
-    const createPageArray = useCallback(() => {
-      if (totalPages > 0 && totalPages < 3) return [1, 2];
-      if (currentPage === INITIAL_PAGE) return [1, 2, 3];
-      if (currentPage === totalPages)
-        return [totalPages - 2, totalPages - 1, totalPages];
-      return [currentPage - 1, currentPage, currentPage + 1];
-    }, [currentPage, totalPages]);
+const CustomPagination: FC<CustomPaginationProps> = ({
+  totalPages,
+  currentPage,
+  onPageChange,
+  position,
+}) => {
+  const createPageArray = useCallback(() => {
+    if (totalPages > 0 && totalPages < 3) return [1, 2];
+    if (currentPage === INITIAL_PAGE) return [1, 2, 3];
+    if (currentPage === totalPages)
+      return [totalPages - 2, totalPages - 1, totalPages];
+    return [currentPage - 1, currentPage, currentPage + 1];
+  }, [currentPage, totalPages]);
 
-    const handlePreviousPage = useCallback(() => {
-      onPageChange(currentPage - 1);
-    }, [currentPage, onPageChange]);
+  const handlePreviousPage = () => {
+    onPageChange(currentPage - 1);
+  };
 
-    const handleNextPage = useCallback(() => {
-      onPageChange(currentPage + 1);
-    }, [currentPage, onPageChange]);
+  const handleNextPage = () => {
+    onPageChange(currentPage + 1);
+  };
 
-    return (
-      <Pagination.Root
-        onPreviousPage={handlePreviousPage}
-        onNextPage={handleNextPage}
-        total={3}
-        classNames={{ control: classes.pagination_control }}
+  return (
+    <Pagination.Root
+      onPreviousPage={handlePreviousPage}
+      onNextPage={handleNextPage}
+      total={3}
+      classNames={{ control: classes.pagination_control }}
+    >
+      <Group
+        gap={8}
+        justify={position || "center"}
+        classNames={{ root: classes.group_root }}
       >
-        <Group
-          gap={8}
-          justify={position || "center"}
-          classNames={{ root: classes.group_root }}
-        >
-          <Pagination.Previous
-            className={classes.control_edge}
-            disabled={currentPage - 1 === 0}
-          />
-          {createPageArray().map((item) => (
-            <Pagination.Control
-              key={item}
-              active={item === currentPage}
-              onClick={() => onPageChange(item)}
-            >
-              {item}
-            </Pagination.Control>
-          ))}
+        <Pagination.Previous
+          className={classes.control_edge}
+          disabled={currentPage - 1 === 0}
+        />
+        {createPageArray().map((item) => (
+          <Pagination.Control
+            key={item}
+            active={item === currentPage}
+            onClick={() => onPageChange(item)}
+          >
+            {item}
+          </Pagination.Control>
+        ))}
 
-          <Pagination.Next
-            className={classes.control_edge}
-            disabled={currentPage === totalPages}
-          />
-        </Group>
-      </Pagination.Root>
-    );
-  },
-);
+        <Pagination.Next
+          className={classes.control_edge}
+          disabled={currentPage === totalPages}
+        />
+      </Group>
+    </Pagination.Root>
+  );
+};
 
 export default CustomPagination;

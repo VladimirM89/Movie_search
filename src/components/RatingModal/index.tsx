@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useCallback, useState } from "react";
 import {
   Divider,
   Modal,
@@ -41,10 +41,10 @@ const RatingModal: FC<RatingModalProps> = ({
     close();
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     close();
     setValue(rating);
-  };
+  }, [close, rating]);
 
   const handleResetRating = () => {
     setValue(0);

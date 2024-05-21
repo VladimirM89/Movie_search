@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import { Movie } from "@/types/Movies";
 import MovieItem from "../MovieItem";
 import classes from "./styles.module.css";
@@ -7,7 +7,7 @@ type MovieListProps = {
   movies: Array<Movie>;
 };
 
-const MovieList: FC<MovieListProps> = memo(({ movies }) => {
+const MovieList: FC<MovieListProps> = ({ movies }) => {
   return (
     <ul className={classes.cards_container}>
       {movies.map((movie) => (
@@ -15,6 +15,6 @@ const MovieList: FC<MovieListProps> = memo(({ movies }) => {
       ))}
     </ul>
   );
-});
+};
 
 export default MovieList;

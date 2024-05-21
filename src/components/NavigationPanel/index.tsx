@@ -4,8 +4,9 @@ import navigationItems from "./navigationPanelInfo";
 import { PATH } from "@/constants/enums";
 import classes from "./styles.module.css";
 import MainLogo from "../UI/MainLogo";
+import { memo } from "react";
 
-const NavigationPanel = () => {
+const NavigationPanel = memo(() => {
   const router = useRouter();
 
   const handleClick = (path: string) => {
@@ -33,6 +34,6 @@ const NavigationPanel = () => {
       </nav>
     </div>
   );
-};
+});
 
 export default NavigationPanel;
