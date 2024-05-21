@@ -1,4 +1,5 @@
 import { Dispatch, FC, SetStateAction, useCallback, useState } from "react";
+import { useRouter } from "next/router";
 import {
   Divider,
   Modal,
@@ -14,6 +15,7 @@ import {
   RATING_MODAL_TITLE,
   REMOVE_RATING,
 } from "@/constants/constants";
+import { PATH } from "@/constants/enums";
 import classes from "./styles.module.css";
 
 type RatingModalProps = {
@@ -32,6 +34,8 @@ const RatingModal: FC<RatingModalProps> = ({
   opened,
 }) => {
   const [value, setValue] = useState<number>(rating);
+
+  const router = useRouter();
 
   const theme = useMantineTheme();
   const colorYellow = getThemeColor(MANTINE_COLOR_YELLOW_6, theme);
@@ -57,7 +61,7 @@ const RatingModal: FC<RatingModalProps> = ({
       classNames={{
         header: classes.modal_header,
         title: classes.modal_title,
-        inner: classes.modal_inner,
+        inner: router.pathname === PATH.RATING ? classes.modal_inner : "",
         close: classes.modal_close,
       }}
       closeButtonProps={{ size: "sm" }}
