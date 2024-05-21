@@ -37,8 +37,7 @@
 .reset_container {
   transform: translate(0%, 46%);
 
-  
-  @media screen and (max-width: 1439px) {
+  @media screen and (max-width: 700px) {
     transform: unset;
   }
 }

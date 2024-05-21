@@ -92,7 +92,7 @@ export default function RatingPage() {
       </div>
 
       <div className={classes.page_content}>
-        {!filteredMovies.length && (
+        {!filteredMovies.length && ratedMovies.length && (
           <NoSearchResultWithError text={NO_RESULT_ACCORDING_SEARCH_TEXT} />
         )}
         <MovieList movies={filterMovieOnPage()} />
