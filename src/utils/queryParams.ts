@@ -1,4 +1,4 @@
-import { FiltersFormType } from "./filtersFormSchema";
+import { FiltersFormType } from "../types/QueryParams";
 
 export const normalizeQueryParams = (
   obj: FiltersFormType,

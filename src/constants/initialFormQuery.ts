@@ -1,5 +1,5 @@
 import { SearchParam } from "@/types/QueryParams";
-import { FiltersFormType } from "@/utils/filtersFormSchema";
+import { FiltersFormType } from "@/types/QueryParams";
 import sortValues from "./sortValues";
 import { LOCALE } from "./constants";
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Title } from "@mantine/core";
-import { FiltersFormType } from "@/utils/filtersFormSchema";
+import { FiltersFormType } from "@/types/QueryParams";
 import showError from "@/utils/showError";
 import { INITIAL_FILTER_PARAMS } from "@/constants/initialFormQuery";
 import {

@@ -1,4 +1,4 @@
-import { FiltersFormType } from "../utils/filtersFormSchema";
+import { FiltersFormType } from "../types/QueryParams";
 import { normalizeQueryParams } from "../utils/queryParams";
 import {
   HTTP_METHOD,

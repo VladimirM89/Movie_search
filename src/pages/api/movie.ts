@@ -1,9 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import validate from "@/middleware/validate";
-import {
-  RequestMovieDetailsApiType,
-  schemaRequestMovieDetails,
-} from "@/utils/filtersFormSchema";
+import { schemaRequestMovieDetails } from "@/utils/filtersFormSchema";
+import { RequestMovieDetailsApiType } from "@/types/QueryParams";
 import {
   API_ENDPOINTS,
   HTTP_METHOD,
