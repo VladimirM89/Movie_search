@@ -8,8 +8,8 @@ import { PATH } from "@/constants/enums";
 import "@mantine/core/styles.css";
 import Layout from "@/components/Layout";
 import "@mantine/notifications/styles.css";
-import "@/styles/common.css";
-import "@/styles/global.css";
+import "@/styles/fonts.css";
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
