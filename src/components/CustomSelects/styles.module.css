@@ -2,10 +2,16 @@
   padding: 0.5rem 0.7rem;
 }
 
+.dropdown {
+  max-height: 14rem;
+  border-radius: 0.5rem;
+}
+
 .option[data-combobox-active],
 .option[data-combobox-active]:hover {
   background-color: var(--mantine-color-purple-4);
   color: var(--mantine-color-white);
+  border-radius: 0.5rem;
 }
 
 .option:hover {

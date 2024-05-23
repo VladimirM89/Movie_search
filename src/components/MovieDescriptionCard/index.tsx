@@ -55,6 +55,7 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
               allowFullScreen
               width={498}
               height={281}
+              tabIndex={0}
               src={`${process.env.NEXT_PUBLIC_BASE_TRAILER_PATH}${officialTrailer?.key}`}
             ></iframe>
           </div>

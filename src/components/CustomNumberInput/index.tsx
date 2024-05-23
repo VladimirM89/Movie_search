@@ -23,6 +23,7 @@ const CustomNumberInput: FC<CustomNumberInputProps> = ({
       step={0.1}
       allowNegative={false}
       onValueChange={handleChangeRating}
+      clampBehavior="strict"
       {...props}
     />
   );

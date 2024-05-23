@@ -10,6 +10,7 @@ export const VALIDATION_PAGE_POSITIVE =
 export const VALIDATION_MIN_PAGE_VALUE = "Minimal page should be is 1";
 export const VALIDATION_ID_POSITIVE = "Id should be positive value";
 export const VALIDATION_ID_REQUIRED = "Id is required";
+export const VALIDATION_DEFAULT_EMPTY_STRING = "Must be only empty string";
 
 export const ERROR_MESSAGE_PROXY_MOVIES = "Request movies. Error ";
 export const ERROR_MESSAGE_PROXY_MOVIE = "Request movie. Error ";

@@ -140,9 +140,10 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
   const handleChangeVoting = useCallback(() => {
     const minVotingValue: number = form.getInputProps("vote_average-gte").value;
     const maxVotingValue: number = form.getInputProps("vote_average-lte").value;
-    minVotingValue <= maxVotingValue &&
-      (form.clearFieldError("vote_average-gte"),
-      form.clearFieldError("vote_average-lte"));
+    if (minVotingValue <= maxVotingValue) {
+      form.clearFieldError("vote_average-gte");
+      form.clearFieldError("vote_average-lte");
+    }
   }, [form]);
 
   const multiSelectRef = useRef<CustomMultiSelectRef>(null);

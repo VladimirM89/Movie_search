@@ -19,6 +19,7 @@ const NavigationPanel = memo(() => {
       <nav className={classes.navigation_list}>
         {navigationItems.map((item) => (
           <NavLink
+            tabIndex={0}
             classNames={{
               root: classes.nav_link_root,
               label: classes.nav_link_label,

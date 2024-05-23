@@ -89,3 +89,12 @@ p {
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+
+
+.m_c44ba933:where([data-orientation='vertical']) {
+  --scrollarea-scrollbar-size: 6.7px;
+}
+
+:where([data-mantine-color-scheme='light']) .m_d8b5e363 {
+  background-color: var(--mantine-color-gray_scale-4);
+}

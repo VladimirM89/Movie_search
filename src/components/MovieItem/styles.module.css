@@ -65,7 +65,7 @@
 .genres_container {
   gap: 0.5rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .genres_title {

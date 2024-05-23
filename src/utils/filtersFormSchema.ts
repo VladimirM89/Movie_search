@@ -15,6 +15,7 @@ import {
   VALIDATION_MIN_PAGE_VALUE,
   VALIDATION_ID_POSITIVE,
   VALIDATION_ID_REQUIRED,
+  VALIDATION_DEFAULT_EMPTY_STRING,
 } from "@/constants/errorText";
 import sortValues from "@/constants/sortValues";
 import { object, string, number, array, lazy } from "yup";
@@ -34,15 +35,14 @@ const baseSchema = object().shape(
           .max(MAX_RATING_VALUE, VALIDATION_RATING_MAX_VALUE)
           .when("vote_average-lte", ([voteAverageLte], schema) => {
             return voteAverageLte
-              ? schema.lessThan(
-                  voteAverageLte,
-                  VALIDATION_RATING_MIN_MORE_THAN_MAX,
-                )
+              ? schema
+                  .lessThan(voteAverageLte, VALIDATION_RATING_MIN_MORE_THAN_MAX)
+                  .max(voteAverageLte, VALIDATION_RATING_MIN_MORE_THAN_MAX)
               : schema;
           })
           .optional();
       }
-      return string();
+      return string().matches(/^$/, VALIDATION_DEFAULT_EMPTY_STRING);
     }),
     "vote_average-lte": lazy((value) => {
       if (typeof value === "number") {
@@ -52,15 +52,14 @@ const baseSchema = object().shape(
           .max(MAX_RATING_VALUE, VALIDATION_RATING_MAX_VALUE)
           .when("vote_average-gte", ([voteAverageGte], schema) => {
             return voteAverageGte
-              ? schema.moreThan(
-                  voteAverageGte,
-                  VALIDATION_RATING_MAX_LESS_THAN_MIN,
-                )
+              ? schema
+                  .moreThan(voteAverageGte, VALIDATION_RATING_MAX_LESS_THAN_MIN)
+                  .min(voteAverageGte, VALIDATION_RATING_MAX_LESS_THAN_MIN)
               : schema;
           })
           .optional();
       }
-      return string();
+      return string().matches(/^$/, VALIDATION_DEFAULT_EMPTY_STRING);
     }),
     sort_by: string()
       .oneOf(sortValues.map((item) => item.value))
@@ -77,11 +76,11 @@ const baseSchema = object().shape(
 
 export const filtersFormSchema = baseSchema.shape({
   with_genres: array(string().required()).optional(),
-});
+  });
 
 export const schemaRequestMovies = baseSchema.shape({
   with_genres: string().optional(),
-});
+  });
 
 export const schemaRequestMovieDetails = object({
   id: number()

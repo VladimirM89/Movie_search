@@ -39,6 +39,7 @@ export const CustomSelect: FC<CustomSelectProps> = ({
   return (
     <Select
       classNames={{
+        dropdown: classes.dropdown,
         option: classes.option,
       }}
       label={label}
@@ -61,6 +62,7 @@ export const CustomSelect: FC<CustomSelectProps> = ({
       maxDropdownHeight={200}
       onDropdownOpen={toggle}
       onDropdownClose={toggle}
+      scrollAreaProps={{ type: "always", scrollbarSize: 4 }}
       {...props}
     />
   );
@@ -112,6 +114,7 @@ export const CustomMultiSelect = forwardRef<
   return (
     <MultiSelect
       classNames={{
+        dropdown: classes.dropdown,
         input: classes.multiselect_input,
         option: classes.option,
         pillsList: classes.multiselect_list_pill,
@@ -153,6 +156,7 @@ export const CustomMultiSelect = forwardRef<
       maxValues={MAX_SELECTED_GENRES}
       onDropdownOpen={toggle}
       onDropdownClose={toggle}
+      scrollAreaProps={{ type: "always", scrollbarSize: 4 }}
       {...props}
     />
   );

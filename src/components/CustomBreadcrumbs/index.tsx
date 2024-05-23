@@ -42,7 +42,12 @@ const CustomBreadcrumbs: FC<CustomBreadcrumbsType> = ({ title }) => {
   };
 
   const breadcrumbsElements = breadcrumbsItems.map((item) => (
-    <Link href={item.link} key={item.id} onClick={handleClickBreadcrumbsLink}>
+    <Link
+      href={item.link}
+      key={item.id}
+      onClick={handleClickBreadcrumbsLink}
+      tabIndex={0}
+    >
       {item.title}
     </Link>
   ));
