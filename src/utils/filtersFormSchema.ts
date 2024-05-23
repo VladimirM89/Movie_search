@@ -76,11 +76,11 @@ const baseSchema = object().shape(
 
 export const filtersFormSchema = baseSchema.shape({
   with_genres: array(string().required()).optional(),
-  });
+});
 
 export const schemaRequestMovies = baseSchema.shape({
   with_genres: string().optional(),
-  });
+});
 
 export const schemaRequestMovieDetails = object({
   id: number()

@@ -1,8 +1,6 @@
 import { FiltersFormType } from "../types/QueryParams";
 
-export const normalizeQueryParams = (
-  obj: FiltersFormType,
-) => {
+export const normalizeQueryParams = (obj: FiltersFormType) => {
   return Object.entries(obj)
     .filter(([, value]) => !!value !== false)
     .reduce((acc, [key, value]) => {
