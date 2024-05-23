@@ -1,8 +1,6 @@
-import { NO_RELEASE_YEAR } from "@/constants/constants";
-
 const validateDate = (dateStr: string) => {
-  const year = new Date(dateStr).getFullYear();
-  return !isNaN(year) ? year : NO_RELEASE_YEAR;
+  const year = new Date(dateStr);
+  return year.toString() !== "Invalid Date";
 };
 
 export default validateDate;

@@ -44,7 +44,7 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
     );
   };
 
-  return overview || officialTrailer || officialTrailer ? (
+  return overview || officialTrailer || production.length > 0 ? (
     <Card radius={"md"} className={classes.card_content}>
       {officialTrailer && (
         <>
@@ -58,7 +58,7 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
               src={`${process.env.NEXT_PUBLIC_BASE_TRAILER_PATH}${officialTrailer?.key}`}
             ></iframe>
           </div>
-          <Divider />
+          <Divider className={classes.divider} />
         </>
       )}
       <div
@@ -79,7 +79,7 @@ const MovieTrailerCard: FC<MovieTrailerCardProps> = ({
       </div>
       {production.length > 0 && (
         <>
-          <Divider />
+          <Divider className={classes.divider} />
           <div
             className={cn(
               classes.info_container,

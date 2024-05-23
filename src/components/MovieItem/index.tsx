@@ -54,20 +54,12 @@ const MovieItem: FC<MovieItemProps> = ({ movieInfo }) => {
             <Rating movieInfo={movieInfo} />
           </div>
           <div className={classes.genres_container}>
-            {movieInfo.genre_ids && movieInfo.genre_ids.length ? (
-              <>
-                <span className={classes.genres_title}>{GENRES_SUBTITLE}</span>
-                <span
-                  className={cn(classes.genres_list, "long_text_container")}
-                >
-                  {movieInfo.genre_ids &&
-                    movieInfo.genre_ids.length &&
-                    parseGenreIds(movieInfo.genre_ids)}
-                </span>
-              </>
-            ) : (
-              <span className={classes.genres}>{NO_GENRES_INFO}</span>
-            )}
+            <span className={classes.genres_title}>{GENRES_SUBTITLE}</span>
+            <span className={cn(classes.genres_list, "long_text_container")}>
+              {movieInfo.genre_ids && movieInfo.genre_ids.length
+                ? parseGenreIds(movieInfo.genre_ids)
+                : NO_GENRES_INFO}
+            </span>
           </div>
         </div>
       </div>

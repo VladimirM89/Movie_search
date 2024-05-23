@@ -53,6 +53,8 @@ export const NO_RATED_MOVIES_TEXT = "You haven't rated any films yet";
 export const NO_FOUND_PAGE_TEXT = "We can’t find the page you are looking for";
 export const NO_RESULT_ACCORDING_SEARCH_TEXT =
   "No result according search value";
+export const NO_INFO_TEXT = "No info";
+export const NO_RELEASE_DATE = "No release date";
 
 export const URL_SEPARATOR = "/";
 export const DYNAMIC_IMPORT_PATH = "/[id]";
@@ -65,11 +67,11 @@ export const CURRENCY_FORMAT = "USD";
 //forms
 export const LABEL_GENRES = "Genres";
 export const LABEL_YEAR = "Release year";
-export const LABEL_RATINGS = "Ratings";
+export const LABEL_VOTING = "Ratings";
 export const LABEL_SORT_BY = "Sort by";
 export const PLACEHOLDER_GENRE_OK = "Select genre";
 export const PLACEHOLDER_GENRE_ERROR = "No genres info";
 export const PLACEHOLDER_YEARS_OK = "Select release year";
 export const PLACEHOLDER_YEARS_ERROR = "No release year info";
-export const PLACEHOLDER_RATING_FROM = "From";
-export const PLACEHOLDER_RATING_TO = "To";
+export const PLACEHOLDER_VOTING_FROM = "From";
+export const PLACEHOLDER_VOTING_TO = "To";

@@ -23,13 +23,13 @@ import {
 } from "@/constants/initialFormQuery";
 import {
   DEBOUNCE_TIME,
-  LABEL_RATINGS,
   LABEL_SORT_BY,
+  LABEL_VOTING,
   LABEL_YEAR,
   LOCAL_STORAGE_GENRES_KEY,
   NO_GENRES_INFO,
-  PLACEHOLDER_RATING_FROM,
-  PLACEHOLDER_RATING_TO,
+  PLACEHOLDER_VOTING_FROM,
+  PLACEHOLDER_VOTING_TO,
   PLACEHOLDER_YEARS_ERROR,
   PLACEHOLDER_YEARS_OK,
   RESET_FILTERS_TEXT,
@@ -137,10 +137,10 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
     ),
   });
 
-  const handleChangeRating = useCallback(() => {
-    const minRatingValue: number = form.getInputProps("vote_average-gte").value;
-    const maxRatingValue: number = form.getInputProps("vote_average-lte").value;
-    minRatingValue <= maxRatingValue &&
+  const handleChangeVoting = useCallback(() => {
+    const minVotingValue: number = form.getInputProps("vote_average-gte").value;
+    const maxVotingValue: number = form.getInputProps("vote_average-lte").value;
+    minVotingValue <= maxVotingValue &&
       (form.clearFieldError("vote_average-gte"),
       form.clearFieldError("vote_average-lte"));
   }, [form]);
@@ -177,19 +177,19 @@ const SearchFilters: FC<SearchFiltersProps> = memo(({ handleFilters }) => {
           disabled={isYearsError}
           allowDeselect={true}
         />
-        <div className={classes.rating_container}>
+        <div className={classes.voting_container}>
           <CustomNumberInput
             key={form.key("vote_average-gte")}
             {...form.getInputProps("vote_average-gte")}
-            label={LABEL_RATINGS}
-            placeholder={PLACEHOLDER_RATING_FROM}
-            handleChangeRating={handleChangeRating}
+            label={LABEL_VOTING}
+            placeholder={PLACEHOLDER_VOTING_FROM}
+            handleChangeRating={handleChangeVoting}
           />
           <CustomNumberInput
             key={form.key("vote_average-lte")}
             {...form.getInputProps("vote_average-lte")}
-            placeholder={PLACEHOLDER_RATING_TO}
-            handleChangeRating={handleChangeRating}
+            placeholder={PLACEHOLDER_VOTING_TO}
+            handleChangeRating={handleChangeVoting}
           />
         </div>
 

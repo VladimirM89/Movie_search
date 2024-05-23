@@ -12,7 +12,7 @@ import {
 import { PATH } from "@/constants/enums";
 import classes from "./styles.module.css";
 
-type BreadcrumdsItemsType = {
+type BreadcrumdsItemType = {
   id: number;
   title: string;
   link: string;
@@ -27,7 +27,7 @@ const CustomBreadcrumbs: FC<CustomBreadcrumbsType> = ({ title }) => {
   const pathArray = router.asPath.split(URL_SEPARATOR);
 
   const breadcrumbsItems = pathArray.map((item, index) => {
-    const breadcrumb: BreadcrumdsItemsType = {
+    const breadcrumb: BreadcrumdsItemType = {
       id: index,
       title: item.length ? title : BREADCRUMBS_HOME_ELEMENT,
       link: item.length ? "" : PATH.HOME,

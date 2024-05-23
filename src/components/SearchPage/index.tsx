@@ -71,6 +71,17 @@ const SearchPage = () => {
     setPage(INITIAL_PAGE);
   }, []);
 
+  const contentEmptyOrFailed = !isMovieError ? (
+    <EmptyState
+      img={NotFoundMoviesImage}
+      text={NOT_FOUND_MOVIES_TEXT}
+      width={311}
+      height={252}
+    />
+  ) : (
+    <NoSearchResultWithError text={ERROR_MESSAGE_FAIL_FETCHING_MOVIE_LIST} />
+  );
+
   return (
     <div className={classes.search_container}>
       <Title className="page_title">{MOVIES_TITLE}</Title>
@@ -90,17 +101,8 @@ const SearchPage = () => {
               />
             )}
           </>
-        ) : !isMovieError ? (
-          <EmptyState
-            img={NotFoundMoviesImage}
-            text={NOT_FOUND_MOVIES_TEXT}
-            width={311}
-            height={252}
-          />
         ) : (
-          <NoSearchResultWithError
-            text={ERROR_MESSAGE_FAIL_FETCHING_MOVIE_LIST}
-          />
+          contentEmptyOrFailed
         )}
       </div>
     </div>

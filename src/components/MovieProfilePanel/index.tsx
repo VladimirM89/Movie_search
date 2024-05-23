@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { useMantineTheme, getThemeColor } from "@mantine/core";
 import cn from "classnames";
-import validateDate from "../../utils/validateDate";
+import getFullDate from "../../utils/getFullYear";
 import convertToShortFormat from "../../utils/convertToShortFormat";
 import { MANTINE_COLOR_YELLOW_6 } from "@/constants/colorConstants";
-import { ALT_RATING_ICON } from "@/constants/constants";
+import { ALT_RATING_ICON, NO_RELEASE_YEAR } from "@/constants/constants";
 import { RatingImage } from "../../../public/images";
 import classes from "./styles.module.css";
+import validateDate from "@/utils/validateDate";
 
 type MovieProfilePanelType = {
   title: string;
@@ -40,7 +41,11 @@ const MovieProfilePanel: FC<MovieProfilePanelType> = ({
       <p className={cn(classes.profile_title, "long_text_container")}>
         {title}
       </p>
-      <p className={classes.profile_year}>{validateDate(release_date)}</p>
+      <p className={classes.profile_year}>
+        {validateDate(release_date)
+          ? getFullDate(release_date)
+          : NO_RELEASE_YEAR}
+      </p>
       <div className={classes.rating_container}>
         <div className={classes.rating_info}>
           <RatingImage

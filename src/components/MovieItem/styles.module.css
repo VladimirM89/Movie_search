@@ -12,17 +12,11 @@
 
   @media screen and (max-width: 1439px) {
     max-width: 40rem;
-  }
-
-  @media screen and (max-width: 1439px) {
     max-height: 20rem;
   }
 
   @media screen and (max-width: 500px) {
     padding: 1rem;
-  }
-
-  @media screen and (max-width: 450px) {
     max-height: none;
   }
 }
