@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+
+  @media screen and (max-width: 450px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.rating_text {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 125%;
+}

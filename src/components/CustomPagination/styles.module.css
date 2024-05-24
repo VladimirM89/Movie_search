@@ -1,0 +1,26 @@
+
+.group_root {
+  @media screen and (max-width: 1439px) {
+    justify-content: center;
+  }
+}
+
+.pagination_control {
+  border-color: var(--mantine-color-gray_scale-3);
+  line-height: var(--mantine-line-height-xs);
+}
+
+.pagination_control:where([data-active]) {
+  border-color: var(--mantine-color-purple-4);
+}
+
+.control_edge {
+  color: var(--mantine-color-gray_scale-5);
+}
+
+.control_edge:where(:disabled, [data-disabled]) {
+  border-color: var(--mantine-color-gray_scale-2);
+  background-color: white;
+  color: var(--mantine-color-gray_scale-3);
+  opacity: unset;
+}

@@ -1,0 +1,30 @@
+.input_wrapper {
+  width: 30.625rem;
+  --input-height: 3rem;
+
+  @media screen and (max-width: 800px) {
+    width: 25rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 21rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 18rem;
+  }
+}
+
+.input {
+  padding-inline-end: 7.75rem;
+  padding-inline-start: 2.25rem;
+  border-color: var(--mantine-color-gray_scale-2);
+}
+
+.input_section[data-position="right"] {
+  --section-end: 1px;
+}
+
+.input_section[data-position="left"] {
+  --section-start: -2px;
+}

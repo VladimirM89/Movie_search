@@ -1,0 +1,11 @@
+.logo_container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--mantine-color-purple-4);
+}
+
+.logo_title {
+  font-family: "Poppins";
+  letter-spacing: -0.5px;
+}

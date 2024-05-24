@@ -1,0 +1,54 @@
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  @media screen and (max-width: 450px) {
+    align-items: center;
+  }
+}
+
+.profile_container_details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  @media screen and (max-width: 950px) {
+    align-items: center;
+  }
+}
+
+.profile_title {
+  width: 100%;
+  font-size: var(--mantine-font-size-xl);
+  color: var(--mantine-color-purple-4);
+  line-height: 121%;
+  font-weight: 600;
+
+  @media screen and (max-width: 450px) {
+    text-align: center;
+  }
+}
+
+.profile_year,
+.profile_voting {
+  color: var(--mantine-color-gray_scale-5);
+  line-height: 125%;
+}
+
+.rating_container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 125%;
+}
+
+.rating_info {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.profile_rating {
+  font-weight: 600;
+}

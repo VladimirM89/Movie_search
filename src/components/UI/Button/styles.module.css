@@ -1,0 +1,25 @@
+.button_root {
+  line-height: var(--mantine-line-height-xs);
+}
+
+.button_root:hover {
+  background-color: var(--mantine-color-purple-3);
+}
+
+.button_root:active {
+  background-color: var(--mantine-color-purple-5);
+}
+
+.button_root:disabled {
+  background-color: var(--mantine-color-gray_scale-5);
+}
+
+.standard {
+  height: 2rem;
+  padding: 0.375rem 1.2rem;
+}
+
+.fat {
+  height: 2.5rem;
+  padding: 0.625rem 1.2rem;
+}
