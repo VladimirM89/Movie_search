@@ -54,14 +54,27 @@ export default function RatingPage() {
     };
   }, [getAllItems]);
 
+  const totalPages = Math.ceil(
+    (searchValue.length ? filteredMovies.length : ratedMovies.length) /
+      ITEMS_PER_PAGE,
+  );
+
   useEffect(() => {
-    setPage(INITIAL_PAGE);
+    setPage((currentPage) => {
+      if (currentPage > INITIAL_PAGE) {
+        if (currentPage > totalPages) {
+          return currentPage - 1;
+        }
+        return currentPage;
+      }
+      return INITIAL_PAGE;
+    });
 
     const filteredMovie = ratedMovies.filter((item) =>
       item.original_title.toLowerCase().includes(searchValue.toLowerCase()),
     );
     setFilteredMovies(filteredMovie);
-  }, [ratedMovies, searchValue]);
+  }, [ratedMovies, searchValue, totalPages]);
 
   const router = useRouter();
 
@@ -76,11 +89,6 @@ export default function RatingPage() {
 
     return filteredMovie.slice(4 * (page - 1), 4 * (page - 1) + 4);
   }, [filteredMovies, page, searchValue]);
-
-  const totalPages = Math.ceil(
-    (searchValue.length ? filteredMovies.length : ratedMovies.length) /
-      ITEMS_PER_PAGE,
-  );
 
   return isLoading ? (
     <CustomLoader />
